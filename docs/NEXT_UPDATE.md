@@ -43,3 +43,33 @@ Status values: **open** (logged, not started), **done in vX.Y**.
   on one line (shrinking it a little only if it still cannot fit), and add a UI
   test that checks every label is drawn on a single line at a narrow width and
   a large font scale.
+
+### 3. Make the app look like a modern app
+- **Reported:** 2026-11-12
+- **Status:** open (direction to confirm with Sir before building)
+- **What Sir asked:** Restyle the app so it looks like a current, polished app,
+  either with custom assets and icons or with a better icon library.
+- **Where it stands today:** The app uses only the basic Material icon set
+  (`material-icons-core`: Close, Add, Settings, Home, Face, Lock and a few
+  others), the default system font, and no illustrations. Screens such as
+  empty lists and the end of a study session have plain text only.
+- **Proposed scope:**
+  - Swap the basic icons for one consistent, modern icon set used everywhere
+    (navigation, buttons, game modes, settings).
+  - Add a bundled typeface for headings and card words, so the app does not
+    look like stock Android.
+  - Add a small set of custom vector illustrations (empty deck, session
+    complete, streak) drawn in the app's colours and in the same style as the
+    icons.
+  - Tidy spacing, corner radius and colour use so every screen follows one set
+    of design tokens.
+- **Open choice (Sir):** which icon direction to use. See the options below.
+  - A. An open-source icon library such as Phosphor or Lucide, plus custom
+    illustrations. Consistent and broad, quickest to apply everywhere.
+  - B. Fully custom hand-drawn icons for the app. Most distinctive, but
+    slower and covers fewer icons.
+  - C. Material Symbols Rounded (the newer Google set). Smallest change, looks
+    the most like other Android apps.
+- **Planned approach:** Treat it as its own design step in the update: design
+  tokens and a written style guide first, then apply screen by screen, with
+  screenshot checks on a phone and a tablet size.
