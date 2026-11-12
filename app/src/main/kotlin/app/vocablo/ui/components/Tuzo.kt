@@ -17,11 +17,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.vocablo.R
 
-enum class TuzoMood { IDLE, CHEER, SLEEP }
+enum class TuzoMood { IDLE, CHEER, SLEEP, WIN, OOPS }
 
 /**
  * Tuzo the gopher. IDLE breathes gently, CHEER hops (used when a session is won),
- * SLEEP sways slowly (nothing due). Full mood artwork arrives with the games in phase 4.
+ * SLEEP sways slowly (nothing due), WIN does a happy spin-hop after a game or chest, and
+ * OOPS gives a small head shake after a miss.
  */
 @Composable
 fun Tuzo(modifier: Modifier = Modifier, size: Dp = 96.dp, mood: TuzoMood = TuzoMood.IDLE) {
@@ -30,6 +31,8 @@ fun Tuzo(modifier: Modifier = Modifier, size: Dp = 96.dp, mood: TuzoMood = TuzoM
         TuzoMood.CHEER -> 420
         TuzoMood.IDLE -> 1600
         TuzoMood.SLEEP -> 2600
+        TuzoMood.WIN -> 700
+        TuzoMood.OOPS -> 140
     }
     val t by motion.animateFloat(
         initialValue = 0f,
@@ -56,6 +59,16 @@ fun Tuzo(modifier: Modifier = Modifier, size: Dp = 96.dp, mood: TuzoMood = TuzoM
                     TuzoMood.SLEEP -> {
                         rotationZ = (t - 0.5f) * 6f
                         alpha = 0.85f
+                    }
+                    TuzoMood.WIN -> {
+                        translationY = -t * this.size.height * 0.2f
+                        rotationZ = (t - 0.5f) * 24f
+                        scaleX = 1f + t * 0.1f
+                        scaleY = 1f + t * 0.1f
+                    }
+                    TuzoMood.OOPS -> {
+                        translationX = (t - 0.5f) * this.size.width * 0.08f
+                        rotationZ = (t - 0.5f) * 8f
                     }
                 }
             },

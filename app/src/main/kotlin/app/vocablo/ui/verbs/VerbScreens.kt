@@ -36,6 +36,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -43,6 +44,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -50,6 +53,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.container
+import app.vocablo.play.Game
+import app.vocablo.play.Medal
 import app.vocablo.data.AppSettings
 import app.vocablo.data.SettingsStore
 import app.vocablo.data.VocabloRepository
@@ -194,6 +199,8 @@ fun VerbListScreen(nav: Navigator) {
     var query by rememberSaveable { mutableStateOf("") }
     var tier by rememberSaveable { mutableStateOf<Tier?>(null) }
     val all = remember { VerbList.all }
+    val app = LocalContext.current.applicationContext
+    val medals by produceState(emptyMap<String, Medal>()) { value = app.container.progress.medals() }
     val shown = remember(query, tier) {
         val q = query.trim().lowercase()
         all.filter { rv ->
@@ -230,10 +237,13 @@ fun VerbListScreen(nav: Navigator) {
                     leadingContent = { Text("${rv.rank}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     headlineContent = { Text(rv.verb.infinitive, fontWeight = FontWeight.SemiBold) },
                     supportingContent = { Text(rv.verb.english) },
-                    trailingContent = if (rv.verb.pattern != VerbPattern()) {
-                        { Text("irregular", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.tertiary) }
-                    } else {
-                        null
+                    trailingContent = {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            if (rv.verb.pattern != VerbPattern()) {
+                                Text("irregular", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.tertiary)
+                            }
+                            medals[rv.verb.infinitive]?.let { MedalBadge(it) }
+                        }
                     },
                     modifier = Modifier.clickable { nav.open(Screen.VerbDetail(rv.verb.infinitive)) },
                 )
@@ -325,5 +335,46 @@ fun PlayHub(nav: Navigator, dueVerbItems: Int, practice: PracticeSettings) {
             OutlinedButton(onClick = { nav.open(Screen.Practice) }, modifier = Modifier.weight(1f)) { Text("What to practice") }
             OutlinedButton(onClick = { nav.open(Screen.Verbs) }, modifier = Modifier.weight(1f)) { Text("Verb list") }
         }
+        Card(
+            onClick = { nav.open(Screen.Sentences) },
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+        ) {
+            Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("Sentence builder", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text("Put tiles in order to make sentences from your own words and verbs.")
+            }
+        }
+        Text("Games", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
+        Game.entries.forEach { game ->
+            Card(onClick = { nav.open(Screen.Game(game)) }, modifier = Modifier.fillMaxWidth()) {
+                Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Text(gameEmoji(game), style = MaterialTheme.typography.headlineMedium)
+                    Column(Modifier.weight(1f)) {
+                        Text(game.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                        Text(game.blurb, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+        }
     }
+}
+
+fun gameEmoji(game: Game): String = when (game) {
+    Game.VERB_RAIN -> "🌧️"
+    Game.TUG_OF_WAR -> "🪢"
+    Game.SI_O_NO -> "👍"
+    Game.PAREJAS -> "🃏"
+    Game.CUATRO -> "4️⃣"
+}
+
+/** Gold: remembered for a month or more in every practiced tense. Silver: a week. Bronze: started. */
+@Composable
+fun MedalBadge(medal: Medal) {
+    val (emoji, name) = when (medal) {
+        Medal.GOLD -> "🥇" to "Gold"
+        Medal.SILVER -> "🥈" to "Silver"
+        Medal.BRONZE -> "🥉" to "Bronze"
+        Medal.NONE -> return
+    }
+    Text(emoji, modifier = Modifier.semantics { contentDescription = "$name medal" })
 }

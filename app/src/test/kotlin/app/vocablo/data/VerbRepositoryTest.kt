@@ -76,7 +76,7 @@ class VerbRepositoryTest {
     }
 }
 
-/** Opens a version 1 database file and checks that version 2 migrates it without losing cards. */
+/** Opens a version 1 database file and checks that it migrates to the current version without losing cards. */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [35], application = Application::class)
 class MigrationTest {
@@ -100,16 +100,18 @@ class MigrationTest {
         ).apply {
             execSQL("DROP TABLE verb_reviews")
             execSQL("DROP TABLE verb_answers")
+            execSQL("DROP TABLE activity")
             version = 1
             close()
         }
 
         val migrated = Room.databaseBuilder(context, VocabloDatabase::class.java, name)
-            .addMigrations(VocabloDatabase.MIGRATION_1_2)
+            .addMigrations(VocabloDatabase.MIGRATION_1_2, VocabloDatabase.MIGRATION_2_3)
             .allowMainThreadQueries()
             .build()
         assertEquals(listOf("el pan"), migrated.dao().allCards().map { it.spanish })
         assertTrue(migrated.dao().verbReviews().isEmpty())
+        assertTrue(migrated.dao().activityDays(ActivityKind.GAME).isEmpty())
         migrated.close()
         context.deleteDatabase(name)
     }

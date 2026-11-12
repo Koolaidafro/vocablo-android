@@ -8,7 +8,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -16,13 +20,21 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.vocablo.play.WeeklyChest
 import app.vocablo.ui.LibraryViewModel
+import app.vocablo.ui.ProgressState
+import app.vocablo.ui.components.Confetti
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
 import app.vocablo.ui.components.Tuzo
@@ -37,6 +49,8 @@ import java.time.LocalDate
 fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit) {
     val state by library.state.collectAsStateWithLifecycle()
     val settings by library.settings.collectAsStateWithLifecycle()
+    val progress by library.progress.collectAsStateWithLifecycle()
+    var chestXp by remember { mutableStateOf<Int?>(null) }
     val newToday = minOf(state.new, settings.newPerDay)
     val toStudy = state.due + newToday
     Column(
@@ -76,10 +90,92 @@ fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit
             }
         }
 
+        LevelCard(progress)
+        QuestsCard(progress)
+        ChestCard(progress, onOpen = { library.openChest { xp -> chestXp = xp } })
+
         VerbOfTheDay()
 
         if (state.decks.isNotEmpty()) {
             OutlinedButton(onClick = onAddCards, Modifier.fillMaxWidth()) { Text("Your decks (${state.decks.size})") }
+        }
+    }
+
+    chestXp?.let { xp ->
+        Box(Modifier.fillMaxSize()) {
+            Confetti(seed = xp)
+            AlertDialog(
+                onDismissRequest = { chestXp = null },
+                icon = { Tuzo(size = 96.dp, mood = TuzoMood.WIN) },
+                title = { Text(if (xp > 0) "¡Increíble!" else "Not yet") },
+                text = { Text(if (xp > 0) "The weekly chest held $xp XP. See you next week." else "Finish your quests on five days this week to open it.") },
+                confirmButton = { TextButton(onClick = { chestXp = null }) { Text("¡Vamos!") } },
+            )
+        }
+    }
+}
+
+@Composable
+private fun LevelCard(progress: ProgressState) {
+    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
+        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Level ${progress.level}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text("${progress.totalXp} XP · ${progress.today.xp} today", style = MaterialTheme.typography.labelLarge)
+            }
+            LinearProgressIndicator(
+                progress = { progress.levelProgress },
+                modifier = Modifier.fillMaxWidth().semantics { contentDescription = "Level ${progress.level}, ${(progress.levelProgress * 100).toInt()} percent to the next" },
+            )
+            if (progress.freezesHeld > 0) {
+                Text(
+                    "🧊 ${progress.freezesHeld} streak ${if (progress.freezesHeld == 1) "freeze" else "freezes"} ready. A missed day is covered automatically.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun QuestsCard(progress: ProgressState) {
+    if (progress.quests.isEmpty()) return
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Daily quests", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            progress.quests.forEach { q ->
+                val done = q.done(progress.today)
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(if (done) "✅" else "⬜")
+                    Column(Modifier.weight(1f)) {
+                        Text(q.title, fontWeight = if (done) FontWeight.Normal else FontWeight.Medium)
+                        LinearProgressIndicator(progress = { q.progress(progress.today).toFloat() / q.target }, modifier = Modifier.fillMaxWidth())
+                    }
+                    Text("${q.progress(progress.today)}/${q.target}", style = MaterialTheme.typography.labelMedium)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ChestCard(progress: ProgressState, onOpen: () -> Unit) {
+    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
+        Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text(if (progress.chestOpened) "📭" else "🎁", style = MaterialTheme.typography.headlineMedium)
+            Column(Modifier.weight(1f)) {
+                Text("Weekly chest", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text(
+                    when {
+                        progress.chestOpened -> "Opened this week. A new one comes Monday."
+                        progress.chestReady -> "Ready to open!"
+                        else -> "Quests done on ${progress.questDaysThisWeek} of ${WeeklyChest.DAYS_NEEDED} days this week."
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
+            if (progress.chestReady) Button(onClick = onOpen) { Text("Open") }
         }
     }
 }
@@ -148,12 +244,6 @@ private fun ComingSoon(title: String, body: String) {
         Text(body, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
     }
 }
-
-@Composable
-fun PlayScreen() = ComingSoon(
-    "Games are on the way",
-    "Verb drills arrive next, then Verb Rain, Tug of War and the sentence builder, all using your own cards.",
-)
 
 @Composable
 fun TutorScreen() = ComingSoon(

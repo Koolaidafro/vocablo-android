@@ -20,8 +20,8 @@ jobs:
           distribution: temurin
           java-version: "21"
       - uses: gradle/actions/setup-gradle@v4
-      - name: Unit tests (verbs, themes, scheduling, cards, dictionary)
-        run: ./gradlew :core:verbs:test :core:design:test :core:srs:test :core:cards:test :core:dictionary:test
+      - name: Unit tests (verbs, themes, scheduling, cards, dictionary, games)
+        run: ./gradlew :core:verbs:test :core:design:test :core:srs:test :core:cards:test :core:dictionary:test :core:play:test
       - name: App tests (database, on Robolectric)
         run: ./gradlew :app:testDebugUnitTest
       - name: Build the app

@@ -144,12 +144,37 @@ fun MeScreen(library: LibraryViewModel) {
         }
 
         Section("Reminders")
-        Text(
-            "Tuzo can nudge you when cards are due. Daily scheduling arrives with streak quests; for now you can see how it looks.",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        OutlinedButton(
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Daily nudge from Tuzo")
+                Text(
+                    "At most two a day: one at your time, and an 8 pm streak saver. Quiet once you've studied.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Switch(
+                checked = settings.remindersOn,
+                onCheckedChange = { on ->
+                    library.updateSettings { it.copy(remindersOn = on) }
+                    if (on && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && Notifications.needsPermission(context)) {
+                        askPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                },
+            )
+        }
+        if (settings.remindersOn) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                listOf(7, 9, 12, 18).forEach { h ->
+                    FilterChip(
+                        selected = settings.reminderHour == h,
+                        onClick = { library.updateSettings { it.copy(reminderHour = h) } },
+                        label = { Text(hourLabel(h)) },
+                    )
+                }
+            }
+        }
+        TextButton(
             onClick = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && Notifications.needsPermission(context)) {
                     askPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -157,7 +182,6 @@ fun MeScreen(library: LibraryViewModel) {
                     sendReminder()
                 }
             },
-            modifier = Modifier.fillMaxWidth(),
         ) { Text("Send a test reminder") }
 
         Section("Your data")
@@ -207,4 +231,11 @@ private fun Fact(value: String, label: String) {
         Text(value, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
+}
+
+private fun hourLabel(h: Int): String = when {
+    h == 0 -> "12 am"
+    h < 12 -> "$h am"
+    h == 12 -> "12 pm"
+    else -> "${h - 12} pm"
 }
