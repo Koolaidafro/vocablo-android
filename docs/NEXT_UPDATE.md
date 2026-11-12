@@ -25,3 +25,21 @@ Status values: **open** (logged, not started), **done in vX.Y**.
 - **Planned fix:** Detect the drag in unrotated screen space (move the gesture
   handling outside the rotated layer) and add a UI test that swipes right on a
   flipped card and expects a "Got it" answer.
+
+### 2. Rating button labels break mid-word
+- **Reported:** 2026-11-12 (with a screenshot from a phone)
+- **Status:** open
+- **What happens:** On the Study screen, after the card is flipped, the four
+  rating buttons at the bottom are too narrow for their labels. The text wraps
+  in the middle of the word: "Aga / in", "Har / d", "Goo / d", "Eas / y".
+- **What we want:** Each label fits on one line and is fully readable, on a
+  normal phone and with a larger system font size.
+- **Likely cause (not yet verified by a test):** `RatingBar` in
+  `app/src/main/kotlin/app/vocablo/ui/study/StudyScreen.kt` splits the row into
+  four equal buttons (`weight(1f)`) and keeps Material's default button padding
+  (24dp left and right). That leaves too little room for the text, and the
+  `Text` is allowed to wrap.
+- **Planned fix:** Give the rating buttons less side padding, keep each label
+  on one line (shrinking it a little only if it still cannot fit), and add a UI
+  test that checks every label is drawn on a single line at a narrow width and
+  a large font scale.
