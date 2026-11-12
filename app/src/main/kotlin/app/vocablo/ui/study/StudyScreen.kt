@@ -47,25 +47,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import app.vocablo.cards.Card as VocabCard
 import app.vocablo.cards.CardType
+import app.vocablo.cards.Card as VocabCard
 import app.vocablo.cards.Streaks
 import app.vocablo.container
 import app.vocablo.data.SettingsStore
 import app.vocablo.data.StudySession
 import app.vocablo.data.VocabloRepository
+import app.vocablo.speech.SpeakButton
 import app.vocablo.srs.Rating
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import kotlin.math.abs
+import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.math.abs
-import kotlin.math.roundToInt
 
 data class StudyUi(
     val loading: Boolean = true,
@@ -238,6 +239,7 @@ private fun Front(card: VocabCard) {
             Text(card.type.name.lowercase(), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
         Text(card.spanish, style = MaterialTheme.typography.displaySmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+        SpeakButton(card.spanish)
         Text("Tap to flip", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
@@ -249,6 +251,7 @@ private fun Back(card: VocabCard) {
         Text(card.english, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
         if (card.example.isNotEmpty()) {
             Text("“${card.example}”", style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center)
+            SpeakButton(card.example)
         }
         if (card.exampleEnglish.isNotEmpty()) {
             Text(card.exampleEnglish, style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant)

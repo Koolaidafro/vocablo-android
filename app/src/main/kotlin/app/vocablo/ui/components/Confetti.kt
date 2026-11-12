@@ -24,6 +24,7 @@ private class Piece(val x: Float, val delay: Float, val speed: Float, val drift:
 /** A short burst of falling confetti for wins. Draws nothing once it has fallen. Purely decorative. */
 @Composable
 fun Confetti(modifier: Modifier = Modifier, pieces: Int = 70, durationMillis: Int = 2600, seed: Int = 0) {
+    if (rememberReduceMotion()) return
     val parts = remember(seed) {
         val r = Random(seed)
         List(pieces) {

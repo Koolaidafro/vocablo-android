@@ -14,13 +14,29 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "0.1.0"
+        versionName = "1.0.0"
+    }
+
+    // Release signing comes from environment variables so the keystore and passwords never
+    // enter the repository. Without them, the release build is simply left unsigned.
+    val releaseKeystore = System.getenv("VOCABLO_KEYSTORE")
+    signingConfigs {
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("VOCABLO_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("VOCABLO_KEY_ALIAS")
+                keyPassword = System.getenv("VOCABLO_KEY_PASSWORD")
+            }
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (releaseKeystore != null) signingConfig = signingConfigs.getByName("release")
         }
     }
 

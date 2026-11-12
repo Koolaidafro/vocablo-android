@@ -36,8 +36,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -53,11 +53,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.container
-import app.vocablo.play.Game
-import app.vocablo.play.Medal
 import app.vocablo.data.AppSettings
 import app.vocablo.data.SettingsStore
 import app.vocablo.data.VocabloRepository
+import app.vocablo.play.Game
+import app.vocablo.play.Medal
+import app.vocablo.speech.SpeakButton
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
 import app.vocablo.verbs.AnswerMode
@@ -290,7 +291,10 @@ fun VerbDetailScreen(infinitive: String, nav: Navigator) {
                 Text("This verb isn't in the list.")
                 return@Column
             }
-            Text(rv.verb.english, style = MaterialTheme.typography.titleLarge)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(rv.verb.english, style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+                SpeakButton(rv.verb.infinitive)
+            }
             Text("#${rv.rank} most used · ${rv.tier.label}", color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(onClick = { vm.addToCards(rv) }) { Text("Add to my cards") }
