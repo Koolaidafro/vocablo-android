@@ -58,6 +58,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.AppContainer
 import app.vocablo.container
+import app.vocablo.speech.SpeakButton
 import app.vocablo.tutor.ChatMessage
 import app.vocablo.tutor.Provider
 import app.vocablo.tutor.Reply
@@ -341,6 +342,7 @@ private fun Bubble(m: ChatMessage) {
             ) {
                 Text(body, modifier = Modifier.padding(12.dp))
             }
+            if (!mine) SpeakButton(body)
             correction?.let {
                 Surface(shape = MaterialTheme.shapes.medium, color = MaterialTheme.colorScheme.tertiaryContainer) {
                     Text(it, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(10.dp))

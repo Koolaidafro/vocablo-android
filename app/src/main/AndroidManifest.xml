@@ -7,6 +7,13 @@
     <!-- Books Tuzo's reminder again after the phone restarts. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- Lets the app find the phone's text-to-speech engine for the listen buttons. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".VocabloApplication"
         android:allowBackup="true"
@@ -27,6 +34,17 @@
             </intent-filter>
         </activity>
         <receiver android:name=".notify.ReminderReceiver" android:exported="false" />
+        <receiver
+            android:name=".widget.TodayWidget"
+            android:exported="false"
+            android:label="@string/widget_description">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_today_info" />
+        </receiver>
         <receiver android:name=".notify.RescheduleReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

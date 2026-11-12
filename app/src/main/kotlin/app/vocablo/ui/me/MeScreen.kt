@@ -197,7 +197,7 @@ fun MeScreen(library: LibraryViewModel) {
 
         Section("About")
         Text(
-            "Vocablo is open source. Dictionary text from Wiktionary (CC BY-SA 4.0). Starter dictionary examples written for Vocablo.",
+            "Vocablo is open source. Dictionary text from Wiktionary (CC BY-SA 4.0). Verb ranking from FrequencyWords by Hermit Dave (CC BY-SA 4.0). Starter dictionary examples written for Vocablo.",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

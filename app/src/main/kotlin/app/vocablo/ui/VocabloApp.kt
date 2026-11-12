@@ -2,8 +2,12 @@ package app.vocablo.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Face
@@ -14,22 +18,27 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
@@ -37,24 +46,24 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.container
+import app.vocablo.data.AppSettings
 import app.vocablo.play.Game as PlayGame
 import app.vocablo.ui.cards.CardEditorScreen
 import app.vocablo.ui.decks.DeckDetailScreen
 import app.vocablo.ui.decks.DecksScreen
 import app.vocablo.ui.home.HomeScreen
-import app.vocablo.data.AppSettings
+import app.vocablo.ui.me.MeScreen
 import app.vocablo.ui.onboarding.OnboardingScreen
 import app.vocablo.ui.play.GameScreen
 import app.vocablo.ui.play.SentenceScreen
+import app.vocablo.ui.study.StudyScreen
+import app.vocablo.ui.theme.VocabloTheme
+import app.vocablo.ui.tutor.TutorScreen
 import app.vocablo.ui.verbs.DrillScreen
 import app.vocablo.ui.verbs.PlayHub
 import app.vocablo.ui.verbs.PracticeSettingsScreen
 import app.vocablo.ui.verbs.VerbDetailScreen
 import app.vocablo.ui.verbs.VerbListScreen
-import app.vocablo.ui.tutor.TutorScreen
-import app.vocablo.ui.me.MeScreen
-import app.vocablo.ui.study.StudyScreen
-import app.vocablo.ui.theme.VocabloTheme
 
 enum class Tab(val label: String, val icon: ImageVector) {
     HOME("Home", Icons.Filled.Home),
@@ -190,16 +199,18 @@ private fun VocabloRoot(library: LibraryViewModel) {
                     }
                 }
                 CompositionLocalProvider(LocalViewModelStoreOwner provides owner) {
-                    when (top) {
-                        is Screen.Deck -> DeckDetailScreen(top.deckId, nav)
-                        is Screen.EditCard -> CardEditorScreen(top.deckId, top.cardId, nav)
-                        is Screen.Study -> StudyScreen(top.deckId, nav)
-                        Screen.Drill -> DrillScreen(nav)
-                        Screen.Practice -> PracticeSettingsScreen(nav)
-                        Screen.Verbs -> VerbListScreen(nav)
-                        is Screen.VerbDetail -> VerbDetailScreen(top.infinitive, nav)
-                        is Screen.Game -> GameScreen(top.game, nav)
-                        Screen.Sentences -> SentenceScreen(nav)
+                    ReadableWidth {
+                        when (top) {
+                            is Screen.Deck -> DeckDetailScreen(top.deckId, nav)
+                            is Screen.EditCard -> CardEditorScreen(top.deckId, top.cardId, nav)
+                            is Screen.Study -> StudyScreen(top.deckId, nav)
+                            Screen.Drill -> DrillScreen(nav)
+                            Screen.Practice -> PracticeSettingsScreen(nav)
+                            Screen.Verbs -> VerbListScreen(nav)
+                            is Screen.VerbDetail -> VerbDetailScreen(top.infinitive, nav)
+                            is Screen.Game -> GameScreen(top.game, nav)
+                            Screen.Sentences -> SentenceScreen(nav)
+                        }
                     }
                 }
             }
@@ -207,23 +218,12 @@ private fun VocabloRoot(library: LibraryViewModel) {
     }
 }
 
+/** Phones get a bottom bar; tablets, unfolded foldables and landscape get a side rail. */
 @Composable
 private fun Tabs(tab: Tab, onTab: (Tab) -> Unit, library: LibraryViewModel, nav: Navigator) {
-    Scaffold(
-        bottomBar = {
-            NavigationBar {
-                Tab.entries.forEach { t ->
-                    NavigationBarItem(
-                        selected = tab == t,
-                        onClick = { onTab(t) },
-                        icon = { Icon(t.icon, contentDescription = null) },
-                        label = { Text(t.label) },
-                    )
-                }
-            }
-        },
-    ) { padding ->
-        Box(Modifier.fillMaxSize().padding(padding)) {
+    val wide = LocalConfiguration.current.screenWidthDp >= 600
+    val content: @Composable () -> Unit = {
+        ReadableWidth {
             when (tab) {
                 Tab.HOME -> HomeScreen(library, nav, onAddCards = { onTab(Tab.DECKS) })
                 Tab.DECKS -> DecksScreen(library, nav)
@@ -236,5 +236,45 @@ private fun Tabs(tab: Tab, onTab: (Tab) -> Unit, library: LibraryViewModel, nav:
                 Tab.ME -> MeScreen(library)
             }
         }
+    }
+    if (wide) {
+        Row(Modifier.fillMaxSize().safeDrawingPadding()) {
+            NavigationRail {
+                Tab.entries.forEach { t ->
+                    NavigationRailItem(
+                        selected = tab == t,
+                        onClick = { onTab(t) },
+                        icon = { Icon(t.icon, contentDescription = null) },
+                        label = { Text(t.label) },
+                    )
+                }
+            }
+            Box(Modifier.weight(1f).fillMaxHeight()) { content() }
+        }
+    } else {
+        Scaffold(
+            bottomBar = {
+                NavigationBar {
+                    Tab.entries.forEach { t ->
+                        NavigationBarItem(
+                            selected = tab == t,
+                            onClick = { onTab(t) },
+                            icon = { Icon(t.icon, contentDescription = null) },
+                            label = { Text(t.label) },
+                        )
+                    }
+                }
+            },
+        ) { padding ->
+            Box(Modifier.fillMaxSize().padding(padding)) { content() }
+        }
+    }
+}
+
+/** Keeps lines and cards a comfortable width on big screens, centered. */
+@Composable
+fun ReadableWidth(content: @Composable () -> Unit) {
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+        Box(Modifier.widthIn(max = 720.dp).fillMaxSize()) { content() }
     }
 }

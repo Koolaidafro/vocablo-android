@@ -48,6 +48,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.container
 import app.vocablo.data.SettingsStore
 import app.vocablo.data.VerbRepository
+import app.vocablo.speech.SpeakButton
 import app.vocablo.srs.Rating
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
@@ -266,7 +267,10 @@ private fun Feedback(ui: DrillUi, q: Question, onNext: () -> Unit) {
         else -> "Not quite" to MaterialTheme.colorScheme.error
     }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(title, style = MaterialTheme.typography.titleLarge, color = color, fontWeight = FontWeight.Bold)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(title, style = MaterialTheme.typography.titleLarge, color = color, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+            SpeakButton("${q.person.pronoun()} ${q.answer}")
+        }
         if (ui.result != Check.CORRECT) {
             Text("${q.person.pronoun()} ${q.answer}", style = MaterialTheme.typography.titleMedium)
         }

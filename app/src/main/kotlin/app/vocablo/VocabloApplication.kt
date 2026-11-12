@@ -4,15 +4,16 @@ import android.app.Application
 import android.content.Context
 import app.vocablo.data.ProgressRepository
 import app.vocablo.data.SettingsStore
-import app.vocablo.data.VocabloDatabase
 import app.vocablo.data.VerbRepository
+import app.vocablo.data.VocabloDatabase
 import app.vocablo.data.VocabloRepository
 import app.vocablo.data.WiktionaryLookup
 import app.vocablo.dictionary.OfflineDictionary
 import app.vocablo.notify.Notifications
+import app.vocablo.notify.ReminderScheduler
+import app.vocablo.speech.Speech
 import app.vocablo.tutor.KeyVault
 import app.vocablo.tutor.TutorClient
-import app.vocablo.notify.ReminderScheduler
 import app.vocablo.verbs.FormIndex
 import app.vocablo.verbs.VerbList
 import kotlinx.coroutines.CoroutineScope
@@ -34,6 +35,7 @@ class AppContainer(context: Context) {
     val progress = ProgressRepository(database.dao())
     val keys: KeyVault by lazy { KeyVault.create(context) }
     val tutor = TutorClient()
+    val speech = Speech(context)
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 }
 
@@ -49,6 +51,9 @@ class VocabloApplication : Application() {
             container.repository.seedIfEmpty()
             container.progress.applyFreezes()
             container.verbForms.lookup("") // builds the conjugated-form index off the main thread
+        }
+        container.scope.launch {
+            container.settings.settings.map { it.region }.distinctUntilChanged().collect { container.speech.region = it }
         }
         // Keep the pending reminder in step with the reminder settings.
         container.scope.launch {

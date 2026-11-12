@@ -8,6 +8,7 @@ import android.content.Intent
 import app.vocablo.container
 import app.vocablo.play.Reminders
 import app.vocablo.play.StreakFreezes
+import app.vocablo.widget.TodayWidget
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -67,6 +68,7 @@ class ReminderReceiver : BroadcastReceiver() {
                     }
                 }
                 ReminderScheduler.reschedule(context)
+                TodayWidget.refresh(context) // a new day may have started
             } finally {
                 result.finish()
             }

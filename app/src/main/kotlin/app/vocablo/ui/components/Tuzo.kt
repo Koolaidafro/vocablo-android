@@ -26,6 +26,10 @@ enum class TuzoMood { IDLE, CHEER, SLEEP, WIN, OOPS }
  */
 @Composable
 fun Tuzo(modifier: Modifier = Modifier, size: Dp = 96.dp, mood: TuzoMood = TuzoMood.IDLE) {
+    if (rememberReduceMotion()) {
+        Image(painterResource(R.drawable.tuzo), contentDescription = "Tuzo the gopher", modifier = modifier.size(size))
+        return
+    }
     val motion = rememberInfiniteTransition(label = "tuzo")
     val period = when (mood) {
         TuzoMood.CHEER -> 420
