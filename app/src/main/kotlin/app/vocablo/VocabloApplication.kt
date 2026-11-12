@@ -14,6 +14,7 @@ import app.vocablo.notify.ReminderScheduler
 import app.vocablo.speech.Speech
 import app.vocablo.tutor.KeyVault
 import app.vocablo.tutor.TutorClient
+import app.vocablo.update.Updates
 import app.vocablo.verbs.FormIndex
 import app.vocablo.verbs.VerbList
 import kotlinx.coroutines.CoroutineScope
@@ -36,6 +37,7 @@ class AppContainer(context: Context) {
     val keys: KeyVault by lazy { KeyVault.create(context) }
     val tutor = TutorClient()
     val speech = Speech(context)
+    val updates = Updates(context)
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 }
 

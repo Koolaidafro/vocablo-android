@@ -23,13 +23,13 @@ jobs:
       - name: Unit tests (verbs, themes, scheduling, cards, dictionary, games, tutor)
         run: ./gradlew :core:verbs:test :core:design:test :core:srs:test :core:cards:test :core:dictionary:test :core:play:test :core:tutor:test
       - name: App tests (database, on Robolectric)
-        run: ./gradlew :app:testDebugUnitTest
+        run: ./gradlew :app:testGithubDebugUnitTest
       - name: Build the app
-        run: ./gradlew :app:assembleDebug
+        run: ./gradlew :app:assembleGithubDebug :app:assemblePlayDebug
       - name: Android lint
-        run: ./gradlew :app:lintDebug
+        run: ./gradlew :app:lintGithubDebug :app:lintPlayDebug
       - name: Release build (shrunk with R8, unsigned)
-        run: ./gradlew :app:assembleRelease :app:bundleRelease
+        run: ./gradlew :app:assembleGithubRelease :app:bundlePlayRelease
       - name: Upload test reports
         if: failure()
         uses: actions/upload-artifact@v4

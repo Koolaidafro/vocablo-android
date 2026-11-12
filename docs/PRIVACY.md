@@ -10,6 +10,8 @@ Vocablo keeps your learning on your phone.
 
 **AI tutor.** The tutor is off until you add your own API key. When you chat, your messages, the scenario, your region and up to 40 of your card words are sent directly from your phone to the service you chose (Anthropic, OpenAI, xAI, or the address you entered). That service's own privacy policy applies, and it bills your account. Your key is encrypted with your phone's secure keystore and never leaves the phone except to that service.
 
+**Updates (GitHub build only).** The copy installed from GitHub asks GitHub at most once an hour whether a newer version exists, and downloads it if you tap Update. Nothing about you is sent. The Play Store copy doesn't do this.
+
 **Notifications.** Reminders are scheduled on the phone. Nothing is sent anywhere.
 
 **Children.** Vocablo is a general-audience app and does not knowingly collect any data from anyone.
