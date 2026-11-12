@@ -53,10 +53,10 @@ class VerbRepositoryTest {
         assertEquals(listOf(true, true, true), verbs.recentInStage(Stage.PRESENT))
         assertTrue(verbs.recentInStage(Stage.PAST).isEmpty())
         assertEquals(0, verbs.dueCount().first())
+        assertEquals(setOf(cards.today()), cards.studyDays().first())
 
         now += 60L * 86_400_000
         assertEquals(3, verbs.dueCount().first())
-        assertEquals(setOf(cards.today()), cards.studyDays().first())
     }
 
     @Test
