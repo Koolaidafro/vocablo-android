@@ -41,6 +41,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.cards.Card
+import app.vocablo.cards.CardType
 import app.vocablo.cards.Deck
 import app.vocablo.container
 import app.vocablo.data.VocabloRepository
@@ -119,7 +120,7 @@ fun DeckDetailScreen(deckId: Long, nav: Navigator) {
                 ListItem(
                     headlineContent = { Text(card.spanish) },
                     supportingContent = { Text(card.english) },
-                    overlineContent = if (card.type != app.vocablo.cards.CardType.WORD) {
+                    overlineContent = if (card.type != CardType.WORD) {
                         { Text(card.type.name.lowercase()) }
                     } else {
                         null
