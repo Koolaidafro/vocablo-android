@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":core:cards"))
     implementation(project(":core:dictionary"))
     implementation(project(":core:play"))
+    implementation(project(":core:tutor"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

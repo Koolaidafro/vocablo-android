@@ -12,6 +12,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import app.vocablo.design.ThemeId
 import app.vocablo.design.ThemeMode
 import app.vocablo.design.Themes
+import app.vocablo.tutor.Provider
 import app.vocablo.verbs.AnswerMode
 import app.vocablo.verbs.PracticeSettings
 import app.vocablo.verbs.Stage
@@ -43,11 +44,15 @@ data class AppSettings(
     /** Tuzo's nudges: a daily one at [reminderHour] and an evening streak saver. Two a day at most. */
     val remindersOn: Boolean = true,
     val reminderHour: Int = 9,
+    /** Which AI service the tutor uses. The key itself lives in KeyVault, never here. */
+    val tutorProvider: Provider = Provider.CLAUDE,
+    val tutorModel: String = "",
+    val tutorBaseUrl: String = "",
 )
 
 private val Context.settingsStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-/** Settings saved on the phone. API keys never go here; they get encrypted storage in phase 5. */
+/** Settings saved on the phone. API keys never go here; KeyVault keeps them encrypted. */
 class SettingsStore(context: Context) {
     private val store = context.applicationContext.settingsStore
 
@@ -71,6 +76,9 @@ class SettingsStore(context: Context) {
             p[ONBOARDED] = new.onboarded
             p[REMINDERS] = new.remindersOn
             p[REMINDER_HOUR] = new.reminderHour
+            p[TUTOR_PROVIDER] = new.tutorProvider.name
+            p[TUTOR_MODEL] = new.tutorModel
+            p[TUTOR_BASE_URL] = new.tutorBaseUrl
         }
     }
 
@@ -91,6 +99,9 @@ class SettingsStore(context: Context) {
         onboarded = p[ONBOARDED] ?: false,
         remindersOn = p[REMINDERS] ?: true,
         reminderHour = p[REMINDER_HOUR] ?: 9,
+        tutorProvider = p[TUTOR_PROVIDER].toEnum(Provider.CLAUDE),
+        tutorModel = p[TUTOR_MODEL] ?: "",
+        tutorBaseUrl = p[TUTOR_BASE_URL] ?: "",
     )
 
     private companion object {
@@ -108,6 +119,9 @@ class SettingsStore(context: Context) {
         val ONBOARDED = booleanPreferencesKey("onboarded")
         val REMINDERS = booleanPreferencesKey("reminders_on")
         val REMINDER_HOUR = intPreferencesKey("reminder_hour")
+        val TUTOR_PROVIDER = stringPreferencesKey("tutor_provider")
+        val TUTOR_MODEL = stringPreferencesKey("tutor_model")
+        val TUTOR_BASE_URL = stringPreferencesKey("tutor_base_url")
     }
 }
 

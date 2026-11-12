@@ -10,6 +10,8 @@ import app.vocablo.data.VocabloRepository
 import app.vocablo.data.WiktionaryLookup
 import app.vocablo.dictionary.OfflineDictionary
 import app.vocablo.notify.Notifications
+import app.vocablo.tutor.KeyVault
+import app.vocablo.tutor.TutorClient
 import app.vocablo.notify.ReminderScheduler
 import app.vocablo.verbs.FormIndex
 import app.vocablo.verbs.VerbList
@@ -30,6 +32,8 @@ class AppContainer(context: Context) {
     val verbForms: FormIndex by lazy { FormIndex(VerbList.all.map { it.verb }) }
     val verbs = VerbRepository(database.dao())
     val progress = ProgressRepository(database.dao())
+    val keys: KeyVault by lazy { KeyVault.create(context) }
+    val tutor = TutorClient()
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 }
 

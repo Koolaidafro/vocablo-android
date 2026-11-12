@@ -51,7 +51,7 @@ import app.vocablo.ui.verbs.PlayHub
 import app.vocablo.ui.verbs.PracticeSettingsScreen
 import app.vocablo.ui.verbs.VerbDetailScreen
 import app.vocablo.ui.verbs.VerbListScreen
-import app.vocablo.ui.home.TutorScreen
+import app.vocablo.ui.tutor.TutorScreen
 import app.vocablo.ui.me.MeScreen
 import app.vocablo.ui.study.StudyScreen
 import app.vocablo.ui.theme.VocabloTheme
