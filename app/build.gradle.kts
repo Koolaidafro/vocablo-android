@@ -13,8 +13,23 @@ android {
         applicationId = "app.vocablo"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0"
+        // CI sets the version code for each published build; local builds are version 1.
+        versionCode = System.getenv("VOCABLO_VERSION_CODE")?.toIntOrNull() ?: 1
+        versionName = "1.0.$versionCode"
+    }
+
+    // github: installed from GitHub releases and updates itself. play: for the Play Store,
+    // which forbids self-updating, so it has no installer permission and no update check.
+    flavorDimensions += "store"
+    productFlavors {
+        create("github") {
+            dimension = "store"
+            buildConfigField("boolean", "SELF_UPDATE", "true")
+        }
+        create("play") {
+            dimension = "store"
+            buildConfigField("boolean", "SELF_UPDATE", "false")
+        }
     }
 
     // Release signing comes from environment variables so the keystore and passwords never
@@ -47,6 +62,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     testOptions {

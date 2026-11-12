@@ -11,6 +11,7 @@ Built with Kotlin, Jetpack Compose and Material 3, test-driven from the first co
 - **Sentence builder and games.** Build sentences from your own nouns and verbs. Five offline games: Verb Rain, Tug of War, Sí o No, Parejas and Cuatro.
 - **Motivation.** XP and levels, streaks with earned freezes, three daily quests, a weekly chest, per-verb medals, and Tuzo the gopher cheering you on. Reminders at most twice a day, and never once you've studied.
 - **AI tutor (optional).** Role-play eight everyday situations with your own API key. Tuzo speaks your region's Spanish and corrects mistakes as you go. Keys are encrypted with the phone's keystore and never backed up.
+- **Updates.** Install the APK from the newest GitHub release once; after that the app offers each new version on its Home screen.
 - **Everywhere else.** Listen buttons with a voice for your region, a home-screen widget, side navigation on tablets and foldables, five color themes with light and dark modes, and still images when the phone's animations are turned off.
 
 ## Modules
@@ -34,9 +35,9 @@ Requires JDK 17 or newer and the Android SDK (API 36).
 
 ```bash
 ./gradlew :core:verbs:test :core:srs:test :core:cards:test :core:dictionary:test :core:play:test :core:tutor:test :core:design:test
-./gradlew :app:testDebugUnitTest     # database and app logic on Robolectric
-./gradlew :app:installDebug          # install on a connected phone
-./gradlew :app:bundleRelease         # Play Store bundle (see docs/RELEASE.md for signing)
+./gradlew :app:testGithubDebugUnitTest   # database and app logic on Robolectric
+./gradlew :app:installGithubDebug        # install on a connected phone
+./gradlew :app:bundlePlayRelease         # Play Store bundle (see docs/RELEASE.md for signing)
 ```
 
 ## How we work

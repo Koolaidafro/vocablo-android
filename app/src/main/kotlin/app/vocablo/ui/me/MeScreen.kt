@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -41,12 +42,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.vocablo.BuildConfig
+import app.vocablo.container
 import app.vocablo.data.Region
 import app.vocablo.design.ThemeMode
 import app.vocablo.design.Themes
 import app.vocablo.notify.Notifications
 import app.vocablo.ui.LibraryViewModel
+import app.vocablo.update.UpdateState
 import java.time.LocalDate
+import kotlinx.coroutines.launch
 
 @Composable
 fun MeScreen(library: LibraryViewModel) {
@@ -196,6 +201,7 @@ fun MeScreen(library: LibraryViewModel) {
         OutlinedButton(onClick = { confirmRestore = true }, modifier = Modifier.fillMaxWidth()) { Text("Restore a backup") }
 
         Section("About")
+        AppVersion()
         Text(
             "Vocablo is open source. Dictionary text from Wiktionary (CC BY-SA 4.0). Verb ranking from FrequencyWords by Hermit Dave (CC BY-SA 4.0). Starter dictionary examples written for Vocablo.",
             style = MaterialTheme.typography.bodySmall,
@@ -238,4 +244,31 @@ private fun hourLabel(h: Int): String = when {
     h < 12 -> "$h am"
     h == 12 -> "12 pm"
     else -> "${h - 12} pm"
+}
+
+@Composable
+private fun AppVersion() {
+    val updates = LocalContext.current.container.updates
+    val state by updates.state.collectAsStateWithLifecycle()
+    val scope = rememberCoroutineScope()
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("Version ${BuildConfig.VERSION_NAME}")
+            if (updates.enabled) {
+                Text(
+                    when (val s = state) {
+                        UpdateState.Checking -> "Checking…"
+                        UpdateState.UpToDate -> "You have the latest version."
+                        is UpdateState.Available -> "Version ${s.release.versionName} is ready. See Home to install it."
+                        is UpdateState.Downloading -> "Downloading…"
+                        is UpdateState.Failed -> s.message
+                        UpdateState.Idle -> "Updates come from GitHub."
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        if (updates.enabled) TextButton(onClick = { scope.launch { updates.check() } }) { Text("Check now") }
+    }
 }

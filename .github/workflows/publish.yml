@@ -1,0 +1,58 @@
+name: Publish update
+
+# Every merge to main becomes a GitHub release with a signed APK. Phones running the GitHub
+# build of Vocablo see it on the Home screen and can install it in one tap.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HAS_KEY: ${{ secrets.VOCABLO_UPDATE_KEYSTORE != '' }}
+    steps:
+      - name: Signing key missing
+        if: env.HAS_KEY != 'true'
+        run: echo "::warning::Add the VOCABLO_UPDATE_KEYSTORE repository secret to publish updates (see docs/RELEASE.md)."
+      - uses: actions/checkout@v4
+        if: env.HAS_KEY == 'true'
+      - uses: actions/setup-java@v4
+        if: env.HAS_KEY == 'true'
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v4
+        if: env.HAS_KEY == 'true'
+      - name: Build the signed GitHub APK
+        if: env.HAS_KEY == 'true'
+        env:
+          KEYSTORE_B64: ${{ secrets.VOCABLO_UPDATE_KEYSTORE }}
+        run: |
+          echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/update.jks"
+          export VOCABLO_KEYSTORE="$RUNNER_TEMP/update.jks"
+          export VOCABLO_KEYSTORE_PASSWORD=vocablo-updates
+          export VOCABLO_KEY_PASSWORD=vocablo-updates
+          export VOCABLO_KEY_ALIAS=vocablo
+          # Version codes keep rising with every publish; 100+ stays above hand-installed builds.
+          export VOCABLO_VERSION_CODE=$((100 + GITHUB_RUN_NUMBER))
+          echo "CODE=$VOCABLO_VERSION_CODE" >> "$GITHUB_ENV"
+          ./gradlew :app:assembleGithubRelease
+          cp app/build/outputs/apk/github/release/app-github-release.apk vocablo.apk
+          rm "$RUNNER_TEMP/update.jks"
+      - name: Publish the release
+        if: env.HAS_KEY == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git log -1 --format=%s > notes.txt
+          gh release create "v1.0.$CODE" vocablo.apk --title "Vocablo 1.0.$CODE" --notes-file notes.txt --latest

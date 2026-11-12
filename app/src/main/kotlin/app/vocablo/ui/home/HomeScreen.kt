@@ -1,6 +1,7 @@
 package app.vocablo.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,36 +9,36 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.vocablo.play.WeeklyChest
 import app.vocablo.ui.LibraryViewModel
-import app.vocablo.ui.ProgressState
-import app.vocablo.ui.components.Confetti
 import app.vocablo.ui.Navigator
+import app.vocablo.ui.ProgressState
 import app.vocablo.ui.Screen
+import app.vocablo.ui.components.Confetti
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.update.UpdateCard
 import app.vocablo.verbs.Conjugator
 import app.vocablo.verbs.Person
 import app.vocablo.verbs.StarterVerbs
@@ -89,6 +90,7 @@ fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit
             }
         }
 
+        UpdateCard()
         LevelCard(progress)
         QuestsCard(progress)
         ChestCard(progress, onOpen = { library.openChest { xp -> chestXp = xp } })
