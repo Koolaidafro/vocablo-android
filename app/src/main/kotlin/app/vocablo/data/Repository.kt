@@ -16,6 +16,7 @@ import app.vocablo.srs.StudyQueue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -95,9 +96,19 @@ class VocabloRepository(
 
     suspend fun deleteCard(id: Long) = dao.deleteCard(id)
 
+    /** Adds a verb card to the "Verbos" deck. Returns false if a card for it already exists. */
+    suspend fun addVerbCard(infinitive: String, english: String): Boolean {
+        if (checkDuplicate(infinitive, english) is DuplicateResult.Exact) return false
+        val deckId = dao.decks().firstOrNull { it.name == VERB_DECK }?.id ?: createDeck(VERB_DECK)
+        addCard(Card(deckId = deckId, spanish = infinitive, english = english, type = CardType.VERB))
+        return true
+    }
+
     // Study
 
-    fun studyDays(): Flow<Set<Long>> = dao.observeStudyDays().map { it.toSet() }
+    /** Days with any study: card reviews or verb drills. */
+    fun studyDays(): Flow<Set<Long>> =
+        combine(dao.observeStudyDays(), dao.observeVerbStudyDays()) { cards, verbs -> (cards + verbs).toSet() }
 
     fun answersToday(): Flow<Int> = ticker.map { dayOf(it) }.distinctUntilChanged().flatMapLatest { dao.observeAnswersOn(it) }
 
@@ -193,6 +204,7 @@ class VocabloRepository(
 
     companion object {
         const val DECK_COLORS = 5
+        const val VERB_DECK = "Verbos"
 
         private val STARTER_CARDS = listOf(
             Triple("hola", "hello", CardType.WORD),

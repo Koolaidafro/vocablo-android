@@ -16,6 +16,8 @@ import androidx.room.RoomDatabase
 import androidx.room.Transaction
 import androidx.room.Update
 import androidx.room.Upsert
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "decks")
@@ -77,6 +79,29 @@ data class ReviewLogEntity(
     val wasNew: Boolean,
     val reviewedMillis: Long,
     /** Local calendar day (days since 1970-01-01). */
+    val day: Long,
+)
+
+/** Spaced repetition state of one drill item (a verb in one tense, see DrillItem.id). */
+@Entity(tableName = "verb_reviews")
+data class VerbReviewEntity(
+    @PrimaryKey val itemId: Long,
+    val stability: Double,
+    val difficulty: Double,
+    val reps: Int,
+    val lapses: Int,
+    val lastReviewMillis: Long?,
+    val dueMillis: Long,
+)
+
+/** One drill answer, for accuracy, stage unlocking and streaks. */
+@Entity(tableName = "verb_answers", indices = [Index("day")])
+data class VerbAnswerEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val itemId: Long,
+    val tense: String,
+    val correct: Boolean,
+    val answeredMillis: Long,
     val day: Long,
 )
 
@@ -191,6 +216,36 @@ abstract class VocabloDao {
         insertLog(log)
     }
 
+    @Query("SELECT * FROM verb_reviews")
+    abstract suspend fun verbReviews(): List<VerbReviewEntity>
+
+    @Query("SELECT * FROM verb_reviews WHERE itemId = :itemId")
+    abstract suspend fun verbReview(itemId: Long): VerbReviewEntity?
+
+    @Query("SELECT COUNT(*) FROM verb_reviews WHERE dueMillis <= :now")
+    abstract fun observeDueVerbItems(now: Long): Flow<Int>
+
+    @Query("SELECT correct FROM verb_answers WHERE tense IN (:tenses) ORDER BY id DESC LIMIT :limit")
+    abstract suspend fun recentVerbAnswers(tenses: List<String>, limit: Int): List<Boolean>
+
+    @Query("SELECT DISTINCT day FROM verb_answers")
+    abstract fun observeVerbStudyDays(): Flow<List<Long>>
+
+    @Query("SELECT spanish FROM cards WHERE type = 'VERB'")
+    abstract suspend fun verbCardTexts(): List<String>
+
+    @Upsert
+    abstract suspend fun upsertVerbReview(review: VerbReviewEntity)
+
+    @Insert
+    abstract suspend fun insertVerbAnswer(answer: VerbAnswerEntity)
+
+    @Transaction
+    open suspend fun saveVerbAnswer(review: VerbReviewEntity, answer: VerbAnswerEntity) {
+        upsertVerbReview(review)
+        insertVerbAnswer(answer)
+    }
+
     /** Replaces every deck, card and review in one step, for restoring a backup. */
     @Transaction
     open suspend fun replaceAll(decks: List<DeckEntity>, cards: List<CardEntity>, reviews: List<ReviewEntity>) {
@@ -202,8 +257,11 @@ abstract class VocabloDao {
 }
 
 @Database(
-    entities = [DeckEntity::class, CardEntity::class, ReviewEntity::class, ReviewLogEntity::class],
-    version = 1,
+    entities = [
+        DeckEntity::class, CardEntity::class, ReviewEntity::class, ReviewLogEntity::class,
+        VerbReviewEntity::class, VerbAnswerEntity::class,
+    ],
+    version = 2,
     exportSchema = false,
 )
 abstract class VocabloDatabase : RoomDatabase() {
@@ -211,6 +269,25 @@ abstract class VocabloDatabase : RoomDatabase() {
 
     companion object {
         fun create(context: Context): VocabloDatabase =
-            Room.databaseBuilder(context, VocabloDatabase::class.java, "vocablo.db").build()
+            Room.databaseBuilder(context, VocabloDatabase::class.java, "vocablo.db")
+                .addMigrations(MIGRATION_1_2)
+                .build()
+
+        /** Version 2 adds verb drill progress. Existing cards and reviews are untouched. */
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `verb_reviews` (`itemId` INTEGER NOT NULL, `stability` REAL NOT NULL, " +
+                        "`difficulty` REAL NOT NULL, `reps` INTEGER NOT NULL, `lapses` INTEGER NOT NULL, " +
+                        "`lastReviewMillis` INTEGER, `dueMillis` INTEGER NOT NULL, PRIMARY KEY(`itemId`))",
+                )
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `verb_answers` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                        "`itemId` INTEGER NOT NULL, `tense` TEXT NOT NULL, `correct` INTEGER NOT NULL, " +
+                        "`answeredMillis` INTEGER NOT NULL, `day` INTEGER NOT NULL)",
+                )
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_verb_answers_day` ON `verb_answers` (`day`)")
+            }
+        }
     }
 }
