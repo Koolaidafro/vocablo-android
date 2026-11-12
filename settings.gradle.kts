@@ -25,6 +25,6 @@ rootProject.name = "vocablo"
 include(":app")
 include(":core:cards")
 include(":core:design")
-include(":core:dictionary")
+include(":core:dictionary", ":core:play")
 include(":core:srs")
 include(":core:verbs")

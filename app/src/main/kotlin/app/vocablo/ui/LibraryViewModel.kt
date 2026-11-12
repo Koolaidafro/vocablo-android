@@ -7,7 +7,14 @@ import androidx.lifecycle.viewModelScope
 import app.vocablo.cards.Streaks
 import app.vocablo.data.AppSettings
 import app.vocablo.data.DeckSummary
+import app.vocablo.data.ProgressRepository
 import app.vocablo.data.SettingsStore
+import app.vocablo.play.DailyQuests
+import app.vocablo.play.DayActivity
+import app.vocablo.play.Quest
+import app.vocablo.play.StreakFreezes
+import app.vocablo.play.WeeklyChest
+import app.vocablo.play.Xp
 import app.vocablo.data.VerbRepository
 import app.vocablo.data.VocabloRepository
 import kotlinx.coroutines.Dispatchers
@@ -29,16 +36,32 @@ data class LibraryState(
     val answeredToday: Int = 0,
     val dueVerbItems: Int = 0,
     val loaded: Boolean = false,
+    /** Days a streak freeze covered; they keep the chain without adding to it. */
+    val frozenDays: Set<Long> = emptySet(),
 ) {
     val due: Int get() = decks.sumOf { it.dueCount }
     val new: Int get() = decks.sumOf { it.newCount }
     val totalCards: Int get() = decks.sumOf { it.cardCount }
 }
 
+data class ProgressState(
+    val totalXp: Int = 0,
+    val today: DayActivity = DayActivity(),
+    val quests: List<Quest> = emptyList(),
+    val questDaysThisWeek: Int = 0,
+    val chestReady: Boolean = false,
+    val chestOpened: Boolean = false,
+    val freezesHeld: Int = 0,
+) {
+    val level: Int get() = Xp.level(totalXp)
+    val levelProgress: Float get() = Xp.levelProgress(totalXp)
+}
+
 /** Shared by Home, Decks and Me: deck counts, streaks, settings and file import/export. */
 class LibraryViewModel(
     private val repo: VocabloRepository,
     verbs: VerbRepository,
+    private val progressRepo: ProgressRepository,
     private val settingsStore: SettingsStore,
     private val resolver: ContentResolver,
 ) : ViewModel() {
@@ -48,16 +71,18 @@ class LibraryViewModel(
         repo.studyDays(),
         repo.answersToday(),
         verbs.dueCount(),
-    ) { decks, days, answered, dueVerbs ->
+        progressRepo.frozenDays(),
+    ) { decks, days, answered, dueVerbs, frozen ->
         val today = repo.today()
         LibraryState(
             decks = decks,
-            streak = Streaks.current(days, today),
-            longestStreak = Streaks.longest(days),
-            streakAtRisk = Streaks.atRisk(days, today),
+            streak = StreakFreezes.streak(days, frozen, today),
+            longestStreak = StreakFreezes.longest(days, frozen),
+            streakAtRisk = Streaks.atRisk(days + frozen, today),
             answeredToday = answered,
             dueVerbItems = dueVerbs,
             loaded = true,
+            frozenDays = frozen,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), LibraryState())
 
@@ -67,6 +92,38 @@ class LibraryViewModel(
 
     val settings: StateFlow<AppSettings> = settingsStore.settings
         .stateIn(viewModelScope, SharingStarted.Eagerly, AppSettings())
+
+    val progress: StateFlow<ProgressState> = combine(
+        progressRepo.totalXp(),
+        progressRepo.todayActivity(),
+        progressRepo.questDays(),
+        progressRepo.chestOpenedThisWeek(),
+        combine(settingsStore.settings, repo.studyDays(), progressRepo.frozenDays(), ::Triple),
+    ) { xp, day, questDays, opened, (settings, study, frozen) ->
+        val today = progressRepo.today()
+        ProgressState(
+            totalXp = xp,
+            today = day,
+            quests = DailyQuests.forDay(today, settings.newPerDay),
+            questDaysThisWeek = WeeklyChest.questDaysThisWeek(questDays, today),
+            chestReady = WeeklyChest.ready(questDays, today, opened),
+            chestOpened = opened,
+            freezesHeld = StreakFreezes.held(StreakFreezes.longest(study, frozen), frozen.size),
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ProgressState())
+
+    init {
+        // Pay out quests whenever today's activity changes, wherever it happened.
+        viewModelScope.launch {
+            combine(progressRepo.todayActivity(), settingsStore.settings) { _, s -> s.newPerDay }
+                .collect { progressRepo.settleQuests(it) }
+        }
+    }
+
+    /** Opens the weekly chest; the XP shows up through [progress]. */
+    fun openChest(onOpened: (Int) -> Unit) {
+        viewModelScope.launch { onOpened(progressRepo.openChest()) }
+    }
 
     /** One-off messages for the UI to show, e.g. "Imported 40 cards". */
     private val _message = MutableStateFlow<String?>(null)

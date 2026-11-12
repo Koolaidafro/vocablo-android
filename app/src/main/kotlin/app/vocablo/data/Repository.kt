@@ -72,6 +72,8 @@ class VocabloRepository(
 
     suspend fun card(id: Long): Card? = dao.card(id)?.toCard()
 
+    suspend fun allCards(): List<Card> = dao.allCards().map { it.toCard() }
+
     /** Compares a new or edited card with every card in every deck. */
     suspend fun checkDuplicate(spanish: String, english: String, ignoreCardId: Long? = null): DuplicateResult {
         val sameLetters = dao.cardsWithLooseKey(CardText.looseKey(spanish)).map { it.toCard() }

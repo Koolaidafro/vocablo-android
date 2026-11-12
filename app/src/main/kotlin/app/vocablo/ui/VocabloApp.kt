@@ -37,12 +37,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.container
+import app.vocablo.play.Game as PlayGame
 import app.vocablo.ui.cards.CardEditorScreen
 import app.vocablo.ui.decks.DeckDetailScreen
 import app.vocablo.ui.decks.DecksScreen
 import app.vocablo.ui.home.HomeScreen
 import app.vocablo.data.AppSettings
 import app.vocablo.ui.onboarding.OnboardingScreen
+import app.vocablo.ui.play.GameScreen
+import app.vocablo.ui.play.SentenceScreen
 import app.vocablo.ui.verbs.DrillScreen
 import app.vocablo.ui.verbs.PlayHub
 import app.vocablo.ui.verbs.PracticeSettingsScreen
@@ -70,6 +73,8 @@ sealed interface Screen {
     data object Practice : Screen
     data object Verbs : Screen
     data class VerbDetail(val infinitive: String) : Screen
+    data class Game(val game: PlayGame) : Screen
+    data object Sentences : Screen
 
     companion object {
         fun encode(s: Screen): String = when (s) {
@@ -80,6 +85,8 @@ sealed interface Screen {
             Practice -> "practice"
             Verbs -> "verbs"
             is VerbDetail -> "verb:${s.infinitive}"
+            is Game -> "game:${s.game.name}"
+            Sentences -> "sentences"
         }
 
         fun decode(s: String): Screen {
@@ -91,6 +98,8 @@ sealed interface Screen {
                 "practice" -> Practice
                 "verbs" -> Verbs
                 "verb" -> VerbDetail(p[1])
+                "game" -> Game(PlayGame.valueOf(p[1]))
+                "sentences" -> Sentences
                 else -> Study(p[1].toLongOrNull())
             }
         }
@@ -140,7 +149,9 @@ class Navigator(val stack: SnapshotStateList<Screen>, private val stores: Screen
 fun VocabloApp() {
     val app = LocalContext.current.applicationContext
     val library: LibraryViewModel = viewModel {
-        LibraryViewModel(app.container.repository, app.container.verbs, app.container.settings, app.contentResolver)
+        LibraryViewModel(
+            app.container.repository, app.container.verbs, app.container.progress, app.container.settings, app.contentResolver,
+        )
     }
     VocabloRoot(library)
 }
@@ -187,6 +198,8 @@ private fun VocabloRoot(library: LibraryViewModel) {
                         Screen.Practice -> PracticeSettingsScreen(nav)
                         Screen.Verbs -> VerbListScreen(nav)
                         is Screen.VerbDetail -> VerbDetailScreen(top.infinitive, nav)
+                        is Screen.Game -> GameScreen(top.game, nav)
+                        Screen.Sentences -> SentenceScreen(nav)
                     }
                 }
             }

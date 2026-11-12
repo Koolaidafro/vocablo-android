@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":core:srs"))
     implementation(project(":core:cards"))
     implementation(project(":core:dictionary"))
+    implementation(project(":core:play"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

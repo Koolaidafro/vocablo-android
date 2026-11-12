@@ -40,6 +40,9 @@ data class AppSettings(
     val practice: PracticeSettings = PracticeSettings(),
     /** False until the first-launch questions are answered or skipped. */
     val onboarded: Boolean = false,
+    /** Tuzo's nudges: a daily one at [reminderHour] and an evening streak saver. Two a day at most. */
+    val remindersOn: Boolean = true,
+    val reminderHour: Int = 9,
 )
 
 private val Context.settingsStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -66,6 +69,8 @@ class SettingsStore(context: Context) {
             p[SOURCE] = pr.source.name
             p[ANSWER_MODE] = pr.answerMode.name
             p[ONBOARDED] = new.onboarded
+            p[REMINDERS] = new.remindersOn
+            p[REMINDER_HOUR] = new.reminderHour
         }
     }
 
@@ -84,6 +89,8 @@ class SettingsStore(context: Context) {
             answerMode = p[ANSWER_MODE].toEnum(AnswerMode.CHOOSE),
         ),
         onboarded = p[ONBOARDED] ?: false,
+        remindersOn = p[REMINDERS] ?: true,
+        reminderHour = p[REMINDER_HOUR] ?: 9,
     )
 
     private companion object {
@@ -99,6 +106,8 @@ class SettingsStore(context: Context) {
         val SOURCE = stringPreferencesKey("practice_source")
         val ANSWER_MODE = stringPreferencesKey("practice_answer_mode")
         val ONBOARDED = booleanPreferencesKey("onboarded")
+        val REMINDERS = booleanPreferencesKey("reminders_on")
+        val REMINDER_HOUR = intPreferencesKey("reminder_hour")
     }
 }
 

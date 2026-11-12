@@ -8,6 +8,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Relation
@@ -103,6 +104,40 @@ data class VerbAnswerEntity(
     val correct: Boolean,
     val answeredMillis: Long,
     val day: Long,
+)
+
+/**
+ * Everything else that earns XP or shapes the streak: games, sentences, finished quests,
+ * the weekly chest and frozen days. [ref] tells rows of one kind and day apart; the unique
+ * index makes awarding a quest or chest twice impossible.
+ */
+@Entity(tableName = "activity", indices = [Index(value = ["kind", "day", "ref"], unique = true)])
+data class ActivityEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val kind: String,
+    val xp: Int,
+    val day: Long,
+    val ref: Long = 0,
+    val millis: Long,
+)
+
+object ActivityKind {
+    const val GAME = "GAME"
+    const val SENTENCE = "SENTENCE"
+    const val QUEST = "QUEST"
+    const val QUEST_DAY = "QUEST_DAY"
+    const val CHEST = "CHEST"
+    const val FREEZE = "FREEZE"
+}
+
+/** One day's counters, matching DayActivity in core:play. */
+data class DayCounts(
+    val cardsReviewed: Int,
+    val newCards: Int,
+    val verbsRight: Int,
+    val gamesPlayed: Int,
+    val sentencesBuilt: Int,
+    val xp: Int,
 )
 
 data class DeckSummary(
@@ -246,6 +281,50 @@ abstract class VocabloDao {
         insertVerbAnswer(answer)
     }
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract suspend fun insertActivity(row: ActivityEntity): Long
+
+    /** XP weights come in as parameters so the numbers live only in Xp (core:play). */
+    @Query(
+        """
+        SELECT
+            (SELECT COUNT(*) FROM review_log WHERE day = :day) AS cardsReviewed,
+            (SELECT COUNT(DISTINCT cardId) FROM review_log WHERE day = :day AND wasNew = 1) AS newCards,
+            (SELECT COUNT(*) FROM verb_answers WHERE day = :day AND correct = 1) AS verbsRight,
+            (SELECT COUNT(*) FROM activity WHERE day = :day AND kind = 'GAME') AS gamesPlayed,
+            (SELECT COUNT(*) FROM activity WHERE day = :day AND kind = 'SENTENCE' AND xp > 0) AS sentencesBuilt,
+            (SELECT COALESCE(SUM(CASE WHEN wasNew = 1 THEN :reviewNew ELSE :review END), 0) FROM review_log WHERE day = :day)
+            + (SELECT COALESCE(SUM(CASE WHEN correct = 1 THEN :drillRight ELSE :drillWrong END), 0) FROM verb_answers WHERE day = :day)
+            + (SELECT COALESCE(SUM(xp), 0) FROM activity WHERE day = :day) AS xp
+        """,
+    )
+    abstract fun observeDay(day: Long, review: Int, reviewNew: Int, drillRight: Int, drillWrong: Int): Flow<DayCounts>
+
+    @Query(
+        """
+        SELECT
+            (SELECT COALESCE(SUM(CASE WHEN wasNew = 1 THEN :reviewNew ELSE :review END), 0) FROM review_log)
+            + (SELECT COALESCE(SUM(CASE WHEN correct = 1 THEN :drillRight ELSE :drillWrong END), 0) FROM verb_answers)
+            + (SELECT COALESCE(SUM(xp), 0) FROM activity)
+        """,
+    )
+    abstract fun observeTotalXp(review: Int, reviewNew: Int, drillRight: Int, drillWrong: Int): Flow<Int>
+
+    @Query("SELECT DISTINCT day FROM activity WHERE kind = :kind")
+    abstract fun observeActivityDays(kind: String): Flow<List<Long>>
+
+    @Query("SELECT DISTINCT day FROM activity WHERE kind = :kind")
+    abstract suspend fun activityDays(kind: String): List<Long>
+
+    @Query("SELECT COUNT(*) FROM activity WHERE kind = 'CHEST' AND ref = :weekStart")
+    abstract fun observeChestsOpened(weekStart: Long): Flow<Int>
+
+    @Query("SELECT DISTINCT day FROM review_log")
+    abstract suspend fun cardStudyDays(): List<Long>
+
+    @Query("SELECT DISTINCT day FROM verb_answers")
+    abstract suspend fun verbStudyDays(): List<Long>
+
     /** Replaces every deck, card and review in one step, for restoring a backup. */
     @Transaction
     open suspend fun replaceAll(decks: List<DeckEntity>, cards: List<CardEntity>, reviews: List<ReviewEntity>) {
@@ -259,9 +338,9 @@ abstract class VocabloDao {
 @Database(
     entities = [
         DeckEntity::class, CardEntity::class, ReviewEntity::class, ReviewLogEntity::class,
-        VerbReviewEntity::class, VerbAnswerEntity::class,
+        VerbReviewEntity::class, VerbAnswerEntity::class, ActivityEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = false,
 )
 abstract class VocabloDatabase : RoomDatabase() {
@@ -270,7 +349,7 @@ abstract class VocabloDatabase : RoomDatabase() {
     companion object {
         fun create(context: Context): VocabloDatabase =
             Room.databaseBuilder(context, VocabloDatabase::class.java, "vocablo.db")
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build()
 
         /** Version 2 adds verb drill progress. Existing cards and reviews are untouched. */
@@ -287,6 +366,18 @@ abstract class VocabloDatabase : RoomDatabase() {
                         "`answeredMillis` INTEGER NOT NULL, `day` INTEGER NOT NULL)",
                 )
                 db.execSQL("CREATE INDEX IF NOT EXISTS `index_verb_answers_day` ON `verb_answers` (`day`)")
+            }
+        }
+
+        /** Version 3 adds XP, quests, the weekly chest and streak freezes. */
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `activity` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                        "`kind` TEXT NOT NULL, `xp` INTEGER NOT NULL, `day` INTEGER NOT NULL, `ref` INTEGER NOT NULL, " +
+                        "`millis` INTEGER NOT NULL)",
+                )
+                db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_activity_kind_day_ref` ON `activity` (`kind`, `day`, `ref`)")
             }
         }
     }
