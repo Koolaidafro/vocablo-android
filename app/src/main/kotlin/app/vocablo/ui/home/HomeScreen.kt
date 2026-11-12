@@ -28,7 +28,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.vocablo.play.WeeklyChest
@@ -231,22 +230,3 @@ fun Person.label() = when (this) {
     Person.VOSOTROS -> "vosotros"
     Person.ELLOS -> "ellos · ustedes"
 }
-
-@Composable
-private fun ComingSoon(title: String, body: String) {
-    Column(
-        Modifier.fillMaxSize().padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Tuzo(size = 120.dp, mood = TuzoMood.SLEEP)
-        Text(title, style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
-        Text(body, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
-    }
-}
-
-@Composable
-fun TutorScreen() = ComingSoon(
-    "Your AI tutor is coming",
-    "Bring your own Claude, ChatGPT or Grok key and practice real conversations in your region's Spanish.",
-)
