@@ -1,0 +1,41 @@
+package app.vocablo
+
+import android.app.Application
+import android.content.Context
+import app.vocablo.data.SettingsStore
+import app.vocablo.data.VocabloDatabase
+import app.vocablo.data.VocabloRepository
+import app.vocablo.data.WiktionaryLookup
+import app.vocablo.dictionary.OfflineDictionary
+import app.vocablo.notify.Notifications
+import app.vocablo.verbs.FormIndex
+import app.vocablo.verbs.StarterVerbs
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+
+/** Hand-made dependency container: small enough that a DI library would be overkill. */
+class AppContainer(context: Context) {
+    val database: VocabloDatabase = VocabloDatabase.create(context)
+    val repository = VocabloRepository(database.dao())
+    val settings = SettingsStore(context)
+    val dictionary: OfflineDictionary by lazy { OfflineDictionary.starter() }
+    val onlineDictionary = WiktionaryLookup()
+    val verbForms: FormIndex by lazy { FormIndex(StarterVerbs.all) }
+    val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+}
+
+class VocabloApplication : Application() {
+    lateinit var container: AppContainer
+        private set
+
+    override fun onCreate() {
+        super.onCreate()
+        container = AppContainer(this)
+        Notifications.createChannels(this)
+        container.scope.launch { container.repository.seedIfEmpty() }
+    }
+}
+
+val Context.container: AppContainer get() = (applicationContext as VocabloApplication).container

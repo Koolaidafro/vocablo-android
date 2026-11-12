@@ -1,0 +1,154 @@
+# Vocablo starter dictionary. Written for Vocablo; Apache 2.0 like the rest of the repo.
+# spanish	pos	gender	english	example	example_english	region_note
+ser	verb		to be (identity, traits)	Soy de Texas.	I'm from Texas.	
+estar	verb		to be (state, location)	¿Dónde estás?	Where are you?	
+tener	verb		to have	Tengo dos hermanos.	I have two brothers.	
+hacer	verb		to do; to make	¿Qué haces hoy?	What are you doing today?	
+ir	verb		to go	Vamos al mercado.	We're going to the market.	
+poder	verb		to be able to; can	¿Puedo pagar con tarjeta?	Can I pay by card?	
+decir	verb		to say; to tell	Dice que viene mañana.	He says he's coming tomorrow.	
+querer	verb		to want; to love	Quiero un café.	I want a coffee.	
+saber	verb		to know (facts)	No sé la respuesta.	I don't know the answer.	
+conocer	verb		to know (people, places)	¿Conoces a mi hermana?	Do you know my sister?	
+ver	verb		to see; to watch	Vimos una película.	We watched a movie.	
+dar	verb		to give	Me das la sal, por favor.	Pass me the salt, please.	
+venir	verb		to come	¿Vienes a la fiesta?	Are you coming to the party?	
+llegar	verb		to arrive	El autobús llega a las ocho.	The bus arrives at eight.	
+pasar	verb		to happen; to pass; to spend (time)	¿Qué pasó?	What happened?	
+deber	verb		should; to owe	Debes descansar.	You should rest.	
+poner	verb		to put	Pon el aguacate en la ensalada.	Put the avocado in the salad.	
+parecer	verb		to seem	Parece fácil.	It seems easy.	
+quedar	verb		to stay; to remain; to fit	Me quedo en casa.	I'm staying home.	
+creer	verb		to believe; to think	Creo que sí.	I think so.	
+hablar	verb		to speak; to talk	Hablo un poco de español.	I speak a little Spanish.	
+llevar	verb		to carry; to take; to wear	Llevo una chaqueta.	I'm wearing a jacket.	
+dejar	verb		to leave; to let	Deja tu mochila aquí.	Leave your backpack here.	
+seguir	verb		to follow; to continue	Sigue derecho.	Keep going straight.	
+encontrar	verb		to find	No encuentro mis llaves.	I can't find my keys.	
+llamar	verb		to call	Te llamo más tarde.	I'll call you later.	
+pensar	verb		to think	Pienso en ti.	I think about you.	
+salir	verb		to leave; to go out	Salgo a las cinco.	I leave at five.	
+volver	verb		to return; to come back	Vuelvo pronto.	I'll be back soon.	
+tomar	verb		to take; to drink	Tomamos un taxi.	We took a taxi.	
+conducir	verb		to drive	Conduzco al trabajo.	I drive to work.	Mexico also: manejar
+manejar	verb		to drive; to handle	¿Sabes manejar?	Do you know how to drive?	Common in Mexico and Central America
+entender	verb		to understand	No entiendo.	I don't understand.	
+pedir	verb		to ask for; to order	Pedimos tacos.	We ordered tacos.	
+comer	verb		to eat	Comemos a las dos.	We eat at two.	
+beber	verb		to drink	Bebo mucha agua.	I drink a lot of water.	
+vivir	verb		to live	Vivo en Houston.	I live in Houston.	
+trabajar	verb		to work	Trabajo desde casa.	I work from home.	
+estudiar	verb		to study	Estudio español todos los días.	I study Spanish every day.	
+escribir	verb		to write	Escríbeme un mensaje.	Write me a message.	
+leer	verb		to read	Leo antes de dormir.	I read before bed.	
+dormir	verb		to sleep	Duermo ocho horas.	I sleep eight hours.	
+jugar	verb		to play (games, sports)	Jugamos fútbol los sábados.	We play soccer on Saturdays.	
+comprar	verb		to buy	Compré pan.	I bought bread.	
+pagar	verb		to pay	¿Cuánto pagaste?	How much did you pay?	
+necesitar	verb		to need	Necesito ayuda.	I need help.	
+buscar	verb		to look for	Busco el baño.	I'm looking for the bathroom.	
+esperar	verb		to wait; to hope	Espera un momento.	Wait a moment.	
+ayudar	verb		to help	¿Me ayudas?	Can you help me?	
+gustar	verb		to be pleasing; to like	Me gusta el café.	I like coffee.	
+platicar	verb		to chat	Platicamos toda la tarde.	We chatted all afternoon.	Mexico. Elsewhere: charlar, conversar
+empezar	verb		to begin	La clase empieza a las nueve.	Class begins at nine.	
+terminar	verb		to finish	Terminé la tarea.	I finished the homework.	
+abrir	verb		to open	Abre la ventana.	Open the window.	
+cerrar	verb		to close	Cierra la puerta.	Close the door.	
+aprender	verb		to learn	Aprendo rápido.	I learn fast.	
+caminar	verb		to walk	Caminamos al parque.	We walked to the park.	
+correr	verb		to run	Corro por la mañana.	I run in the morning.	
+cocinar	verb		to cook	Mi abuela cocina mole.	My grandmother cooks mole.	
+el agua	noun	f	water	Un vaso de agua, por favor.	A glass of water, please.	Feminine, but takes el and un: el agua fría
+el aguacate	noun	m	avocado	Pon el aguacate en la ensalada.	Put the avocado in the salad.	Argentina, Chile, Peru: la palta
+la palta	noun	f	avocado	Me encanta la palta.	I love avocado.	Argentina, Chile, Peru. Elsewhere: el aguacate
+el pan	noun	m	bread	Compramos pan dulce.	We bought sweet bread.	
+la comida	noun	f	food; meal	La comida está lista.	The food is ready.	
+el desayuno	noun	m	breakfast	El desayuno es a las siete.	Breakfast is at seven.	
+el almuerzo	noun	m	lunch	¿Qué hay de almuerzo?	What's for lunch?	Mexico also: la comida (main midday meal)
+la cena	noun	f	dinner	La cena fue deliciosa.	Dinner was delicious.	
+el jugo	noun	m	juice	Un jugo de naranja.	An orange juice.	Spain: el zumo
+el café	noun	m	coffee; café	¿Tomamos un café?	Shall we get a coffee?	
+la leche	noun	f	milk	Café con leche, por favor.	Coffee with milk, please.	
+el pollo	noun	m	chicken	Arroz con pollo.	Rice with chicken.	
+la carne	noun	f	meat; beef	No como carne.	I don't eat meat.	
+el frijol	noun	m	bean	Frijoles negros.	Black beans.	Caribbean: la habichuela; Spain: la judía
+el maíz	noun	m	corn	Tortillas de maíz.	Corn tortillas.	
+la cuenta	noun	f	the bill; account	¿Nos trae la cuenta?	Could you bring us the bill?	
+el carro	noun	m	car	Mi carro es azul.	My car is blue.	Spain: el coche; Argentina: el auto
+el coche	noun	m	car	Aparca el coche aquí.	Park the car here.	Spain. Latin America: el carro, el auto
+el camión	noun	m	truck; bus (Mexico)	Tomo el camión al centro.	I take the bus downtown.	Mexico: bus. Elsewhere: truck
+el autobús	noun	m	bus	El autobús está lleno.	The bus is full.	
+la casa	noun	f	house; home	Estoy en casa.	I'm at home.	
+el trabajo	noun	m	work; job	Voy al trabajo.	I'm going to work.	
+la escuela	noun	f	school	Los niños están en la escuela.	The kids are at school.	
+el dinero	noun	m	money	No tengo dinero.	I don't have money.	Mexico, colloquial: la lana; Argentina: la plata
+la familia	noun	f	family	Mi familia es grande.	My family is big.	
+el amigo	noun	m	friend (male)	Es mi mejor amigo.	He's my best friend.	Mexico, colloquial: el cuate, el compa
+la amiga	noun	f	friend (female)	Mi amiga vive cerca.	My friend lives nearby.	
+el hermano	noun	m	brother	Tengo un hermano.	I have a brother.	
+la hermana	noun	f	sister	Mi hermana estudia medicina.	My sister studies medicine.	
+el niño	noun	m	boy; child	El niño está jugando.	The boy is playing.	
+la mamá	noun	f	mom	Llama a tu mamá.	Call your mom.	
+el papá	noun	m	dad	Mi papá cocina los domingos.	My dad cooks on Sundays.	
+el tiempo	noun	m	time; weather	No tengo tiempo.	I don't have time.	
+el día	noun	m	day	Buen día.	Good morning.	Masculine despite ending in -a
+la noche	noun	f	night	Buenas noches.	Good night.	
+la semana	noun	f	week	La semana pasada.	Last week.	
+el año	noun	m	year	Tengo treinta años.	I'm thirty years old.	
+la ciudad	noun	f	city	La ciudad es enorme.	The city is huge.	
+la calle	noun	f	street	Cruza la calle.	Cross the street.	
+el baño	noun	m	bathroom	¿Dónde está el baño?	Where's the bathroom?	
+la tienda	noun	f	store; shop	La tienda abre a las diez.	The store opens at ten.	
+el mercado	noun	m	market	Ayer fuimos al mercado.	Yesterday we went to the market.	
+el teléfono	noun	m	phone	Mi teléfono no tiene batería.	My phone is dead.	Latin America also: el celular
+el celular	noun	m	cell phone	Te mando un mensaje al celular.	I'll text your phone.	Latin America. Spain: el móvil
+la computadora	noun	f	computer	Uso la computadora todo el día.	I use the computer all day.	Spain: el ordenador
+el libro	noun	m	book	Este libro es interesante.	This book is interesting.	
+la palabra	noun	f	word	¿Qué significa esta palabra?	What does this word mean?	
+la pregunta	noun	f	question	Tengo una pregunta.	I have a question.	
+el problema	noun	m	problem	No hay problema.	No problem.	Masculine despite ending in -a
+la mano	noun	f	hand	Lávate las manos.	Wash your hands.	Feminine despite ending in -o
+la gente	noun	f	people	Hay mucha gente aquí.	There are a lot of people here.	Singular in Spanish: la gente es
+bueno	adj		good	Es un buen libro.	It's a good book.	Shortens to buen before a masculine noun
+malo	adj		bad	Hace mal tiempo.	The weather is bad.	Shortens to mal before a masculine noun
+grande	adj		big; great	Una casa grande.	A big house.	Before a noun: gran (a great house)
+pequeño	adj		small	Un perro pequeño.	A small dog.	Mexico also: chico, chiquito
+nuevo	adj		new	Tengo un teléfono nuevo.	I have a new phone.	
+viejo	adj		old	Mi carro es viejo.	My car is old.	
+bonito	adj		pretty; nice	¡Qué bonito día!	What a nice day!	
+feliz	adj		happy	Estoy muy feliz.	I'm very happy.	
+cansado	adj		tired	Estoy cansado.	I'm tired.	
+listo	adj		ready; smart	¿Estás listo?	Are you ready?	estar listo = ready; ser listo = smart
+fácil	adj		easy	Es fácil.	It's easy.	
+difícil	adj		difficult	El examen fue difícil.	The exam was hard.	
+rico	adj		delicious; rich	¡Qué rico!	How delicious!	
+caro	adj		expensive	Es muy caro.	It's very expensive.	
+barato	adj		cheap	Esta tienda es barata.	This store is cheap.	
+siempre	adv		always	Siempre llego temprano.	I always arrive early.	
+nunca	adv		never	Nunca como carne.	I never eat meat.	
+también	adv		also; too	Yo también.	Me too.	
+ahora	adv		now	Ahora no puedo.	I can't right now.	Mexico: ahorita (right now, or in a bit)
+ahorita	adv		right now; in a little while	Ahorita vengo.	I'll be right back.	Mexico and Central America; timing is flexible
+hoy	adv		today	Hoy hace calor.	It's hot today.	
+mañana	adv		tomorrow; morning	Nos vemos mañana.	See you tomorrow.	la mañana = the morning
+ayer	adv		yesterday	Ayer fui al cine.	Yesterday I went to the movies.	
+aquí	adv		here	Ven aquí.	Come here.	Also: acá (more common in Latin America)
+muy	adv		very	Muy bien, gracias.	Very well, thanks.	
+mucho	adv		a lot; much	Te quiero mucho.	I love you a lot.	
+poco	adv		a little	Hablo un poco de español.	I speak a little Spanish.	
+sí	adv		yes	Sí, claro.	Yes, of course.	
+si	conj		if	Si llueve, no vamos.	If it rains, we won't go.	
+pero	conj		but	Quiero ir, pero no puedo.	I want to go, but I can't.	
+porque	conj		because	Estudio porque me gusta.	I study because I like it.	
+por qué	phrase		why	¿Por qué no vienes?	Why aren't you coming?	
+para llevar	phrase		to go (takeout)	Dos tacos para llevar.	Two tacos to go.	
+con todo	phrase		with everything (on it)	Tres tacos con todo.	Three tacos with everything.	Mexico: onion, cilantro and salsa
+¿qué tal?	phrase		how's it going?	Hola, ¿qué tal?	Hi, how's it going?	
+¿mande?	phrase		pardon?; yes?	¿Mande? No te escuché.	Pardon? I didn't hear you.	Mexico, polite
+de nada	phrase		you're welcome	—Gracias. —De nada.	"Thanks." "You're welcome."	
+por favor	phrase		please	Agua, por favor.	Water, please.	
+lo siento	phrase		I'm sorry	Lo siento mucho.	I'm very sorry.	
+¿cuánto cuesta?	phrase		how much does it cost?	¿Cuánto cuesta esta camisa?	How much is this shirt?	
+tener hambre	phrase		to be hungry	Tengo mucha hambre.	I'm really hungry.	Spanish says "to have hunger"
+tener que	phrase		to have to	Tengo que trabajar.	I have to work.	

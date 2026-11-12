@@ -1,55 +1,53 @@
 package app.vocablo.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import app.vocablo.design.ThemeId
-import app.vocablo.design.ThemeMode
-import app.vocablo.design.Themes
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
+import app.vocablo.container
+import app.vocablo.ui.cards.CardEditorScreen
+import app.vocablo.ui.decks.DeckDetailScreen
+import app.vocablo.ui.decks.DecksScreen
+import app.vocablo.ui.home.HomeScreen
+import app.vocablo.ui.home.PlayScreen
+import app.vocablo.ui.home.TutorScreen
+import app.vocablo.ui.me.MeScreen
+import app.vocablo.ui.study.StudyScreen
 import app.vocablo.ui.theme.VocabloTheme
-import app.vocablo.verbs.Conjugator
-import app.vocablo.verbs.Person
-import app.vocablo.verbs.StarterVerbs
-import app.vocablo.verbs.Tense
 
-private enum class Tab(val label: String, val icon: ImageVector) {
+enum class Tab(val label: String, val icon: ImageVector) {
     HOME("Home", Icons.Filled.Home),
     DECKS("Decks", Icons.AutoMirrored.Filled.List),
     PLAY("Play", Icons.Filled.PlayArrow),
@@ -57,44 +55,111 @@ private enum class Tab(val label: String, val icon: ImageVector) {
     ME("Me", Icons.Filled.Person),
 }
 
+/** Screens above the tabs. Kept as a simple back stack that survives rotation. */
+sealed interface Screen {
+    data class Deck(val deckId: Long) : Screen
+    data class EditCard(val deckId: Long, val cardId: Long?) : Screen
+    data class Study(val deckId: Long?) : Screen
+
+    companion object {
+        fun encode(s: Screen): String = when (s) {
+            is Deck -> "deck:${s.deckId}"
+            is EditCard -> "card:${s.deckId}:${s.cardId ?: ""}"
+            is Study -> "study:${s.deckId ?: ""}"
+        }
+
+        fun decode(s: String): Screen {
+            val p = s.split(':')
+            return when (p[0]) {
+                "deck" -> Deck(p[1].toLong())
+                "card" -> EditCard(p[1].toLong(), p[2].toLongOrNull())
+                else -> Study(p[1].toLongOrNull())
+            }
+        }
+    }
+}
+
 /**
- * Phase 1 app shell: the five-tab layout and live theme switching.
- * Appearance choices are kept in memory for now; phase 2 persists them with DataStore.
+ * Each open screen gets its own ViewModelStore, so a screen's state lives exactly as long as
+ * the screen: it survives rotation and is cleared when the screen is closed.
  */
+class ScreenStores : ViewModel() {
+    private val stores = mutableMapOf<String, ViewModelStore>()
+
+    fun storeFor(key: String): ViewModelStore = stores.getOrPut(key) { ViewModelStore() }
+
+    fun clear(key: String) {
+        stores.remove(key)?.clear()
+    }
+
+    override fun onCleared() {
+        stores.values.forEach { it.clear() }
+        stores.clear()
+    }
+}
+
+class Navigator(val stack: SnapshotStateList<Screen>, private val stores: ScreenStores) {
+    fun keyAt(index: Int): String = "$index:${Screen.encode(stack[index])}"
+
+    fun open(screen: Screen) {
+        stack.add(screen)
+    }
+
+    fun back() {
+        if (stack.isEmpty()) return
+        stores.clear(keyAt(stack.lastIndex))
+        stack.removeAt(stack.lastIndex)
+    }
+
+    /** Swaps the top screen, e.g. from the add form to the existing card it duplicates. */
+    fun replace(screen: Screen) {
+        back()
+        open(screen)
+    }
+}
+
 @Composable
 fun VocabloApp() {
-    var themeId by rememberSaveable { mutableStateOf(Themes.default) }
-    var mode by rememberSaveable { mutableStateOf(ThemeMode.SYSTEM) }
-    var tab by rememberSaveable { mutableStateOf(Tab.HOME) }
+    val app = LocalContext.current.applicationContext
+    val library: LibraryViewModel = viewModel {
+        LibraryViewModel(app.container.repository, app.container.settings, app.contentResolver)
+    }
+    VocabloRoot(library)
+}
 
-    VocabloTheme(themeId = themeId, mode = mode) {
-        Scaffold(
-            bottomBar = {
-                NavigationBar {
-                    Tab.entries.forEach { t ->
-                        NavigationBarItem(
-                            selected = tab == t,
-                            onClick = { tab = t },
-                            icon = { Icon(t.icon, contentDescription = null) },
-                            label = { Text(t.label) },
-                        )
+@Composable
+private fun VocabloRoot(library: LibraryViewModel) {
+    val settings by library.settings.collectAsStateWithLifecycle()
+    VocabloTheme(themeId = settings.themeId, mode = settings.mode) {
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+            val stack = rememberSaveable(
+                saver = listSaver<SnapshotStateList<Screen>, String>(
+                    save = { list -> list.map { Screen.encode(it) } },
+                    restore = { saved -> saved.map { Screen.decode(it) }.toMutableStateList() },
+                ),
+            ) { mutableListOf<Screen>().toMutableStateList() }
+            val stores: ScreenStores = viewModel { ScreenStores() }
+            val nav = Navigator(stack, stores)
+            var tab by rememberSaveable { mutableStateOf(Tab.HOME) }
+
+            BackHandler(enabled = stack.isNotEmpty()) { nav.back() }
+
+            val top = stack.lastOrNull()
+            if (top == null) {
+                Tabs(tab, onTab = { tab = it }, library, nav)
+            } else {
+                val key = nav.keyAt(stack.lastIndex)
+                val owner = remember(key) {
+                    object : ViewModelStoreOwner {
+                        override val viewModelStore: ViewModelStore = stores.storeFor(key)
                     }
                 }
-            },
-        ) { padding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                Text(tab.label, style = MaterialTheme.typography.headlineMedium)
-                when (tab) {
-                    Tab.HOME -> VerbOfTheDay()
-                    Tab.ME -> AppearanceSettings(themeId, mode, onTheme = { themeId = it }, onMode = { mode = it })
-                    else -> Text("Coming in a later phase.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                CompositionLocalProvider(LocalViewModelStoreOwner provides owner) {
+                    when (top) {
+                        is Screen.Deck -> DeckDetailScreen(top.deckId, nav)
+                        is Screen.EditCard -> CardEditorScreen(top.deckId, top.cardId, nav)
+                        is Screen.Study -> StudyScreen(top.deckId, nav)
+                    }
                 }
             }
         }
@@ -102,74 +167,29 @@ fun VocabloApp() {
 }
 
 @Composable
-private fun VerbOfTheDay() {
-    val verb = StarterVerbs.byInfinitive.getValue("tener")
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
-        Column(Modifier.padding(16.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text("Verb of the day", style = MaterialTheme.typography.labelLarge)
-            Text("${verb.infinitive} · ${verb.english}", style = MaterialTheme.typography.titleLarge)
-            Conjugator.table(verb, Tense.PRETERITE).forEach { (person, form) ->
-                if (person != Person.VOSOTROS) Text("${person.label()}  $form")
+private fun Tabs(tab: Tab, onTab: (Tab) -> Unit, library: LibraryViewModel, nav: Navigator) {
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                Tab.entries.forEach { t ->
+                    NavigationBarItem(
+                        selected = tab == t,
+                        onClick = { onTab(t) },
+                        icon = { Icon(t.icon, contentDescription = null) },
+                        label = { Text(t.label) },
+                    )
+                }
+            }
+        },
+    ) { padding ->
+        Box(Modifier.fillMaxSize().padding(padding)) {
+            when (tab) {
+                Tab.HOME -> HomeScreen(library, nav, onAddCards = { onTab(Tab.DECKS) })
+                Tab.DECKS -> DecksScreen(library, nav)
+                Tab.PLAY -> PlayScreen()
+                Tab.TUTOR -> TutorScreen()
+                Tab.ME -> MeScreen(library)
             }
         }
     }
-}
-
-private fun Person.label() = when (this) {
-    Person.YO -> "yo"
-    Person.TU -> "tú"
-    Person.EL -> "él · ella · usted"
-    Person.NOSOTROS -> "nosotros"
-    Person.VOSOTROS -> "vosotros"
-    Person.ELLOS -> "ellos · ustedes"
-}
-
-@Composable
-private fun AppearanceSettings(
-    themeId: ThemeId,
-    mode: ThemeMode,
-    onTheme: (ThemeId) -> Unit,
-    onMode: (ThemeMode) -> Unit,
-) {
-    Text("Mode", style = MaterialTheme.typography.titleMedium)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        ThemeMode.entries.forEach { m ->
-            FilterChip(
-                selected = m == mode,
-                onClick = { onMode(m) },
-                label = { Text(m.name.lowercase().replaceFirstChar { it.uppercase() }) },
-            )
-        }
-    }
-    Text("Theme", style = MaterialTheme.typography.titleMedium)
-    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Themes.all.forEach { theme ->
-            FilterChip(
-                selected = theme.id == themeId,
-                onClick = { onTheme(theme.id) },
-                leadingIcon = {
-                    Box(
-                        Modifier
-                            .size(18.dp)
-                            .clip(CircleShape)
-                            .background(Color(theme.light.primary)),
-                    )
-                },
-                label = { Text(theme.displayName) },
-            )
-        }
-    }
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            "Theme and mode are kept until the app closes. Saving them comes in phase 2.",
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.bodySmall,
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun VocabloAppPreview() {
-    VocabloApp()
 }
