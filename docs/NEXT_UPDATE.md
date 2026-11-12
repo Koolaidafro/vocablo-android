@@ -46,7 +46,7 @@ Status values: **open** (logged, not started), **done in vX.Y**.
 
 ### 3. Make the app look like a modern app
 - **Reported:** 2026-11-12
-- **Status:** open (direction to confirm with Sir before building)
+- **Status:** open (direction chosen 2026-11-12: option A)
 - **What Sir asked:** Restyle the app so it looks like a current, polished app,
   either with custom assets and icons or with a better icon library.
 - **Where it stands today:** The app uses only the basic Material icon set
@@ -63,7 +63,7 @@ Status values: **open** (logged, not started), **done in vX.Y**.
     icons.
   - Tidy spacing, corner radius and colour use so every screen follows one set
     of design tokens.
-- **Open choice (Sir):** which icon direction to use. See the options below.
+- **Icon direction:** Sir chose **A** on 2026-11-12. The options were:
   - A. An open-source icon library such as Phosphor or Lucide, plus custom
     illustrations. Consistent and broad, quickest to apply everywhere.
   - B. Fully custom hand-drawn icons for the app. Most distinctive, but
