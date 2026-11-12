@@ -8,6 +8,7 @@ import app.vocablo.cards.Streaks
 import app.vocablo.data.AppSettings
 import app.vocablo.data.DeckSummary
 import app.vocablo.data.SettingsStore
+import app.vocablo.data.VerbRepository
 import app.vocablo.data.VocabloRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,7 @@ data class LibraryState(
     val longestStreak: Int = 0,
     val streakAtRisk: Boolean = false,
     val answeredToday: Int = 0,
+    val dueVerbItems: Int = 0,
     val loaded: Boolean = false,
 ) {
     val due: Int get() = decks.sumOf { it.dueCount }
@@ -36,11 +38,17 @@ data class LibraryState(
 /** Shared by Home, Decks and Me: deck counts, streaks, settings and file import/export. */
 class LibraryViewModel(
     private val repo: VocabloRepository,
+    verbs: VerbRepository,
     private val settingsStore: SettingsStore,
     private val resolver: ContentResolver,
 ) : ViewModel() {
 
-    val state: StateFlow<LibraryState> = combine(repo.deckSummaries(), repo.studyDays(), repo.answersToday()) { decks, days, answered ->
+    val state: StateFlow<LibraryState> = combine(
+        repo.deckSummaries(),
+        repo.studyDays(),
+        repo.answersToday(),
+        verbs.dueCount(),
+    ) { decks, days, answered, dueVerbs ->
         val today = repo.today()
         LibraryState(
             decks = decks,
@@ -48,12 +56,17 @@ class LibraryViewModel(
             longestStreak = Streaks.longest(days),
             streakAtRisk = Streaks.atRisk(days, today),
             answeredToday = answered,
+            dueVerbItems = dueVerbs,
             loaded = true,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), LibraryState())
 
+    /** Null until the saved settings have been read, so the first frame never shows defaults. */
+    val loadedSettings: StateFlow<AppSettings?> = settingsStore.settings
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     val settings: StateFlow<AppSettings> = settingsStore.settings
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), AppSettings())
+        .stateIn(viewModelScope, SharingStarted.Eagerly, AppSettings())
 
     /** One-off messages for the UI to show, e.g. "Imported 40 cards". */
     private val _message = MutableStateFlow<String?>(null)

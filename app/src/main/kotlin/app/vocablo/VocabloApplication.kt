@@ -4,12 +4,13 @@ import android.app.Application
 import android.content.Context
 import app.vocablo.data.SettingsStore
 import app.vocablo.data.VocabloDatabase
+import app.vocablo.data.VerbRepository
 import app.vocablo.data.VocabloRepository
 import app.vocablo.data.WiktionaryLookup
 import app.vocablo.dictionary.OfflineDictionary
 import app.vocablo.notify.Notifications
 import app.vocablo.verbs.FormIndex
-import app.vocablo.verbs.StarterVerbs
+import app.vocablo.verbs.VerbList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -22,7 +23,8 @@ class AppContainer(context: Context) {
     val settings = SettingsStore(context)
     val dictionary: OfflineDictionary by lazy { OfflineDictionary.starter() }
     val onlineDictionary = WiktionaryLookup()
-    val verbForms: FormIndex by lazy { FormIndex(StarterVerbs.all) }
+    val verbForms: FormIndex by lazy { FormIndex(VerbList.all.map { it.verb }) }
+    val verbs = VerbRepository(database.dao())
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 }
 
@@ -34,7 +36,10 @@ class VocabloApplication : Application() {
         super.onCreate()
         container = AppContainer(this)
         Notifications.createChannels(this)
-        container.scope.launch { container.repository.seedIfEmpty() }
+        container.scope.launch {
+            container.repository.seedIfEmpty()
+            container.verbForms.lookup("") // builds the conjugated-form index off the main thread
+        }
     }
 }
 

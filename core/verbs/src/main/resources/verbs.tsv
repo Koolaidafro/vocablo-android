@@ -1,0 +1,2084 @@
+# Vocablo verb list: infinitive, English, conjugation pattern (see VerbList.kt).
+# Ranked by how often each verb's forms appear in film and TV subtitles
+# (FrequencyWords by Hermit Dave, CC BY-SA 4.0). Meanings and patterns written for Vocablo.
+ser	to be (identity, origin, time)	PRESENT:soy,eres,es,somos,sois,son PRETERITE:fui,fuiste,fue,fuimos,fuisteis,fueron IMPERFECT:era,eras,era,éramos,erais,eran
+ir	to go	PRESENT:voy,vas,va,vamos,vais,van PRETERITE:fui,fuiste,fue,fuimos,fuisteis,fueron IMPERFECT:iba,ibas,iba,íbamos,ibais,iban
+hacer	to do; to make	g pret:hic fut:har
+estar	to be (state, location)	pret:estuv PRESENT.YO:estoy PRESENT.TU:estás PRESENT.EL:está PRESENT.ELLOS:están
+decir	to say; to tell	i pret:dij fut:dir PRESENT.YO:digo
+tener	to have	ie g pret:tuv fut:tendr
+poder	to be able to; can	ue pret:pud fut:podr
+ver	to see; to watch	PRESENT.YO:veo IMPERFECT:veía,veías,veía,veíamos,veíais,veían
+haber	to have (auxiliary); there is	pret:hub fut:habr PRESENT:he,has,ha,hemos,habéis,han
+saber	to know (facts); to know how	pret:sup fut:sabr PRESENT.YO:sé
+deber	to owe; must; should	
+dar	to give	PRESENT.YO:doy PRETERITE:di,diste,dio,dimos,disteis,dieron
+hablar	to speak; to talk	
+querer	to want; to love	ie pret:quis fut:querr
+pensar	to think	ie
+dejar	to leave; to let	
+pasar	to pass; to happen; to spend (time)	
+encontrar	to find; to meet	ue
+venir	to come	ie g pret:vin fut:vendr
+volver	to return; to come back	ue
+salir	to go out; to leave	g fut:saldr
+llevar	to carry; to take; to wear	
+matar	to kill	
+llamar	to call	
+llegar	to arrive	
+poner	to put; to place	g pret:pus fut:pondr
+creer	to believe; to think	
+ayudar	to help	
+tomar	to take; to drink	
+quedar	to stay; to remain; to arrange to meet	
+morir	to die	ue
+conocer	to know (people, places); to meet	zco
+gustar	to like; to please	
+necesitar	to need	
+perder	to lose; to miss	ie
+esperar	to wait; to hope; to expect	
+conseguir	to get; to achieve	i
+seguir	to follow; to continue	i
+traer	to bring	ig pret:traj
+sentir	to feel; to be sorry	ie
+trabajar	to work	
+entrar	to enter; to go in	
+pedir	to ask for; to order	i
+empezar	to begin; to start	ie
+vivir	to live	
+buscar	to look for	
+comer	to eat	
+usar	to use	
+escuchar	to listen; to hear	
+preguntar	to ask (a question)	
+intentar	to try	
+oír	to hear	ig
+sacar	to take out; to get (a grade)	
+cambiar	to change	
+ganar	to win; to earn	
+terminar	to finish; to end	
+pagar	to pay	
+acabar	to finish; to have just (done)	
+comprar	to buy	
+contar	to count; to tell (a story)	ue
+dormir	to sleep	ue
+parecer	to seem; to look like	zco
+tratar	to try; to treat	
+mantener	to keep; to maintain	ie g pret:mantuv fut:mantendr
+casar	to marry	
+jugar	to play (games, sports)	uue
+entender	to understand	ie
+enviar	to send	acc
+salvar	to save; to rescue	
+olvidar	to forget	
+mirar	to look at; to watch	
+regresar	to return; to go back	
+escribir	to write	
+caer	to fall	ig
+recibir	to receive	
+meter	to put in	
+robar	to steal; to rob	
+echar	to throw; to throw out	
+detener	to stop; to arrest	ie g pret:detuv fut:detendr
+disparar	to shoot; to fire	
+leer	to read	
+tocar	to touch; to play (an instrument)	
+abrir	to open	
+comenzar	to begin; to start	ie
+enseñar	to teach; to show	
+convertir	to convert; to turn into	ie
+mostrar	to show	ue
+suceder	to happen; to succeed (follow)	
+romper	to break	
+coger	to take; to catch; to grab	
+aprender	to learn	
+arreglar	to fix; to arrange	
+vender	to sell	
+decidir	to decide	
+recordar	to remember; to remind	ue
+parar	to stop	
+ocurrir	to happen; to occur	
+escapar	to escape	
+beber	to drink	
+descubrir	to discover	
+probar	to try; to taste; to prove	ue
+amar	to love	
+aceptar	to accept	
+sentar	to sit; to seat	ie
+explicar	to explain	
+proteger	to protect	
+subir	to go up; to climb; to upload	
+quitar	to remove; to take away	
+soler	to usually (do)	ue
+lograr	to achieve; to manage to	
+presentar	to present; to introduce	
+cuidar	to take care of	
+correr	to run	
+funcionar	to work; to function	
+asegurar	to assure; to make sure; to insure	
+permitir	to allow	
+encantar	to love; to delight	
+mentir	to lie (tell lies)	ie
+mover	to move	ue
+preocupar	to worry	
+confiar	to trust	acc
+bajar	to go down; to lower; to download	
+tirar	to throw; to pull	
+evitar	to avoid	
+cortar	to cut	
+obtener	to obtain; to get	ie g pret:obtuv fut:obtendr
+averiguar	to find out	
+importar	to matter; to import	
+golpear	to hit; to knock	
+elegir	to choose; to elect	i
+cenar	to have dinner	
+desaparecer	to disappear	zco
+servir	to serve; to be useful	i
+volar	to fly	ue
+imaginar	to imagine	
+cerrar	to close	ie
+bailar	to dance	
+mandar	to send; to order	
+luchar	to fight; to struggle	
+recuperar	to recover; to get back	
+levantar	to lift; to raise	
+recoger	to pick up; to collect	
+destruir	to destroy	
+atrapar	to catch; to trap	
+pelear	to fight; to argue	
+prometer	to promise	
+cantar	to sing	
+despertar	to wake up	ie
+crear	to create	
+preparar	to prepare	
+aparecer	to appear	zco
+ofrecer	to offer	zco
+molestar	to bother; to annoy	
+partir	to leave; to split	
+conducir	to drive; to lead	zco pret:conduj
+podar	to prune	
+desear	to wish; to desire	
+llorar	to cry	
+caminar	to walk	
+invitar	to invite	
+nacer	to be born	zco
+devolver	to give back; to return (something)	ue
+atacar	to attack	
+entregar	to deliver; to hand in	
+reunir	to gather; to bring together	acc
+abandonar	to abandon; to leave	
+responder	to answer; to respond	
+construir	to build	
+limpiar	to clean	
+manejar	to drive; to handle	
+sobrevivir	to survive	
+esconder	to hide	
+marchar	to march; to go	
+resolver	to solve; to resolve	ue
+compartir	to share	
+continuar	to continue	acc
+encargar	to put in charge; to order	
+actuar	to act	acc
+unir	to unite; to join	
+pesar	to weigh	
+discutir	to argue; to discuss	
+crecer	to grow	zco
+ocupar	to occupy; to take up	
+enterar	to inform; (enterarse) to find out	
+despedir	to say goodbye; to fire (from a job)	i
+visitar	to visit	
+revisar	to check; to review	
+besar	to kiss	
+suponer	to suppose; to assume	g pret:supus fut:supondr
+arruinar	to ruin	
+acostar	to put to bed	ue
+convencer	to convince	
+mudar	to move (house); to change	
+gritar	to shout; to scream	
+huir	to flee; to run away	
+reír	to laugh	i acc
+mencionar	to mention	
+guardar	to keep; to save; to put away	
+asustar	to frighten; to scare	
+engañar	to deceive; to cheat on	
+saltar	to jump	
+cometer	to commit	
+cumplir	to fulfill; to turn (years old)	
+acercar	to bring closer	
+controlar	to control	
+firmar	to sign	
+enfrentar	to face; to confront	
+soportar	to stand; to bear	
+pegar	to hit; to stick; to paste	
+hallar	to find	
+estudiar	to study	
+demostrar	to demonstrate; to prove	ue
+andar	to walk; to go about	pret:anduv
+agradecer	to thank; to be grateful for	zco
+sufrir	to suffer	
+divertir	to amuse; to entertain	ie
+contratar	to hire	
+utilizar	to use	
+dirigir	to direct; to lead	
+odiar	to hate	
+asesinar	to murder	
+deshacer	to undo; to unpack	g pret:deshic fut:deshar
+viajar	to travel	
+descansar	to rest	
+reconocer	to recognize; to admit	zco
+cruzar	to cross	
+tardar	to take (time); to be late	
+retirar	to withdraw; to remove	
+quemar	to burn	
+lanzar	to throw; to launch	
+celebrar	to celebrate	
+sonar	to sound; to ring	ue
+avisar	to warn; to let know	
+disfrutar	to enjoy	
+causar	to cause	
+perdonar	to forgive	
+informar	to inform; to report	
+agarrar	to grab; to hold	
+preferir	to prefer	ie
+defender	to defend	ie
+lastimar	to hurt; to injure	
+admitir	to admit	
+negar	to deny; to refuse	ie
+acompañar	to accompany; to go with	
+considerar	to consider	
+alcanzar	to reach; to catch up with	
+costar	to cost	ue
+cubrir	to cover	
+arrestar	to arrest	
+sorprender	to surprise	
+comprobar	to check; to verify	ue
+separar	to separate	
+disculpar	to excuse; to forgive	
+investigar	to investigate	
+permanecer	to remain; to stay	zco
+fumar	to smoke	
+superar	to overcome; to exceed	
+liberar	to free; to release	
+comprender	to understand	
+renunciar	to resign; to give up	
+contestar	to answer	
+ordenar	to order; to tidy	
+extrañar	to miss (someone)	
+ocultar	to hide; to conceal	
+resultar	to turn out; to result	
+arriesgar	to risk	
+lavar	to wash	
+notar	to notice	
+alejar	to move away; to keep away	
+montar	to ride; to set up; to assemble	
+colgar	to hang; to hang up	ue
+respirar	to breathe	
+equivocar	(equivocarse) to make a mistake	
+temer	to fear	
+durar	to last	
+escoger	to choose	
+aguantar	to put up with; to hold on	
+mejorar	to improve	
+fallar	to fail; to miss	
+obligar	to force; to oblige	
+cocinar	to cook	
+apoyar	to support; to lean	
+significar	to mean	
+inventar	to invent; to make up	
+acordar	to agree; (acordarse) to remember	ue
+identificar	to identify	
+vestir	to dress	i
+explotar	to explode; to exploit	
+llenar	to fill	
+soñar	to dream	ue
+gastar	to spend; to wear out	
+apostar	to bet	ue
+cargar	to load; to carry; to charge	
+apagar	to turn off; to put out	
+fingir	to pretend	
+formar	to form; to train	
+prestar	to lend; to pay (attention)	
+vencer	to defeat; to expire	
+enamorar	to make fall in love; (enamorarse) to fall in love	
+curar	to cure; to heal	
+advertir	to warn; to notice	ie
+culpar	to blame	
+votar	to vote	
+enterrar	to bury	ie
+rendir	to surrender; to perform	i
+faltar	to be missing; to lack	
+planear	to plan	
+contactar	to contact	
+eliminar	to eliminate; to delete	
+existir	to exist	
+adivinar	to guess	
+confesar	to confess	ie
+grabar	to record	
+valer	to be worth; to cost	g fut:valdr
+soltar	to let go; to release	ue
+realizar	to carry out; to achieve	
+atender	to attend to; to serve	ie
+rechazar	to reject	
+encender	to turn on; to light	ie
+herir	to wound; to hurt	ie
+nadar	to swim	
+perseguir	to chase; to pursue	i
+repetir	to repeat	i
+encerrar	to lock up; to shut in	ie
+pintar	to paint	
+colocar	to place; to put	
+oler	to smell	ue
+merecer	to deserve	zco
+alimentar	to feed	
+cancelar	to cancel	
+traicionar	to betray	
+violar	to violate; to rape	
+organizar	to organize	
+declarar	to declare; to testify	
+arrancar	to start (an engine); to pull out	
+vigilar	to watch; to keep an eye on	
+confirmar	to confirm	
+asumir	to assume; to take on	
+interrumpir	to interrupt	
+resistir	to resist; to withstand	
+calmar	to calm	
+aprovechar	to take advantage of; to make the most of	
+empujar	to push	
+comunicar	to communicate	
+referir	to refer; to tell	ie
+cobrar	to charge; to collect (money)	
+callar	to keep quiet; to silence	
+juzgar	to judge	
+saludar	to greet; to say hello	
+doler	to hurt; to ache	ue
+acusar	to accuse	
+amanecer	to dawn; to wake up	zco
+participar	to participate	
+observar	to observe	
+relajar	to relax	
+amenazar	to threaten	
+cazar	to hunt	
+librar	to free; to save from	
+atravesar	to cross; to go through	ie
+rezar	to pray	
+rastrear	to track; to trace	
+solucionar	to solve	
+registrar	to register; to search	
+impedir	to prevent; to impede	i
+quejar	(quejarse) to complain	
+almorzar	to have lunch	ue
+provocar	to provoke; to cause	
+localizar	to locate	
+pillar	to catch	
+pescar	to fish	
+describir	to describe	
+practicar	to practice	
+establecer	to establish	zco
+vengar	to avenge	
+regalar	to give (as a gift)	
+entrenar	to train	
+jurar	to swear	
+aclarar	to clarify	
+vomitar	to vomit	
+revelar	to reveal	
+ignorar	to ignore; not to know	
+patear	to kick	
+rescatar	to rescue	
+criar	to raise; to bring up	acc
+arrastrar	to drag	
+morder	to bite	ue
+concentrar	to concentrate	
+ahorrar	to save (money, time)	
+enojar	to anger	
+iniciar	to begin; to initiate	
+sugerir	to suggest	ie
+interesar	to interest	
+publicar	to publish; to post	
+borrar	to erase; to delete	
+sostener	to hold; to support	ie g pret:sostuv fut:sostendr
+producir	to produce	zco pret:produj
+aterrizar	to land	
+arrojar	to throw	
+capturar	to capture	
+conectar	to connect	
+respetar	to respect	
+secuestrar	to kidnap	
+juntar	to put together; to gather	
+interrogar	to interrogate; to question	
+ofender	to offend	
+atraer	to attract	ig pret:atraj
+pertenecer	to belong	zco
+anunciar	to announce; to advertise	
+lidiar	to deal with	
+sospechar	to suspect	
+marcar	to mark; to dial; to score	
+ahogar	to drown; to choke	
+pasear	to stroll; to walk (a dog)	
+asistir	to attend; to assist	
+girar	to turn; to spin	
+largar	(largarse) to clear off; to let go	
+dedicar	to dedicate	
+alegrar	to make happy; (alegrarse) to be glad	
+pretender	to intend; to try to	
+abrazar	to hug	
+acostumbrar	to be used to; to accustom	
+apuntar	to aim; to note down	
+operar	to operate	
+sonreír	to smile	i acc
+filmar	to film	
+apreciar	to appreciate	
+castigar	to punish	
+proponer	to propose	g pret:propus fut:propondr
+expresar	to express	
+negociar	to negotiate	
+atar	to tie	
+reducir	to reduce	zco pret:reduj
+insistir	to insist	
+examinar	to examine	
+aumentar	to increase	
+arrepentir	(arrepentirse) to regret	ie
+lamentar	to regret; to be sorry	
+destrozar	to wreck; to tear apart	
+fijar	to fix; (fijarse) to notice	
+desayunar	to have breakfast	
+acceder	to access; to agree	
+hundir	to sink	
+forzar	to force	ue
+enfadar	to make angry; (enfadarse) to get angry	
+dudar	to doubt	
+alquilar	to rent	
+afectar	to affect	
+derrotar	to defeat	
+comportar	(comportarse) to behave	
+reparar	to repair	
+involucrar	to involve	
+añadir	to add	
+presionar	to press; to pressure	
+sacrificar	to sacrifice	
+aprobar	to approve; to pass (an exam)	ue
+avanzar	to advance; to move forward	
+conservar	to keep; to preserve	
+desarrollar	to develop	
+reemplazar	to replace	
+avergonzar	to embarrass; to shame	ue PRESENT:avergüenzo,avergüenzas,avergüenza,avergonzamos,avergonzáis,avergüenzan
+impresionar	to impress	
+lucir	to look; to shine; to show off	zco
+tragar	to swallow	
+derribar	to knock down; to shoot down	
+denunciar	to report (a crime); to denounce	
+armar	to arm; to assemble	
+guiar	to guide	acc
+retener	to retain; to hold back	ie g pret:retuv fut:retendr
+representar	to represent	
+dividir	to divide	
+divorciar	(divorciarse) to get divorced	
+determinar	to determine	
+contener	to contain; to hold back	ie g pret:contuv fut:contendr
+atrever	(atreverse) to dare	
+verificar	to verify	
+demandar	to sue; to demand	
+animar	to cheer up; to encourage	
+dibujar	to draw	
+solicitar	to apply for; to request	
+desmayar	(desmayarse) to faint	
+nombrar	to name; to appoint	
+chocar	to crash; to collide	
+competir	to compete	i
+comprometer	to commit; to compromise	
+analizar	to analyze	
+rodar	to roll; to film	ue
+estallar	to burst; to break out	
+aplastar	to crush	
+expulsar	to expel	
+bromear	to joke	
+burlar	(burlarse) to make fun of	
+decepcionar	to disappoint	
+transformar	to transform	
+adorar	to adore	
+reportar	to report	
+rogar	to beg; to pray	ue
+obedecer	to obey	zco
+interpretar	to interpret; to perform	
+surgir	to arise; to emerge	
+estropear	to spoil; to break	
+confundir	to confuse	
+acudir	to go (to); to turn to	
+reaccionar	to react	
+apretar	to squeeze; to press	ie
+instalar	to install	
+dañar	to damage; to harm	
+completar	to complete	
+emborrachar	(emborracharse) to get drunk	
+testificar	to testify	
+plantar	to plant; to stand up (someone)	
+ejecutar	to execute; to run (a program)	
+recomendar	to recommend	ie
+apartar	to move away; to set aside	
+invertir	to invest; to reverse	ie
+dominar	to dominate; to master	
+cansar	to tire	
+graduar	(graduarse) to graduate	acc
+experimentar	to experience; to experiment	
+compensar	to compensate; to make up for	
+conquistar	to conquer	
+apuñalar	to stab	
+comparar	to compare	
+conversar	to talk; to chat	
+mezclar	to mix	
+anotar	to note down; to score	
+enfermar	to get sick; to make sick	
+adoptar	to adopt	
+distraer	to distract	ig pret:distraj
+exponer	to expose; to exhibit	g pret:expus fut:expondr
+llover	to rain	ue
+trasladar	to move; to transfer	
+calentar	to heat; to warm up	ie
+combatir	to fight; to combat	
+incluir	to include	
+enloquecer	to go crazy; to drive crazy	zco
+bañar	to bathe	
+tender	to hang out (laundry); to tend to	ie
+torturar	to torture	
+afeitar	to shave	
+activar	to activate	
+agregar	to add	
+consultar	to consult	
+tolerar	to tolerate	
+cavar	to dig	
+recorrer	to travel through; to go over	
+esforzar	(esforzarse) to make an effort	ue
+ceder	to give in; to yield	
+retrasar	to delay	
+freír	to fry	i acc
+charlar	to chat	
+garantizar	to guarantee	
+condenar	to condemn; to sentence	
+encajar	to fit	
+bastar	to be enough	
+agradar	to please	
+empeorar	to get worse; to make worse	
+ingresar	to enter; to be admitted; to deposit	
+navegar	to sail; to browse	
+explorar	to explore	
+empacar	to pack	
+diseñar	to design	
+reservar	to book; to reserve	
+doblar	to fold; to turn; to dub	
+señalar	to point out; to signal	
+estrellar	to crash; to smash	
+adelantar	to move forward; to overtake	
+bloquear	to block	
+insultar	to insult	
+prender	to turn on; to light	
+fracasar	to fail	
+proceder	to proceed	
+desperdiciar	to waste	
+despegar	to take off; to peel off	
+extender	to extend; to spread	ie
+chupar	to suck	
+entrevistar	to interview	
+transportar	to transport	
+transmitir	to transmit; to broadcast	
+detectar	to detect	
+medir	to measure	i
+comentar	to comment; to mention	
+fallecer	to pass away	zco
+manipular	to manipulate	
+clavar	to nail; to stick in	
+conceder	to grant	
+quebrar	to break; to go bankrupt	ie
+delatar	to give away; to betray	
+transferir	to transfer	ie
+aplicar	to apply	
+repartir	to hand out; to deliver	
+complacer	to please	zco
+poseer	to own; to possess	
+brindar	to toast; to offer	
+proporcionar	to provide	
+honrar	to honor	
+depender	to depend	
+fastidiar	to annoy; to bother	
+seducir	to seduce	zco pret:seduj
+pisar	to step on	
+intercambiar	to exchange	
+brillar	to shine	
+gobernar	to govern	ie
+introducir	to introduce; to insert	zco pret:introduj
+adaptar	to adapt	
+alterar	to alter; to upset	
+ajustar	to adjust	
+heredar	to inherit	
+centrar	to center; to focus	
+envenenar	to poison	
+procesar	to process; to prosecute	
+entretener	to entertain	ie g pret:entretuv fut:entretendr
+reclamar	to claim; to complain	
+retroceder	to go back; to back off	
+indicar	to indicate; to point to	
+intervenir	to intervene	ie g pret:intervin fut:intervendr
+felicitar	to congratulate	
+suspender	to suspend; to fail (an exam)	
+extraer	to extract	ig pret:extraj
+desafiar	to challenge; to defy	acc
+descargar	to download; to unload	
+descifrar	to decipher	
+fiar	to sell on credit; (fiarse) to trust	acc
+drogar	to drug	
+atropellar	to run over	
+reconstruir	to rebuild	
+cooperar	to cooperate	
+aburrir	to bore	
+afrontar	to face	
+ensayar	to rehearse; to test	
+reventar	to burst	ie
+sacudir	to shake	
+interferir	to interfere	ie
+predecir	to predict	i g pret:predij
+prevenir	to prevent; to warn	ie g pret:previn fut:prevendr
+arder	to burn	
+derramar	to spill	
+corregir	to correct	i
+escupir	to spit	
+donar	to donate	
+satisfacer	to satisfy	g pret:satisfic fut:satisfar
+espiar	to spy on	acc
+oponer	to oppose	g pret:opus fut:opondr
+tropezar	to trip; to stumble	ie
+congelar	to freeze	
+coser	to sew	
+fabricar	to manufacture; to make	
+admirar	to admire	
+inspirar	to inspire; to inhale	
+estacionar	to park	
+demorar	to delay; to take (time)	
+escalar	to climb	
+prohibir	to forbid; to ban	acc
+acelerar	to speed up	
+asignar	to assign	
+emitir	to broadcast; to emit	
+invadir	to invade	
+aconsejar	to advise	
+copiar	to copy	
+exigir	to demand	
+asaltar	to assault; to rob	
+elevar	to raise	
+ascender	to go up; to promote	ie
+aliviar	to relieve	
+humillar	to humiliate	
+consumir	to consume	
+someter	to subject; to submit	
+desviar	to divert; to deflect	acc
+vaciar	to empty	acc
+descartar	to rule out; to discard	
+cuestionar	to question	
+sangrar	to bleed	
+incendiar	to set on fire	
+rodear	to surround	
+apurar	to hurry; to rush	
+secar	to dry	
+sujetar	to hold; to fasten	
+relacionar	to relate; to connect	
+colar	to strain; (colarse) to sneak in	ue
+temblar	to tremble; to shake	ie
+abusar	to abuse; to take advantage	
+distinguir	to distinguish	
+mojar	to wet	
+estrangular	to strangle	
+picar	to sting; to bite; to chop	
+tranquilizar	to calm down	
+suplicar	to beg	
+captar	to capture; to grasp	
+abordar	to board; to tackle	
+irrumpir	to burst in	
+anular	to cancel; to annul	
+calcular	to calculate	
+liar	to tie; to roll; (liarse) to get involved	acc
+cesar	to cease; to stop	
+justificar	to justify	
+citar	to quote; to make an appointment	
+educar	to educate; to raise	
+envolver	to wrap	ue
+tapar	to cover	
+evacuar	to evacuate	
+apresurar	to hurry	
+duchar	(ducharse) to shower	
+revivir	to revive; to relive	
+rellenar	to fill in; to refill	
+imponer	to impose	g pret:impus fut:impondr
+requerir	to require	ie
+acampar	to camp	
+sustituir	to substitute; to replace	
+recurrir	to resort to; to appeal	
+reclutar	to recruit	
+deslizar	to slide	
+ensuciar	to make dirty	
+derrumbar	to knock down; (derrumbarse) to collapse	
+sanar	to heal	
+sobornar	to bribe	
+acosar	to harass	
+adquirir	to acquire	iie
+inclinar	to tilt; to lean	
+disponer	to arrange; to have available	g pret:dispus fut:dispondr
+imprimir	to print	
+desconectar	to disconnect	
+repasar	to review; to go over	
+aferrar	(aferrarse) to cling to	
+inyectar	to inject	
+pronunciar	to pronounce	
+programar	to program; to schedule	
+triunfar	to triumph; to succeed	
+generar	to generate	
+proveer	to provide	
+coincidir	to coincide; to agree	
+topar	to bump into	
+despejar	to clear	
+ubicar	to locate; to place	
+enfocar	to focus	
+criticar	to criticize	
+afirmar	to state; to affirm	
+ahorcar	to hang (a person)	
+limitar	to limit	
+beneficiar	to benefit	
+ligar	to flirt; to tie	
+fugar	(fugarse) to run away; to escape	
+definir	to define	
+cultivar	to grow; to cultivate	
+soplar	to blow	
+atardecer	to get dark (evening)	zco
+alojar	to lodge; to host	
+estirar	to stretch	
+envejecer	to grow old	zco
+desatar	to untie; to unleash	
+anochecer	to get dark (night)	zco
+presenciar	to witness	
+conformar	to shape; (conformarse) to settle for	
+tumbar	to knock down; (tumbarse) to lie down	
+persuadir	to persuade	
+acertar	to get right; to hit (the target)	ie
+descender	to descend; to go down	ie
+evaluar	to evaluate	acc
+desactivar	to deactivate	
+cabalgar	to ride (a horse)	
+variar	to vary	acc
+posponer	to postpone	g pret:pospus fut:pospondr
+proyectar	to project; to plan	
+financiar	to finance	
+componer	to compose; to make up	g pret:compus fut:compondr
+batir	to beat; to whisk; to break (a record)	
+expandir	to expand	
+restaurar	to restore	
+interponer	(interponerse) to come between	g pret:interpus fut:interpondr
+colaborar	to collaborate	
+enfriar	to cool	acc
+sellar	to seal	
+frenar	to brake; to stop	
+interceptar	to intercept	
+iluminar	to light up	
+enganchar	to hook; to get hooked	
+lamer	to lick	
+orar	to pray	
+resbalar	to slip	
+aislar	to isolate	acc
+preservar	to preserve	
+desnudar	to undress	
+autorizar	to authorize	
+liquidar	to liquidate; to settle	
+contribuir	to contribute	
+protestar	to protest; to complain	
+alistar	to enlist; to get ready	
+exagerar	to exaggerate	
+chantajear	to blackmail	
+liderar	to lead	
+resucitar	to resurrect; to revive	
+caber	to fit	pret:cup fut:cabr PRESENT.YO:quepo
+ampliar	to expand; to enlarge	acc
+sudar	to sweat	
+embarcar	to embark; to board	
+consolar	to console	ue
+complicar	to complicate	
+penetrar	to penetrate	
+ejercer	to exercise (a right); to practice (a profession)	
+escabullir	(escabullirse) to slip away	
+emplear	to employ; to use	
+traducir	to translate	zco pret:traduj
+percibir	to perceive	
+filtrar	to filter; to leak	
+inscribir	to enroll; to register	
+maldecir	to curse	i g pret:maldij
+fotografiar	to photograph	acc
+remover	to stir; to remove	ue
+alzar	to raise; to lift	
+arrebatar	to snatch	
+facilitar	to make easier; to provide	
+telefonear	to telephone	
+defraudar	to disappoint; to defraud	
+aparcar	to park	
+entrometer	(entrometerse) to meddle	
+refrescar	to refresh; to cool down	
+intimidar	to intimidate	
+modificar	to modify	
+implicar	to imply; to involve	
+administrar	to manage; to administer	
+imitar	to imitate	
+agotar	to exhaust; to use up	
+bombardear	to bomb	
+convocar	to call; to summon	
+improvisar	to improvise	
+concluir	to conclude	
+derretir	to melt	i
+hartar	to fill up; to fed up	
+agitar	to shake; to stir up	
+abortar	to abort	
+colapsar	to collapse	
+presumir	to show off; to presume	
+desenterrar	to dig up	ie
+fundar	to found	
+chequear	to check	
+zarpar	to set sail	
+pinchar	to prick; to puncture	
+estafar	to swindle; to scam	
+encubrir	to cover up	
+voltear	to turn over; to turn around	
+acariciar	to caress; to stroke	
+supervisar	to supervise	
+retomar	to resume; to take up again	
+revolver	to stir; to mess up	ue
+disfrazar	to disguise; to dress up	
+sabotear	to sabotage	
+renovar	to renew; to renovate	ue
+parir	to give birth	
+barrer	to sweep	
+deducir	to deduce	zco pret:deduj
+perjudicar	to harm; to damage	
+apestar	to stink	
+arrasar	to devastate; to sweep (win)	
+esquivar	to dodge	
+acoger	to welcome; to take in	
+incriminar	to incriminate	
+combinar	to combine	
+botar	to throw away; to bounce	
+infiltrar	to infiltrate	
+reflexionar	to reflect; to think over	
+recaudar	to collect; to raise (money)	
+infectar	to infect	
+posar	to pose	
+hackear	to hack	
+falsificar	to forge; to fake	
+desvanecer	(desvanecerse) to vanish; to faint	zco
+madurar	to mature; to ripen	
+coquetear	to flirt	
+acomodar	to arrange; to make comfortable	
+patinar	to skate; to slip	
+pelar	to peel	
+esparcir	to scatter; to spread	
+reproducir	to reproduce; to play (media)	zco pret:reproduj
+contemplar	to contemplate	
+perforar	to drill; to pierce	
+trepar	to climb	
+detonar	to detonate	
+basar	to base	
+disminuir	to decrease	
+recompensar	to reward	
+emocionar	to move; to excite	
+flotar	to float	
+sumergir	to submerge	
+provenir	to come from	ie g pret:provin fut:provendr
+finalizar	to finish	
+notificar	to notify	
+susurrar	to whisper	
+reconsiderar	to reconsider	
+aspirar	to aspire; to inhale; to vacuum	
+contagiar	to infect; to pass on	
+absorber	to absorb	
+manchar	to stain	
+hervir	to boil	ie
+decorar	to decorate	
+pudrir	to rot	
+inspeccionar	to inspect	
+respaldar	to back; to support	
+aportar	to contribute; to provide	
+aplaudir	to applaud	
+arrodillar	(arrodillarse) to kneel	
+rehusar	to refuse	acc
+valorar	to value	
+festejar	to celebrate	
+frotar	to rub	
+sumar	to add up	
+apelar	to appeal	
+florecer	to bloom; to flourish	zco
+consentir	to consent; to spoil (a child)	ie
+desobedecer	to disobey	zco
+vagar	to wander	
+masticar	to chew	
+esquiar	to ski	acc
+desarmar	to disarm; to take apart	
+plantear	to raise (a question); to pose	
+escoltar	to escort	
+bendecir	to bless	i pret:bendij PRESENT.YO:bendigo
+evolucionar	to evolve	
+simular	to simulate; to fake	
+excitar	to excite	
+alertar	to alert	
+distribuir	to distribute	
+confiscar	to confiscate	
+concebir	to conceive	i
+opinar	to think; to have an opinion	
+incrementar	to increase	
+promover	to promote	ue
+latir	to beat (heart)	
+atracar	to rob; to dock	
+duplicar	to duplicate; to double	
+contraer	to contract; to catch (an illness)	ig pret:contraj
+razonar	to reason	
+torcer	to twist; to turn	ue
+estrechar	to narrow; to shake (hands)	
+jubilar	(jubilarse) to retire	
+saborear	to taste; to savor	
+subestimar	to underestimate	
+mascar	to chew	
+recrear	to recreate	
+azotar	to whip; to lash	
+abofetear	to slap	
+excavar	to excavate; to dig	
+diagnosticar	to diagnose	
+evadir	to evade	
+influir	to influence	
+malgastar	to waste	
+devorar	to devour	
+alentar	to encourage	ie
+depositar	to deposit	
+insinuar	to hint; to imply	acc
+rascar	to scratch	
+enfurecer	to infuriate	zco
+recitar	to recite	
+reponer	to replace; to put back	g pret:repus fut:repondr
+recortar	to cut; to trim	
+seleccionar	to select	
+desangrar	(desangrarse) to bleed out	
+espantar	to scare away	
+encarcelar	to imprison	
+otorgar	to grant; to award	
+despreciar	to despise; to look down on	
+enrollar	to roll up	
+precisar	to need; to specify	
+recobrar	to regain	
+estrenar	to premiere; to use for the first time	
+engordar	to gain weight; to fatten	
+fortalecer	to strengthen	zco
+estabilizar	to stabilize	
+deletrear	to spell	
+reforzar	to reinforce	ue
+peinar	to comb	
+destacar	to stand out; to highlight	
+memorizar	to memorize	
+exterminar	to exterminate	
+sembrar	to sow	ie
+disolver	to dissolve	ue
+revertir	to reverse	ie
+fregar	to scrub; to wash (dishes)	ie
+asociar	to associate	
+agredir	to attack	
+dictar	to dictate	
+impulsar	to drive; to boost	
+inundar	to flood	
+impactar	to impact	
+difundir	to spread; to broadcast	
+embarazar	to make pregnant	
+tentar	to tempt; to touch	ie
+atormentar	to torment	
+machacar	to crush; to pound	
+raptar	to abduct	
+bautizar	to baptize	
+volcar	to overturn; to tip over	ue
+aniquilar	to annihilate	
+empeñar	to pawn; (empeñarse) to insist	
+postular	to apply; to postulate	
+recolectar	to collect; to harvest	
+apetecer	to feel like; to fancy	zco
+desembarcar	to disembark; to land	
+fluir	to flow	
+procurar	to try; to make sure	
+fundir	to melt; to merge	
+rebajar	to lower; to reduce	
+retar	to challenge	
+remar	to row	
+noquear	to knock out	
+regañar	to scold	
+cepillar	to brush	
+manifestar	to show; to express; to demonstrate	ie
+vendar	to bandage	
+rehacer	to redo	g pret:rehic fut:rehar
+reconciliar	to reconcile	
+agachar	(agacharse) to crouch; to duck	
+invocar	to invoke	
+gozar	to enjoy	
+rentar	to rent (Latin America)	
+anticipar	to anticipate	
+recostar	(recostarse) to lie back; to lean	ue
+igualar	to equal; to even out	
+incrustar	to embed	
+enderezar	to straighten	
+calificar	to grade; to describe as	
+jalar	to pull	
+recetar	to prescribe	
+retorcer	to twist	ue
+confrontar	to confront	
+meditar	to meditate	
+saquear	to loot	
+convenir	to suit; to agree	ie g pret:convin fut:convendr
+debilitar	to weaken	
+editar	to edit; to publish	
+rebotar	to bounce	
+dimitir	to resign	
+actualizar	to update	
+incorporar	to incorporate	
+tejer	to knit; to weave	
+aterrorizar	to terrify	
+diferenciar	to differentiate	
+emprender	to undertake; to set off	
+redactar	to write; to draft	
+hornear	to bake	
+idear	to come up with	
+disgustar	to upset; to displease	
+reabrir	to reopen	
+debatir	to debate	
+predicar	to preach	
+clasificar	to classify; to qualify	
+exhibir	to exhibit; to display	
+precipitar	to rush; to precipitate	
+conspirar	to conspire	
+regar	to water	ie
+asfixiar	to suffocate	
+prosperar	to prosper	
+reinar	to reign	
+sobrepasar	to exceed	
+desmoronar	(desmoronarse) to crumble	
+prescindir	to do without	
+almacenar	to store	
+reflejar	to reflect	
+corresponder	to correspond; to return (feelings)	
+aparentar	to pretend; to look (an age)	
+extinguir	to extinguish	
+ladrar	to bark	
+trazar	to trace; to draw up	
+perturbar	to disturb	
+excluir	to exclude	
+internar	to admit (to hospital)	
+alardear	to boast	
+derrocar	to overthrow	
+obsesionar	to obsess	
+oscurecer	to darken; to get dark	zco
+retractar	(retractarse) to retract	
+privar	to deprive	
+enredar	to tangle; to get involved	
+silbar	to whistle	
+refugiar	(refugiarse) to take refuge	
+recargar	to recharge; to reload	
+conmover	to move (emotionally)	ue
+aflojar	to loosen	
+eludir	to avoid; to elude	
+batear	to bat	
+asimilar	to assimilate	
+rociar	to spray	acc
+nominar	to nominate	
+alegar	to claim; to allege	
+estimular	to stimulate	
+masacrar	to massacre	
+coordinar	to coordinate	
+atascar	to clog; to get stuck	
+asar	to roast; to grill	
+inculpar	to accuse	
+planificar	to plan	
+pulir	to polish	
+motivar	to motivate	
+integrar	to integrate	
+ahuyentar	to drive away	
+progresar	to make progress	
+forjar	to forge	
+acumular	to accumulate	
+redimir	to redeem	
+argumentar	to argue (a point)	
+errar	to err; to miss; to wander	ie
+rajar	to split; to crack	
+descomponer	to break down; to decompose	g pret:descompus fut:descompondr
+cosechar	to harvest	
+desahogar	(desahogarse) to let off steam	
+suministrar	to supply	
+pulsar	to press	
+planchar	to iron	
+aproximar	to bring closer	
+renacer	to be reborn	zco
+dispersar	to disperse	
+silenciar	to silence	
+desplegar	to unfold; to deploy	ie
+reprobar	to fail (an exam); to condemn	ue
+prever	to foresee	PRESENT.YO:preveo PRESENT.TU:prevés PRESENT.EL:prevé PRESENT.ELLOS:prevén IMPERFECT:preveía,preveías,preveía,preveíamos,preveíais,preveían
+neutralizar	to neutralize	
+amarrar	to tie up	
+emerger	to emerge	
+fusilar	to shoot (execute)	
+maquillar	to put makeup on	
+saldar	to settle (a debt)	
+digerir	to digest	ie
+desistir	to give up	
+desertar	to desert	
+acortar	to shorten	
+pilotar	to pilot	
+elaborar	to make; to develop	
+ejercitar	to exercise; to train	
+reiniciar	to restart; to reboot	
+asentar	to settle; to establish	ie
+rasgar	to tear	
+patrullar	to patrol	
+costear	to pay for	
+alargar	to lengthen	
+prolongar	to prolong	
+verter	to pour; to spill	ie
+remediar	to remedy	
+esposar	to handcuff	
+cortejar	to court; to woo	
+asomar	to peek out; to lean out	
+bucear	to dive	
+concertar	to arrange; to coordinate	ie
+irritar	to irritate	
+perecer	to perish	zco
+surfear	to surf	
+alinear	to align	
+resumir	to summarize	
+aplazar	to postpone	
+perfeccionar	to perfect	
+despistar	to throw off; to mislead	
+alabar	to praise	
+disuadir	to dissuade	
+enmendar	to amend	ie
+suavizar	to soften	
+restablecer	to restore; to reestablish	zco
+desplazar	to displace; to move	
+suprimir	to suppress; to delete	
+paralizar	to paralyze	
+velar	to watch over; to keep vigil	
+situar	to place; to locate	acc
+alarmar	to alarm	
+desechar	to discard	
+corroborar	to corroborate	
+balancear	to balance; to swing	
+reprogramar	to reschedule; to reprogram	
+coleccionar	to collect	
+maltratar	to mistreat	
+influenciar	to influence	
+figurar	to appear; to figure	
+encarar	to face	
+teñir	to dye	i
+escanear	to scan	
+propagar	to spread	
+desprender	to give off; to detach	
+incitar	to incite	
+desmontar	to dismantle; to dismount	
+deprimir	to depress	
+reformar	to reform; to renovate	
+demoler	to demolish	ue
+inducir	to induce	zco pret:induj
+exceder	to exceed	
+divulgar	to spread; to disclose	
+reanudar	to resume	
+contaminar	to pollute; to contaminate	
+desencadenar	to unleash; to trigger	
+asombrar	to amaze	
+traficar	to traffic; to deal	
+rozar	to brush against; to graze	
+corromper	to corrupt	
+marear	to make dizzy	
+hospedar	to host; (hospedarse) to stay	
+optar	to choose; to opt	
+vincular	to link	
+disimular	to hide; to pretend	
+reescribir	to rewrite	
+vacilar	to hesitate; to tease	
+moler	to grind	ue
+desgarrar	to tear	
+boxear	to box	
+promocionar	to promote	
+desvestir	to undress	i
+detestar	to detest	
+malinterpretar	to misinterpret	
+desplomar	(desplomarse) to collapse	
+insertar	to insert	
+especular	to speculate	
+traspasar	to go through; to transfer	
+pisotear	to trample	
+arañar	to scratch	
+efectuar	to carry out	acc
+nevar	to snow	ie
+chillar	to scream; to squeal	
+drenar	to drain	
+lloriquear	to whimper	
+toser	to cough	
+extirpar	to remove (surgically)	
+relevar	to relieve; to take over from	
+albergar	to house; to harbor	
+estimar	to estimate; to esteem	
+husmear	to snoop; to sniff	
+retornar	to return	
+relucir	to shine	zco
+parpadear	to blink	
+atener	(atenerse) to abide by	ie g pret:atuv fut:atendr
+envidiar	to envy	
+reprimir	to repress	
+exprimir	to squeeze	
+archivar	to file; to archive	
+desilusionar	to disappoint	
+erradicar	to eradicate	
+pecar	to sin	
+originar	to cause; to originate	
+sobrar	to be left over	
+fusionar	to merge	
+tallar	to carve	
+padecer	to suffer from	zco
+movilizar	to mobilize	
+acechar	to lie in wait; to stalk	
+encoger	to shrink	
+consistir	to consist (of)	
+interactuar	to interact	acc
+desalojar	to evict; to evacuate	
+decapitar	to behead	
+entusiasmar	to excite	
+atrasar	to delay; to set back	
+platicar	to chat (Mexico)	
+desacreditar	to discredit	
+contradecir	to contradict	i g pret:contradij fut:contradir
+omitir	to omit	
+engendrar	to engender; to father	
+multiplicar	to multiply	
+convivir	to live together	
+inhalar	to inhale	
+proseguir	to continue; to proceed	i
+atribuir	to attribute	
+alucinar	to hallucinate; to be amazed	
+emparejar	to pair up; to match	
+piratear	to pirate; to hack	
+equilibrar	to balance	
+documentar	to document	
+compadecer	to feel sorry for	zco
+monitorear	to monitor	
+descuidar	to neglect	
+contentar	to please	
+desempacar	to unpack	
+desmantelar	to dismantle	
+crucificar	to crucify	
+despachar	to dispatch; to serve	
+bombear	to pump	
+implantar	to implant; to introduce	
+empaquetar	to pack	
+proclamar	to proclaim	
+aguardar	to wait for	
+tramar	to plot	
+revocar	to revoke	
+excusar	to excuse	
+estornudar	to sneeze	
+domar	to tame	
+deportar	to deport	
+desquitar	(desquitarse) to get even	
+cegar	to blind	ie
+frecuentar	to frequent	
+enriquecer	to enrich	zco
+encadenar	to chain	
+tachar	to cross out	
+comerciar	to trade	
+sucumbir	to succumb	
+destripar	to gut; to spoil (a plot)	
+despedazar	to tear to pieces	
+amputar	to amputate	
+embriagar	to intoxicate	
+canalizar	to channel	
+indagar	to investigate	
+remolcar	to tow	
+desempeñar	to carry out; to play (a role)	
+aventurar	to venture	
+hinchar	to swell; to inflate	
+profundizar	to go deeper into	
+trabar	to jam; to lock	
+desconocer	not to know; to be unaware of	zco
+enorgullecer	to make proud	zco
+fracturar	to fracture	
+reanimar	to revive	
+acorralar	to corner	
+etiquetar	to label; to tag	
+anhelar	to long for	
+sobrellevar	to cope with	
+ocasionar	to cause	
+desconfiar	to distrust	acc
+contraatacar	to counterattack	
+fichar	to sign (a player); to clock in	
+replicar	to reply; to replicate	
+instruir	to instruct	
+ansiar	to long for	acc
+ingerir	to ingest; to swallow	ie
+murmurar	to murmur; to gossip	
+prevalecer	to prevail	zco
+deshonrar	to dishonor	
+averiar	to damage; to break down	acc
+designar	to designate	
+incomodar	to make uncomfortable	
+objetar	to object	
+reprochar	to reproach	
+mimar	to pamper	
+favorecer	to favor; to suit	zco
+desfilar	to parade	
+resfriar	(resfriarse) to catch a cold	acc
+electrocutar	to electrocute	
+hurgar	to rummage; to poke	
+ordeñar	to milk	
+sentenciar	to sentence	
+inaugurar	to inaugurate; to open	
+ablandar	to soften	
+minimizar	to minimize	
+emigrar	to emigrate	
+sobresalir	to stand out	g fut:sobresaldr
+salpicar	to splash	
+quebrantar	to break (a law, a promise)	
+formular	to formulate	
+doblegar	to bend; to subdue	
+apresar	to capture	
+hipnotizar	to hypnotize	
+desterrar	to banish	ie
+absolver	to absolve; to acquit	ue
+pilotear	to pilot	
+atestiguar	to testify	
+deambular	to wander	
+destapar	to uncover; to open	
+estremecer	to shudder; to shake	zco
+multar	to fine	
+sofocar	to suffocate; to put out	
+orientar	to guide; to orient	
+emboscar	to ambush	
+madrugar	to get up early	
+intubar	to intubate	
+resaltar	to highlight; to stand out	
+degradar	to degrade; to demote	
+moldear	to mold; to shape	
+rondar	to hang around; to be around (a number)	
+abatir	to knock down; to depress	
+socializar	to socialize	
+flirtear	to flirt	
+desestimar	to dismiss	
+habitar	to inhabit	
+encomendar	to entrust	ie
+desenmascarar	to unmask	
+allanar	to raid; to flatten	
+virar	to turn; to veer	
+comandar	to command	
+brotar	to sprout; to spring up	
+implorar	to implore	
+disipar	to dispel	
+carecer	to lack	zco
+comparecer	to appear (in court)	zco
+timar	to con	
+despellejar	to skin	
+modelar	to model; to shape	
+contrarrestar	to counteract	
+reorganizar	to reorganize	
+rematar	to finish off	
+sedar	to sedate	
+adelgazar	to lose weight	
+responsabilizar	to hold responsible	
+reciclar	to recycle	
+concretar	to specify; to finalize	
+simplificar	to simplify	
+recaer	to relapse	ig
+mendigar	to beg	
+mutilar	to mutilate	
+inflar	to inflate	
+agrandar	to enlarge	
+depilar	to wax; to remove hair	
+fomentar	to encourage; to promote	
+degollar	to slit the throat of	ue PRESENT:degüello,degüellas,degüella,degollamos,degolláis,degüellan
+tatuar	to tattoo	acc
+fascinar	to fascinate	
+entablar	to start (a conversation)	
+acatar	to obey; to comply with	
+reposar	to rest	
+remontar	to go back; to overcome	
+gemir	to moan; to groan	i
+fantasear	to fantasize	
+empapar	to soak	
+recomponer	to repair; to rebuild	g pret:recompus fut:recompondr
+elogiar	to praise	
+presentir	to have a feeling; to sense	ie
+frustrar	to frustrate	
+desintegrar	to disintegrate	
+apilar	to stack	
+adornar	to decorate	
+raspar	to scrape	
+descontar	to discount	ue
+desbloquear	to unlock	
+configurar	to configure; to set up	
+babear	to drool	
+menospreciar	to underestimate; to scorn	
+encabezar	to lead; to head	
+estorbar	to get in the way	
+suspirar	to sigh	
+rayar	to scratch; to draw lines	
+entristecer	to sadden	zco
+desvelar	to reveal; to keep awake	
+vibrar	to vibrate	
+sermonear	to lecture	
+implementar	to implement	
+cocer	to cook; to boil	ue
+intensificar	to intensify	
+purificar	to purify	
+tontear	to fool around	
+incinerar	to incinerate	
+sortear	to draw lots; to dodge	
+endurecer	to harden	zco
+prescribir	to prescribe	
+concordar	to agree	ue
+visualizar	to visualize; to view	
+patrocinar	to sponsor	
+sepultar	to bury	
+resignar	(resignarse) to resign oneself	
+saciar	to satisfy (hunger, thirst)	
+untar	to spread (butter)	
+halagar	to flatter	
+despojar	to strip; to deprive	
+expirar	to expire	
+asear	to clean; to tidy	
+pellizcar	to pinch	
+maniobrar	to maneuver	
+sintonizar	to tune in	
+reñir	to scold; to quarrel	i
+infringir	to infringe	
+refutar	to refute	
+abastecer	to supply	zco
+gruñir	to grunt; to growl	
+amamantar	to breastfeed	
+acuchillar	to stab	
+brincar	to jump	
+roncar	to snore	
+extorsionar	to extort	
+menear	to shake; to wiggle	
+ventilar	to ventilate; to air	
+coronar	to crown	
+desesperar	to despair; to exasperate	
+simpatizar	to get on with; to sympathize	
+merodear	to prowl; to hang around	
+hechizar	to bewitch	
+revolucionar	to revolutionize	
+esclavizar	to enslave	
+deslumbrar	to dazzle	
+aullar	to howl	acc
+reaparecer	to reappear	zco
+rugir	to roar	
+enchufar	to plug in	
+clonar	to clone	
+saltear	to sauté	
+escarbar	to dig; to scratch	
+presidir	to preside over	
+pestañear	to blink	
+abstener	(abstenerse) to abstain	ie g pret:abstuv fut:abstendr
+inquietar	to worry	
+gestionar	to manage; to arrange	
+afinar	to tune; to refine	
+reinventar	to reinvent	
+infligir	to inflict	
+tambalear	(tambalearse) to wobble; to stagger	
+restar	to subtract	
+obrar	to act; to work	
+triplicar	to triple	
+purgar	to purge	
+enlistar	to list; to enlist	
+asentir	to nod; to agree	ie
+desanimar	to discourage	
+obstruir	to obstruct; to block	
+conmemorar	to commemorate	
+escurrir	to drain; to wring	
+regatear	to haggle	
+descongelar	to thaw	
+arrollar	to run over; to crush	
+rebanar	to slice	
+evaporar	to evaporate	
+sobrecargar	to overload	
+regenerar	to regenerate	
+profanar	to desecrate	
+especificar	to specify	
+rectificar	to correct; to rectify	
+congeniar	to get along	
+marchitar	(marchitarse) to wither	
+afilar	to sharpen	
+rehabilitar	to rehabilitate	
+checar	to check (Mexico)	
+manosear	to handle; to grope	
+deleitar	to delight	
+audicionar	to audition	
+recopilar	to compile	
+oprimir	to oppress	
+empatar	to tie (a game)	
+masajear	to massage	
+descuartizar	to quarter; to cut up	
+enlazar	to link	
+sincronizar	to synchronize	
+premiar	to award; to reward	
+enmarcar	to frame	
+sobrevolar	to fly over	ue
+adular	to flatter	
+reconectar	to reconnect	
+perdurar	to last; to endure	
+reprender	to reprimand	
+atragantar	(atragantarse) to choke	
+procrear	to procreate	
+destinar	to assign; to allocate	
+legar	to bequeath	
+cautivar	to captivate	
+censurar	to censor	
+abrochar	to fasten; to button	
+cotejar	to compare	
+engatusar	to coax	
+blanquear	to whiten; to launder (money)	
+asesorar	to advise	
+accionar	to activate; to operate	
+ridiculizar	to ridicule	
+succionar	to suck	
+enfatizar	to emphasize	
+retratar	to portray	
+mecer	to rock; to sway	
+conciliar	to reconcile	
+acontecer	to happen	zco
+apaciguar	to appease	
+broncear	(broncearse) to tan	
+enjuiciar	to prosecute; to judge	
+redecorar	to redecorate	
+descarrilar	to derail	
+reactivar	to reactivate	
+denegar	to deny; to refuse	ie
+pactar	to agree on	
+repeler	to repel	
+declinar	to decline	
+inmovilizar	to immobilize	
+ilustrar	to illustrate	
+olfatear	to sniff	
+abarcar	to cover; to include	
+agobiar	to overwhelm	
+expiar	to atone for	acc
+bordar	to embroider	
+colorear	to color in	
+embargar	to seize; to overwhelm	
+acarrear	to carry; to bring about	
+clausurar	to close down	
+colonizar	to colonize	
+arribar	to arrive (by sea)	
+vacunar	to vaccinate	
+remodelar	to remodel	
+remitir	to send; to refer	
+esculpir	to sculpt	
+resurgir	to reappear	
+teletransportar	to teleport	
+deliberar	to deliberate	
+aligerar	to lighten; to hurry up	
+acaparar	to hog; to hoard	
+derivar	to derive; to refer	
+triturar	to crush; to shred	
+desabrochar	to unfasten; to unbutton	
+venerar	to venerate	
+regir	to govern; to be in force	i
+resonar	to resound	ue
+inculcar	to instill	
+izar	to hoist	
+encaminar	to direct; to head	
+catalogar	to catalog	
+subastar	to auction	
+estresar	to stress	
+endulzar	to sweeten	
+suturar	to stitch	
+protagonizar	to star in	
+talar	to cut down (trees)	
+aplacar	to placate	
+derrochar	to waste; to squander	
+vetar	to veto	
+abrigar	to wrap up; to keep warm	
+maximizar	to maximize	
+intimar	to become close	
+guiñar	to wink	
+embaucar	to trick	
+trotar	to trot; to jog	
+ralentizar	to slow down	
+añorar	to long for; to miss	
+socavar	to undermine	
+apalear	to beat	
+esterilizar	to sterilize	
+extraviar	to lose; to mislay	acc
+discrepar	to disagree	
+ceñir	to fit tightly	i
+consumar	to consummate	
+diseccionar	to dissect	
+minar	to undermine; to mine	
+rotar	to rotate	
+equipar	to equip	
+helar	to freeze	ie
+parlotear	to chatter	
+exonerar	to exonerate	
+consolidar	to consolidate	
+delirar	to be delirious	
+debutar	to debut	
+desinfectar	to disinfect	
+contrabandear	to smuggle	
+orbitar	to orbit	
+decodificar	to decode	
+consagrar	to consecrate; to devote	
+lazar	to lasso	
+taladrar	to drill	
+embolsar	to pocket	
+relatar	to tell; to recount	
+restringir	to restrict	
+arrugar	to wrinkle	
+rebobinar	to rewind	
+gatear	to crawl	
+aturdir	to stun; to daze	
+desposar	to marry	
+constituir	to constitute	
+atesorar	to treasure; to hoard	
+tartamudear	to stutter	
+custodiar	to guard	
+colmar	to fill to the brim	
+redirigir	to redirect	
+eructar	to burp	
+monitorizar	to monitor	
+crujir	to creak; to crunch	
+sonrojar	(sonrojarse) to blush	
+cuadrar	to add up; to square	
+naufragar	to be shipwrecked	
+repostar	to refuel	
+juguetear	to play around	
+impartir	to give (a class)	
+renegar	to renounce; to grumble	ie
+empuñar	to grip; to wield	
+fanfarronear	to brag	
+reembolsar	to refund	
+difamar	to defame	
+desenfundar	to draw (a weapon)	
+erigir	to erect	
+reconfortar	to comfort	
+agrupar	to group	
+avivar	to liven up	
+soldar	to weld	ue
+rapar	to shave (head)	
+dificultar	to make difficult	
+infundir	to instill	
+legalizar	to legalize	
+engrasar	to grease	
+balbucear	to babble	
+templar	to temper; to warm up	
+certificar	to certify	
+evocar	to evoke	
+transcurrir	to pass; to elapse	
+recomenzar	to start again	ie
+desplumar	to pluck	
+enjuagar	to rinse	
+residir	to reside	
+tararear	to hum	
+conjurar	to conjure; to ward off	
+decaer	to decline	ig
+sustentar	to sustain; to support	
+requisar	to requisition	
+ensamblar	to assemble	
+engullir	to gobble	
+holgazanear	to laze around	
+interceder	to intercede	
+dislocar	to dislocate	
+sintetizar	to synthesize	
+embestir	to charge (at)	i
+amontonar	to pile up	
+arremeter	to charge (at)	
+acallar	to silence	
+desgastar	to wear out	
+espabilar	to wake up; to get smart	
+incautar	to seize	
+desbaratar	to ruin; to wreck	
+desestabilizar	to destabilize	
+salvaguardar	to safeguard	
+nivelar	to level	
+acoplar	to fit together; to couple	
+atentar	to make an attempt (on)	
+peligrar	to be in danger	
+repudiar	to repudiate	
+camuflar	to camouflage	
+nutrir	to nourish	
+clamar	to cry out	
+disputar	to dispute; to play (a match)	
+delegar	to delegate	
+telegrafiar	to telegraph	acc
+estampar	to stamp; to print	
+agravar	to aggravate; to worsen	
+resguardar	to protect	
+gotear	to drip	
+abrumar	to overwhelm	
+facturar	to invoice; to check in (luggage)	
+divisar	to make out; to spot	
+aporrear	to bang on	
+constar	to be on record; to consist of	
+amañar	to rig; to fix	
+desaprovechar	to waste	
+matricular	to enroll; to register	
+instar	to urge	
+mitigar	to mitigate	
+sondear	to probe; to poll	
+nublar	to cloud	
+mutar	to mutate	
+unificar	to unify	
+blandir	to brandish	
+devastar	to devastate	
+denominar	to name; to call	
+cotillear	to gossip	
+escandalizar	to scandalize	
+posicionar	to position	
+escatimar	to skimp on	
+rapear	to rap	
+lustrar	to polish	
+fisgonear	to snoop	
+dictaminar	to rule	
+reafirmar	to reaffirm	
+decretar	to decree	
+pastar	to graze	
+renegociar	to renegotiate	
+hipotecar	to mortgage	
+trastornar	to disturb; to upset	
+exportar	to export	
+oficiar	to officiate	
+medicar	to medicate	
+forrar	to line; to cover	
+contrariar	to upset; to go against	acc
+obviar	to avoid; to leave out	
+instigar	to instigate	
+merendar	to have an afternoon snack	ie
+embalar	to pack	
+amasar	to knead; to amass	
+disciplinar	to discipline	
+repensar	to rethink	ie
+exhumar	to exhume	
+amargar	to embitter	
+obstaculizar	to hinder	
+desbordar	to overflow	
+cursar	to study; to take (a course)	
+cojear	to limp	
+alumbrar	to light up; to give birth	
+chasquear	to click; to snap	
+vislumbrar	to glimpse	
+eclipsar	to eclipse	
+alternar	to alternate; to socialize	
+domesticar	to domesticate	
+resplandecer	to shine	zco
+agujerear	to make holes in	
+abreviar	to abbreviate	
+pedalear	to pedal	
+resentir	(resentirse) to suffer; to resent	ie
+desconcertar	to disconcert	ie
+codificar	to encode	
+incumplir	to break (a promise, a rule)	
+mediar	to mediate	
+batallar	to battle	
+fruncir	to frown; to gather (fabric)	
+sopesar	to weigh up	
+desmentir	to deny	ie
+cercar	to fence in; to surround	
+exhalar	to exhale	
+calar	to soak through; to stall	
+reivindicar	to claim; to vindicate	
+descolgar	to take down; to pick up (the phone)	ue
+comprimir	to compress	
+complementar	to complement	
+adormecer	to make sleepy; to numb	zco
+destituir	to dismiss (from a post)	
+amplificar	to amplify	
+empapelar	to wallpaper	
+colisionar	to collide	
+perseverar	to persevere	
+narrar	to narrate	
+postear	to post (online)	
+coexistir	to coexist	
+tostar	to toast	ue
+ayunar	to fast	
+desparramar	to scatter; to spill	
+degustar	to taste	
+rebuscar	to search; to rummage	
+dialogar	to talk; to hold a dialogue	
+subrayar	to underline	
+aguar	to water down; to spoil (a party)	
+articular	to articulate	
+curiosear	to browse; to snoop	
+perpetuar	to perpetuate	acc
+ondear	to wave; to fly (a flag)	
+orquestar	to orchestrate	
+descalificar	to disqualify	
+avistar	to sight	
+rimar	to rhyme	
+calzar	to put shoes on; to wear (shoe size)	
+adiestrar	to train	
+reavivar	to revive	
+encerar	to wax	
+enmascarar	to mask	
+edificar	to build	
+culminar	to culminate	
+distorsionar	to distort	
+forcejear	to struggle	
+invalidar	to invalidate	
+reasignar	to reassign	
+aclamar	to acclaim	
+atemorizar	to frighten	
+zanjar	to settle (an issue)	
+titubear	to hesitate	
+disecar	to stuff; to dissect	
+chatear	to chat (online)	
+surtir	to supply; to have (an effect)	
+remojar	to soak	
+disentir	to dissent	ie
+calibrar	to calibrate	
+avalar	to guarantee; to vouch for	
+discernir	to discern	ie
+zumbar	to buzz	
+rebosar	to overflow	
+sancionar	to sanction; to penalize	
+cremar	to cremate	
+desentrañar	to unravel	
+priorizar	to prioritize	
+validar	to validate	
+adjudicar	to award	
+anteponer	to put before	g pret:antepus fut:antepondr
+persistir	to persist	
+alborotar	to stir up	
+rasguñar	to scratch	
+patentar	to patent	
+teclear	to type	
+atajar	to take a shortcut; to stop	
+desagradar	to displease	
+caducar	to expire	
+reevaluar	to reassess	acc
+simbolizar	to symbolize	
+amortiguar	to cushion; to muffle	
+anestesiar	to anesthetize	
+refinar	to refine	
+desordenar	to mess up	
+sorber	to sip	
+rabiar	to rage	
+tantear	to feel out; to test	
+atornillar	to screw	
+galopar	to gallop	
+rejuvenecer	to rejuvenate	zco
+recapacitar	to think again	
+bostezar	to yawn	
+incapacitar	to incapacitate	
+codiciar	to covet	
+discriminar	to discriminate	
+abogar	to advocate	
+anclar	to anchor	
+palpitar	to throb	
+subsistir	to subsist	
+diluir	to dilute	
+desacelerar	to slow down	
+retribuir	to pay; to reward	
+limar	to file; to smooth	
+confinar	to confine	
+encarnar	to embody	
+transpirar	to perspire	
+ofertar	to offer (for sale)	
+tronar	to thunder	ue
+afligir	to afflict; to distress	
+deponer	to depose; to lay down	g pret:depus fut:depondr
+redondear	to round off	
+desocupar	to vacate	
+pender	to hang	
+divagar	to digress	
+abuchear	to boo	
+glorificar	to glorify	
+agendar	to schedule	
+danzar	to dance	
+desorientar	to disorient	
+tensar	to tighten	
+malcriar	to spoil (a child)	acc
+migrar	to migrate	
+empañar	to fog up; to tarnish	
+socorrer	to help; to aid	
+traumatizar	to traumatize	
+vagabundear	to wander	
+pitar	to whistle; to honk	
+acuñar	to coin; to mint	
+moderar	to moderate	
+desfigurar	to disfigure	
+detallar	to detail	
+embrujar	to bewitch	
+irradiar	to radiate	
+caracterizar	to characterize	
+dilatar	to dilate; to delay	
+atenuar	to attenuate	acc
+adjuntar	to attach	
+agonizar	to be dying	
+despilfarrar	to squander	
+anidar	to nest	
+corretear	to run around	
+arrear	to herd	
+morar	to dwell	
+revolotear	to flutter	
+rechinar	to grind; to squeak	
+habituar	to accustom	acc
+recluir	to confine	
+exaltar	to exalt; to excite	
+calumniar	to slander	
+blasfemar	to blaspheme	
+cronometrar	to time	
+cascar	to crack	
+plasmar	to capture; to express	
+deformar	to deform	
+rebatir	to refute	
+derrapar	to skid	
+clarificar	to clarify	
+contrastar	to contrast	
+ensillar	to saddle	
+pervertir	to pervert	ie
+barajar	to shuffle; to consider	
+poblar	to populate	ue
+conllevar	to entail	
+oscilar	to oscillate; to range	
+acentuar	to stress; to accentuate	acc
+jadear	to pant	
+picotear	to peck; to nibble	
+pronosticar	to forecast	
+incentivar	to encourage	
+dotar	to equip; to endow	
+empalmar	to splice; to connect	
+dispensar	to excuse; to dispense	
+diezmar	to decimate	
+aborrecer	to loathe	zco
+inflamar	to inflame	
+trenzar	to braid	
+abonar	to pay; to fertilize	
+cebar	to fatten; to bait	
+plagiar	to plagiarize	
+secundar	to support; to second	
+rizar	to curl	
+fotocopiar	to photocopy	
+legitimar	to legitimize	
+guisar	to stew; to cook	
+martillar	to hammer	
+sustraer	to subtract; to steal	ig pret:sustraj
+potenciar	to boost	
+retumbar	to echo; to rumble	
+trasplantar	to transplant	
+sollozar	to sob	
+transitar	to travel; to go along	
+hilar	to spin; to string together	
+capacitar	to train; to qualify	
+pavimentar	to pave	
+chorrear	to drip; to gush	
+enjaular	to cage	
+palidecer	to turn pale	zco
+expedir	to issue	i
+convidar	to invite	
+dorar	to gild; to brown (food)	
+pausar	to pause	
+catar	to taste	
+surcar	to plow through; to sail	
+puntuar	to score; to punctuate	acc
+autografiar	to autograph	acc
+alisar	to smooth	
+sobrevenir	to happen suddenly	ie g pret:sobrevin fut:sobrevendr
+tasar	to value; to appraise	
+saturar	to saturate	
+equivaler	to be equivalent	g fut:equivaldr
+testimoniar	to testify	
+dinamitar	to blow up	
+condimentar	to season	
+incordiar	to pester	
+concurrir	to converge; to take part	
+hurtar	to steal	
+chirriar	to screech	acc
+ultimar	to finalize	
+civilizar	to civilize	
+redoblar	to redouble	
+escasear	to be scarce	
+cablear	to wire	
+resoplar	to huff; to snort	
+generalizar	to generalize	
+cuajar	to curdle; to set; to work out	
+retraer	to retract	ig pret:retraj
+salar	to salt	
+capitular	to capitulate	
+patalear	to kick; to stamp one's feet	
+urgir	to be urgent	
+santificar	to sanctify	
+parlamentar	to negotiate	
+indultar	to pardon	
+dragar	to dredge	
+gravar	to tax	
+degenerar	to degenerate	
+colectar	to collect	
+renombrar	to rename	
+chutar	to shoot (a ball)	
+cacarear	to cackle; to brag	
+zurcir	to darn; to mend	
+pacificar	to pacify	
+enrojecer	to blush; to turn red	zco
+reverenciar	to revere	
+retardar	to delay	
+injertar	to graft	
+marinar	to marinate	
+ahumar	to smoke (food)	acc
+concursar	to compete	
+penar	to punish	
+destellar	to sparkle	
+rastrillar	to rake	
+adecuar	to adapt	
+anexar	to annex; to attach	
+desafinar	to sing out of tune	
+lucrar	(lucrarse) to profit	
+listar	to list	
+aceitar	to oil	
+aletear	to flap	
+converger	to converge	
+datar	to date (from)	
+maullar	to meow	acc
+conjugar	to conjugate; to combine	
+enjabonar	to soap; to lather	
+acondicionar	to condition; to fit out	
+estructurar	to structure	
+licuar	to liquefy; to blend	
+fechar	to date (a document)	
+autenticar	to authenticate	
+gestar	to gestate; to develop	
+tintinear	to jingle	
+conjeturar	to conjecture	
+precintar	to seal	
+ronronear	to purr	
+aunar	to combine	acc
+inmigrar	to immigrate	
+chistar	to say a word; to hiss	
+corear	to chant	
+menguar	to diminish	
+subsidiar	to subsidize	
+concienciar	to raise awareness	
+tutelar	to protect; to supervise	
+aducir	to cite; to put forward	zco pret:aduj
+desdecir	(desdecirse) to go back on one's word	i g pret:desdij fut:desdir
+fraguar	to forge; to set (concrete)	
+fluctuar	to fluctuate	acc
+avenir	(avenirse) to agree	ie g pret:avin fut:avendr
+predisponer	to predispose	g pret:predispus fut:predispondr
+subvertir	to subvert	ie
+presuponer	to presuppose	g pret:presupus fut:presupondr
+reconvertir	to restructure	ie
+reunificar	to reunify	
+investir	to invest (with power)	i
+abstraer	to abstract	ig pret:abstraj
+desoír	to ignore (advice)	ig
+derruir	to demolish	
+santiguar	(santiguarse) to cross oneself	
+exceptuar	to exclude	acc
+cohibir	to inhibit	acc
+contraponer	to contrast	g pret:contrapus fut:contrapondr
+enraizar	to take root	acc
+divergir	to diverge	
+hastiar	to bore; to sicken	acc
+yuxtaponer	to juxtapose	g pret:yuxtapus fut:yuxtapondr
+colegir	to deduce	i
+afluir	to flow (into)	
+porfiar	to insist	acc
+engreír	(engreírse) to become conceited	i acc
+descafeinar	to decaffeinate	acc
+desavenir	to fall out	ie g pret:desavin fut:desavendr
+entreoír	to half-hear	ig

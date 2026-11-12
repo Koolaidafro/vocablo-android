@@ -7,10 +7,17 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import app.vocablo.design.ThemeId
 import app.vocablo.design.ThemeMode
 import app.vocablo.design.Themes
+import app.vocablo.verbs.AnswerMode
+import app.vocablo.verbs.PracticeSettings
+import app.vocablo.verbs.Stage
+import app.vocablo.verbs.Tense
+import app.vocablo.verbs.Tier
+import app.vocablo.verbs.VerbSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -30,6 +37,9 @@ data class AppSettings(
     val region: Region = Region.LATAM,
     val newPerDay: Int = 20,
     val onlineLookup: Boolean = true,
+    val practice: PracticeSettings = PracticeSettings(),
+    /** False until the first-launch questions are answered or skipped. */
+    val onboarded: Boolean = false,
 )
 
 private val Context.settingsStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -48,6 +58,14 @@ class SettingsStore(context: Context) {
             p[REGION] = new.region.name
             p[NEW_PER_DAY] = new.newPerDay
             p[ONLINE_LOOKUP] = new.onlineLookup
+            val pr = new.practice
+            p[STAGE] = pr.unlocked.name
+            p[TENSES] = pr.enabledTenses.map { it.name }.toSet()
+            p[TIER] = pr.maxTier.name
+            p[VOSOTROS] = pr.includeVosotros
+            p[SOURCE] = pr.source.name
+            p[ANSWER_MODE] = pr.answerMode.name
+            p[ONBOARDED] = new.onboarded
         }
     }
 
@@ -57,6 +75,15 @@ class SettingsStore(context: Context) {
         region = p[REGION].toEnum(Region.LATAM),
         newPerDay = p[NEW_PER_DAY] ?: 20,
         onlineLookup = p[ONLINE_LOOKUP] ?: true,
+        practice = PracticeSettings(
+            unlocked = p[STAGE].toEnum(Stage.PRESENT),
+            enabledTenses = p[TENSES]?.mapNotNull { n -> Tense.entries.firstOrNull { it.name == n } }?.toSet() ?: setOf(Tense.PRESENT),
+            maxTier = p[TIER].toEnum(Tier.TOP_100),
+            includeVosotros = p[VOSOTROS] ?: false,
+            source = p[SOURCE].toEnum(VerbSource.TOP_LIST),
+            answerMode = p[ANSWER_MODE].toEnum(AnswerMode.CHOOSE),
+        ),
+        onboarded = p[ONBOARDED] ?: false,
     )
 
     private companion object {
@@ -65,6 +92,13 @@ class SettingsStore(context: Context) {
         val REGION = stringPreferencesKey("region")
         val NEW_PER_DAY = intPreferencesKey("new_per_day")
         val ONLINE_LOOKUP = booleanPreferencesKey("online_lookup")
+        val STAGE = stringPreferencesKey("practice_stage")
+        val TENSES = stringSetPreferencesKey("practice_tenses")
+        val TIER = stringPreferencesKey("practice_tier")
+        val VOSOTROS = booleanPreferencesKey("practice_vosotros")
+        val SOURCE = stringPreferencesKey("practice_source")
+        val ANSWER_MODE = stringPreferencesKey("practice_answer_mode")
+        val ONBOARDED = booleanPreferencesKey("onboarded")
     }
 }
 

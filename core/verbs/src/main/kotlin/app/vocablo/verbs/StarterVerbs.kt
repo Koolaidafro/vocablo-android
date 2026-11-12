@@ -38,7 +38,7 @@ object StarterVerbs {
         Verb("construir", "to build"),
         Verb("enviar", "to send", VerbPattern(accentStressedStem = true)),
         Verb("continuar", "to continue", VerbPattern(accentStressedStem = true)),
-        Verb("guiar", "to guide"),
+        Verb("guiar", "to guide", VerbPattern(accentStressedStem = true)),
         Verb("reír", "to laugh", VerbPattern(stemChange = E_I, accentStressedStem = true)),
         Verb("oír", "to hear", VerbPattern(yoForm = IG)),
         Verb("traer", "to bring", VerbPattern(yoForm = IG, strongPreteriteStem = "traj")),

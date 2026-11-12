@@ -64,6 +64,7 @@ class ConjugatorTest {
         Triple("enviar", PRESENT, "envío envías envía enviamos enviáis envían"),
         Triple("continuar", PRESENT, "continúo continúas continúa continuamos continuáis continúan"),
         Triple("guiar", PRETERITE, "guie guiaste guio guiamos guiasteis guiaron"),
+        Triple("guiar", PRESENT, "guío guías guía guiamos guiais guían"),
         Triple("reír", PRESENT, "río ríes ríe reímos reís ríen"),
         Triple("reír", PRETERITE, "reí reíste rio reímos reísteis rieron"),
         Triple("oír", PRESENT, "oigo oyes oye oímos oís oyen"),
