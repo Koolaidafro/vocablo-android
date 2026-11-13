@@ -4,8 +4,8 @@ Feedback collected while testing. When Sir says "execute", every open item is
 implemented test-first, `SRS.md` and `DEVLOG.md` are updated, and the update
 ships through a PR to `main`, which publishes the release.
 
-Items 1 to 3 shipped in v1.1 (see `DEVLOG.md`, 2026-11-13). New feedback goes
-below as item 4 onwards.
+Items 1 to 3 shipped in v1.1 and item 4 in v1.2 (see `DEVLOG.md`, 2026-11-13).
+New feedback goes below as item 5 onwards.
 
 Status values: **open** (logged, not started), **done in vX.Y**.
 
@@ -75,3 +75,15 @@ Status values: **open** (logged, not started), **done in vX.Y**.
 - **Planned approach:** Treat it as its own design step in the update: design
   tokens and a written style guide first, then apply screen by screen, with
   screenshot checks on a phone and a tablet size.
+
+### 4. New art and a more engaging app, like Stepwise
+- **Reported:** 2026-11-13
+- **Status:** done in v1.2 (2026-11-13)
+- **What Sir asked:** Replace the app's icons and art with new images made with
+  Gemini's Nano Banana, give Tuzo a better, more engaging design, and use the
+  tips from the Stepwise guide to make Vocablo more engaging overall.
+- **What shipped:** FR-17 to FR-27 and NFR-7, NFR-8 in `SRS.md` v1.2: seven
+  Tuzo poses, a new launcher icon, seven scenes, six badges, seven game tiles,
+  Tuzo reactions in study, an end-of-session summary with a next step,
+  welcome-back card, Tuzo-voice reminders and a one-time reminder offer.
+  Prompts are in `docs/ART_PROMPTS.md`.

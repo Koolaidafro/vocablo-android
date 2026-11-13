@@ -1,7 +1,7 @@
 # Development Log: Vocablo
 
 ## Current state
-Version: 1.2 (in progress) | Last updated: 2026-11-13
+Version: 1.2 (complete; ships when PR #9 merges) | Last updated: 2026-11-13
 
 ### Asset inventory
 
@@ -49,6 +49,9 @@ Only assets added or changed since this log began are listed one by one. Everyth
 | `docs/NEXT_UPDATE.md` | Document | Testing feedback waiting for the next update | 1.1 | 1.1 |
 | `docs/uml-v1.1.svg` | Diagram | Class diagram with members: study screen and design system | 1.1 | 1.1 |
 | `docs/uml-v1.1-overview.svg` | Diagram | Class diagram overview: every module and package, types by name | 1.1 | 1.1 |
+| `docs/uml-v1.2-overview.svg` | Diagram | Class diagram overview for v1.2: every module and package, types by name | 1.2 | 1.2 |
+| `docs/uml-v1.2-play.svg` | Diagram | Class diagram with members: core:play package (badges, reminders, session summary) | 1.2 | 1.2 |
+| `docs/uml-v1.2-app.svg` | Diagram | Class diagram with members: app classes added or changed in v1.2 | 1.2 | 1.2 |
 | `docs/licenses/OFL-Nunito.txt`, `docs/licenses/ISC-Lucide.txt` | Licence texts | Redistribution terms for the font and icons (NFR-5) | 1.1 | 1.1 |
 | `.github/workflows/publish.yml` | CI config | Publishes a signed APK on every merge to `main` | 1.0 | 1.2 |
 | `app/build.gradle.kts`, `gradle/libs.versions.toml` | Build config | Dependencies and version | 1.0 | 1.2 |
@@ -56,7 +59,7 @@ Only assets added or changed since this log began are listed one by one. Everyth
 ## Log
 
 ### 2026-11-13 | v1.2 | Art overhaul and engagement update
-**Phase:** Analysis through testing (maintenance update; release pending CI and Sir's merge).
+**Phase:** Analysis through release (maintenance update; publishes when Sir merges PR #9).
 **Requirements touched:** FR-15 (removed), FR-17 to FR-27, NFR-7, NFR-8.
 
 **Decisions**
@@ -117,7 +120,8 @@ Only assets added or changed since this log began are listed one by one. Everyth
 - Dead code: unused game icons and `gameIcon()` removed.
 - Left as is: `LibraryViewModel` keeps growing as the shared screen state (Large Class); splitting it into per-screen ViewModels is noted as an open issue.
 
-**Tests:** Core module tests run locally on a plain JVM build (`:core:play:test`, all pass). Test-first check for the new rules: two deliberate mutations (welcome back after more than 3 days instead of 3 or more; comeback after more than 7 days) each made `EngagementTest` fail, then were reverted. App tests and Android builds run on CI only (the Android SDK cannot be downloaded in this sandbox); see PR #9.
+**Tests:** Core module tests run locally on a plain JVM build (`:core:play:test`, all pass). Test-first check for the new rules: two deliberate mutations (welcome back after more than 3 days instead of 3 or more; comeback after more than 7 days) each made `EngagementTest` fail, then were reverted. App tests and Android builds run on CI only (the Android SDK cannot be downloaded in this sandbox). CI run 43528515926 failed in 9 Robolectric classes while downloading the android-all jar (FileNotFoundException in MavenArtifactFetcher, an infrastructure fault, no assertion failed); the next run on dc52716 passed every module's tests, lint, and the debug and release builds. Results are in PR #9.
+**UML:** `uml-v1.2-overview.svg`, plus per-package diagrams `uml-v1.2-play.svg` and `uml-v1.2-app.svg` because the changed classes pass 20. The v1.1 diagrams are kept as the record of that release.
 **Open issues:** `LibraryViewModel` size (see above). The themed monochrome icon still uses the 1.0 silhouette. Widget streak line still uses an emoji (SRS section 7).
 
 ### 2026-11-13 | v1.1 | Testing feedback: swipe direction, rating labels, modern look

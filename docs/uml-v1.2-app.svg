@@ -1,0 +1,397 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2620 2306" width="2620" height="2306">
+<defs>
+<filter id="shadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.18"/></filter>
+<marker id="tri" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,1 L11,6 L1,11 Z" fill="#ffffff" stroke="#555555" stroke-width="1.2"/></marker>
+<marker id="open" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,1 L11,6 L1,11" fill="none" stroke="#555555" stroke-width="1.2"/></marker>
+<marker id="diamondF" viewBox="0 0 16 10" refX="1" refY="5" markerWidth="16" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="#555555" stroke="#555555"/></marker>
+<marker id="diamondH" viewBox="0 0 16 10" refX="1" refY="5" markerWidth="16" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="#ffffff" stroke="#555555"/></marker>
+</defs>
+<style>
+text { font-family: Helvetica, Arial, sans-serif; fill: #333333; }
+.nm { font-size: 13px; font-weight: bold; }
+.mb { font-size: 11px; }
+.st { font-size: 10px; }
+.lb { font-size: 10px; }
+.ct { font-size: 12px; font-weight: bold; fill: #555555; }
+.tt { font-size: 16px; font-weight: bold; }
+</style>
+<rect width="2620" height="2306" fill="#ffffff"/>
+<rect x="40" y="20" width="520" height="62" rx="6" fill="#ffffff" stroke="#555555" stroke-width="1"/><text x="52" y="42" class="tt">Vocablo</text><text x="52" y="60" class="mb">Class diagram: app module, classes changed in v1.2 · version 1.2 · 2026-11-13</text><text x="52" y="75" class="lb">Built from the code on the v1.2 branch (PR #9). Other app classes are unchanged; see uml-v1.2-overview.svg.</text>
+<rect x="50" y="160" width="2520" height="288" rx="8" fill="#fafafa" stroke="#999999" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="62" y="178" class="ct">package app.vocablo.ui.components (FR-17 to FR-20, FR-22)</text>
+<rect x="50" y="518" width="890" height="1454" rx="8" fill="#fafafa" stroke="#999999" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="62" y="536" class="ct">package app.vocablo.ui.study (FR-21, FR-23, FR-27)</text>
+<rect x="960" y="518" width="520" height="1454" rx="8" fill="#fafafa" stroke="#999999" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="972" y="536" class="ct">package app.vocablo.ui (FR-22, FR-24)</text>
+<rect x="1550" y="518" width="500" height="1454" rx="8" fill="#fafafa" stroke="#999999" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="1562" y="536" class="ct">package app.vocablo.data</text>
+<rect x="2120" y="518" width="440" height="1454" rx="8" fill="#fafafa" stroke="#999999" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="2132" y="536" class="ct">package app.vocablo.notify (FR-25, FR-26)</text>
+<g filter="url(#shadow)"><rect x="80" y="200" width="170" height="228" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M86,200 H244 Q250,200 250,206 V240 H80 V206 Q80,200 86,200 Z" fill="#e1d5e7"/>
+<rect x="80" y="200" width="170" height="228" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="165.0" y="216" class="st" text-anchor="middle">«enumeration»</text>
+<text x="165.0" y="232" class="nm" text-anchor="middle">TuzoMood</text>
+<line x1="80" y1="240" x2="250" y2="240" stroke="#9673a6" stroke-width="1.5"/>
+<text x="92" y="258" class="mb">IDLE</text>
+<text x="92" y="276" class="mb">READY</text>
+<text x="92" y="294" class="mb">CHEER</text>
+<text x="92" y="312" class="mb">THINK</text>
+<text x="92" y="330" class="mb">OOPS</text>
+<text x="92" y="348" class="mb">SLEEP</text>
+<text x="92" y="366" class="mb">WIN</text>
+<text x="92" y="384" class="mb">+ drawable : Int</text>
+<text x="92" y="402" class="mb">+ periodMillis : Int</text>
+<text x="92" y="420" class="mb">+ description : String</text>
+<g filter="url(#shadow)"><rect x="320" y="200" width="390" height="110" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M326,200 H704 Q710,200 710,206 V240 H320 V206 Q320,200 326,200 Z" fill="#dae8fc"/>
+<rect x="320" y="200" width="390" height="110" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="515.0" y="216" class="st" text-anchor="middle">«file»</text>
+<text x="515.0" y="232" class="nm" text-anchor="middle">Tuzo.kt</text>
+<line x1="320" y1="240" x2="710" y2="240" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="332" y="258" class="mb">- POSE_FADE_MILLIS : Int = 180</text>
+<line x1="320" y1="266" x2="710" y2="266" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="332" y="284" class="mb">+ Tuzo(modifier : Modifier, size : Dp, mood : TuzoMood)</text>
+<text x="332" y="302" class="mb">- GraphicsLayerScope.move(mood : TuzoMood, t : Float)</text>
+<g filter="url(#shadow)"><rect x="810" y="200" width="170" height="210" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M816,200 H974 Q980,200 980,206 V240 H810 V206 Q810,200 816,200 Z" fill="#e1d5e7"/>
+<rect x="810" y="200" width="170" height="210" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="895.0" y="216" class="st" text-anchor="middle">«enumeration»</text>
+<text x="895.0" y="232" class="nm" text-anchor="middle">Scene</text>
+<line x1="810" y1="240" x2="980" y2="240" stroke="#9673a6" stroke-width="1.5"/>
+<text x="822" y="258" class="mb">SESSION_COMPLETE</text>
+<text x="822" y="276" class="mb">ALL_DONE</text>
+<text x="822" y="294" class="mb">WELCOME_BACK</text>
+<text x="822" y="312" class="mb">UPDATE_READY</text>
+<text x="822" y="330" class="mb">EMPTY_DECK</text>
+<text x="822" y="348" class="mb">REMINDERS</text>
+<text x="822" y="366" class="mb">ONBOARDING</text>
+<text x="822" y="384" class="mb">+ drawable : Int</text>
+<text x="822" y="402" class="mb">+ description : String</text>
+<g filter="url(#shadow)"><rect x="1050" y="200" width="400" height="200" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M1056,200 H1444 Q1450,200 1450,206 V240 H1050 V206 Q1050,200 1056,200 Z" fill="#dae8fc"/>
+<rect x="1050" y="200" width="400" height="200" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1250.0" y="216" class="st" text-anchor="middle">«file»</text>
+<text x="1250.0" y="232" class="nm" text-anchor="middle">Art.kt</text>
+<line x1="1050" y1="240" x2="1450" y2="240" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1062" y="258" class="mb">- LOCKED_ALPHA : Float = 0.45</text>
+<text x="1062" y="276" class="mb">- TILE_CORNER : Float = 0.22</text>
+<line x1="1050" y1="284" x2="1450" y2="284" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1062" y="302" class="mb">+ SceneArt(scene : Scene, modifier : Modifier, size : Dp)</text>
+<text x="1062" y="320" class="mb">+ badgeArt(badge : Badge) : Int</text>
+<text x="1062" y="338" class="mb">+ BadgeArt(badge : Badge, earned : Boolean,</text>
+<text x="1062" y="356" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;modifier : Modifier, size : Dp)</text>
+<text x="1062" y="374" class="mb">+ gameArt(game : Game) : Int</text>
+<text x="1062" y="392" class="mb">+ ArtTile(art : Int, modifier : Modifier, size : Dp)</text>
+<g filter="url(#shadow)"><rect x="80" y="558" width="360" height="164" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,558 H434 Q440,558 440,564 V598 H80 V564 Q80,558 86,558 Z" fill="#dae8fc"/>
+<rect x="80" y="558" width="360" height="164" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="260.0" y="574" class="st" text-anchor="middle">«file»</text>
+<text x="260.0" y="590" class="nm" text-anchor="middle">StudyScreen.kt</text>
+<line x1="80" y1="598" x2="440" y2="598" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="616" class="mb">- REACTION_MILLIS : Long = 900</text>
+<line x1="80" y1="624" x2="440" y2="624" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="642" class="mb">+ StudyScreen(deckId : Long?, nav : Navigator)</text>
+<text x="92" y="660" class="mb">- ReactingTuzo(lastRating : Rating?, answers : Int,</text>
+<text x="92" y="678" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;flipped : Boolean)</text>
+<text x="92" y="696" class="mb">- openNextStep(step : NextStep, nav : Navigator)</text>
+<text x="92" y="714" class="mb">- Empty(onDone : () -&gt; Unit)</text>
+<g filter="url(#shadow)"><rect x="80" y="792" width="260" height="258" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,792 H334 Q340,792 340,798 V818 H80 V798 Q80,792 86,792 Z" fill="#dae8fc"/>
+<rect x="80" y="792" width="260" height="258" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="210.0" y="810" class="nm" text-anchor="middle">StudyViewModel</text>
+<line x1="80" y1="818" x2="340" y2="818" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="836" class="mb">- repo : VocabloRepository</text>
+<text x="92" y="854" class="mb">- progress : ProgressRepository</text>
+<text x="92" y="872" class="mb">- verbs : VerbRepository</text>
+<text x="92" y="890" class="mb">- settings : SettingsStore</text>
+<text x="92" y="908" class="mb">- _ui : MutableStateFlow&lt;StudyUi&gt;</text>
+<text x="92" y="926" class="mb">+ ui : StateFlow&lt;StudyUi&gt;</text>
+<text x="92" y="944" class="mb">- session : StudySession?</text>
+<line x1="80" y1="952" x2="340" y2="952" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="970" class="mb">+ flip() : Unit</text>
+<text x="92" y="988" class="mb">+ answer(rating : Rating) : Unit</text>
+<text x="92" y="1006" class="mb">+ remindersOffered() : Unit</text>
+<text x="92" y="1024" class="mb">- summarize(ui : StudyUi) : Summary</text>
+<text x="92" y="1042" class="mb">- publish(s : StudySession) : Unit</text>
+<g filter="url(#shadow)"><rect x="80" y="1120" width="170" height="282" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,1120 H244 Q250,1120 250,1126 V1160 H80 V1126 Q80,1120 86,1120 Z" fill="#dae8fc"/>
+<rect x="80" y="1120" width="170" height="282" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="165.0" y="1136" class="st" text-anchor="middle">«data class»</text>
+<text x="165.0" y="1152" class="nm" text-anchor="middle">StudyUi</text>
+<line x1="80" y1="1160" x2="250" y2="1160" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="1178" class="mb">+ loading : Boolean</text>
+<text x="92" y="1196" class="mb">+ card : Card?</text>
+<text x="92" y="1214" class="mb">+ flipped : Boolean</text>
+<text x="92" y="1232" class="mb">+ answers : Int</text>
+<text x="92" y="1250" class="mb">+ learned : Int</text>
+<text x="92" y="1268" class="mb">+ total : Int</text>
+<text x="92" y="1286" class="mb">+ missed : Int</text>
+<text x="92" y="1304" class="mb">+ finished : Boolean</text>
+<text x="92" y="1322" class="mb">+ lastRating : Rating?</text>
+<text x="92" y="1340" class="mb">+ newAnswers : Int</text>
+<text x="92" y="1358" class="mb">+ reviewAnswers : Int</text>
+<text x="92" y="1376" class="mb">+ summary : Summary?</text>
+<text x="92" y="1394" class="mb">+ progress : Float</text>
+<g filter="url(#shadow)"><rect x="80" y="1472" width="220" height="156" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,1472 H294 Q300,1472 300,1478 V1512 H80 V1478 Q80,1472 86,1472 Z" fill="#dae8fc"/>
+<rect x="80" y="1472" width="220" height="156" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="190.0" y="1488" class="st" text-anchor="middle">«data class»</text>
+<text x="190.0" y="1504" class="nm" text-anchor="middle">Summary</text>
+<line x1="80" y1="1512" x2="300" y2="1512" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="1530" class="mb">+ xp : Int</text>
+<text x="92" y="1548" class="mb">+ questsDone : Int</text>
+<text x="92" y="1566" class="mb">+ questsTotal : Int</text>
+<text x="92" y="1584" class="mb">+ streak : Int</text>
+<text x="92" y="1602" class="mb">+ next : NextStep</text>
+<text x="92" y="1620" class="mb">+ mayOfferReminders : Boolean</text>
+<g filter="url(#shadow)"><rect x="370" y="1472" width="500" height="182" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M376,1472 H864 Q870,1472 870,1478 V1512 H370 V1478 Q370,1472 376,1472 Z" fill="#dae8fc"/>
+<rect x="370" y="1472" width="500" height="182" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="620.0" y="1488" class="st" text-anchor="middle">«file»</text>
+<text x="620.0" y="1504" class="nm" text-anchor="middle">SessionFinish.kt</text>
+<line x1="370" y1="1512" x2="870" y2="1512" stroke="#6c8ebf" stroke-width="1.5"/>
+<line x1="370" y1="1538" x2="870" y2="1538" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="382" y="1556" class="mb">+ FinishedScreen(learned : Int, missed : Int, summary : Summary,</text>
+<text x="382" y="1574" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;onNext : (NextStep) -&gt; Unit, onReminderOfferAnswered : () -&gt; Unit)</text>
+<text x="382" y="1592" class="mb">- SummaryRow(summary : Summary)</text>
+<text x="382" y="1610" class="mb">- SummaryFact(value : String, label : String)</text>
+<text x="382" y="1628" class="mb">- ReminderOffer(onAnswered : () -&gt; Unit)</text>
+<text x="382" y="1646" class="mb">+ nextStepScreen(step : NextStep, today : Long) : Screen?</text>
+<g filter="url(#shadow)"><rect x="980" y="862" width="160" height="66" rx="6" fill="#ffffff" stroke="#d6b656" stroke-width="1.5"/></g>
+<path d="M986,862 H1134 Q1140,862 1140,868 V902 H980 V868 Q980,862 986,862 Z" fill="#fff2cc"/>
+<rect x="980" y="862" width="160" height="66" rx="6" fill="none" stroke="#d6b656" stroke-width="1.5"/>
+<text x="1060.0" y="878" class="st" text-anchor="middle">«abstract» (AndroidX)</text>
+<text x="1060.0" y="894" class="nm" text-anchor="middle" font-style="italic">ViewModel</text>
+<line x1="980" y1="902" x2="1140" y2="902" stroke="#d6b656" stroke-width="1.5"/>
+<text x="992" y="920" class="mb">…</text>
+<g filter="url(#shadow)"><rect x="980" y="998" width="390" height="456" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M986,998 H1364 Q1370,998 1370,1004 V1024 H980 V1004 Q980,998 986,998 Z" fill="#dae8fc"/>
+<rect x="980" y="998" width="390" height="456" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1175.0" y="1016" class="nm" text-anchor="middle">LibraryViewModel</text>
+<line x1="980" y1="1024" x2="1370" y2="1024" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="992" y="1042" class="mb">- repo : VocabloRepository</text>
+<text x="992" y="1060" class="mb">- progressRepo : ProgressRepository</text>
+<text x="992" y="1078" class="mb">- settingsStore : SettingsStore</text>
+<text x="992" y="1096" class="mb">- resolver : ContentResolver</text>
+<text x="992" y="1114" class="mb">+ state : StateFlow&lt;LibraryState&gt;</text>
+<text x="992" y="1132" class="mb">+ loadedSettings : StateFlow&lt;AppSettings?&gt;</text>
+<text x="992" y="1150" class="mb">+ settings : StateFlow&lt;AppSettings&gt;</text>
+<text x="992" y="1168" class="mb">+ progress : StateFlow&lt;ProgressState&gt;</text>
+<text x="992" y="1186" class="mb">- _newBadges : MutableStateFlow&lt;List&lt;Badge&gt;&gt;</text>
+<text x="992" y="1204" class="mb">+ newBadges : StateFlow&lt;List&lt;Badge&gt;&gt;</text>
+<text x="992" y="1222" class="mb">- _message : MutableStateFlow&lt;String?&gt;</text>
+<text x="992" y="1240" class="mb">+ message : StateFlow&lt;String?&gt;</text>
+<line x1="980" y1="1248" x2="1370" y2="1248" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="992" y="1266" class="mb">+ badgesCelebrated() : Unit</text>
+<text x="992" y="1284" class="mb">- settleBadges() : Unit</text>
+<text x="992" y="1302" class="mb">+ openChest(onOpened : (Int) -&gt; Unit) : Unit</text>
+<text x="992" y="1320" class="mb">+ messageShown() : Unit</text>
+<text x="992" y="1338" class="mb">+ updateSettings(change : (AppSettings) -&gt; AppSettings)</text>
+<text x="992" y="1356" class="mb">+ createDeck(name : String) : Unit</text>
+<text x="992" y="1374" class="mb">+ importFrom(uri : Uri) / exportCsvTo(uri : Uri)</text>
+<text x="992" y="1392" class="mb">+ backupTo(uri : Uri) / restoreFrom(uri : Uri)</text>
+<text x="992" y="1410" class="mb">- runFileJob(job : suspend () -&gt; String) : Unit</text>
+<text x="992" y="1428" class="mb">- readText(uri : Uri) : String</text>
+<text x="992" y="1446" class="mb">- writeText(uri : Uri, text : String) : Unit</text>
+<g filter="url(#shadow)"><rect x="980" y="1524" width="220" height="228" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M986,1524 H1194 Q1200,1524 1200,1530 V1564 H980 V1530 Q980,1524 986,1524 Z" fill="#dae8fc"/>
+<rect x="980" y="1524" width="220" height="228" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1090.0" y="1540" class="st" text-anchor="middle">«data class»</text>
+<text x="1090.0" y="1556" class="nm" text-anchor="middle">LibraryState</text>
+<line x1="980" y1="1564" x2="1200" y2="1564" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="992" y="1582" class="mb">+ decks : List&lt;DeckSummary&gt;</text>
+<text x="992" y="1600" class="mb">+ streak : Int</text>
+<text x="992" y="1618" class="mb">+ longestStreak : Int</text>
+<text x="992" y="1636" class="mb">+ streakAtRisk : Boolean</text>
+<text x="992" y="1654" class="mb">+ answeredToday : Int</text>
+<text x="992" y="1672" class="mb">+ dueVerbItems : Int</text>
+<text x="992" y="1690" class="mb">+ loaded : Boolean</text>
+<text x="992" y="1708" class="mb">+ frozenDays : Set&lt;Long&gt;</text>
+<text x="992" y="1726" class="mb">+ welcomeBack : Boolean</text>
+<text x="992" y="1744" class="mb">+ due / new / totalCards : Int</text>
+<g filter="url(#shadow)"><rect x="1270" y="1524" width="190" height="228" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M1276,1524 H1454 Q1460,1524 1460,1530 V1564 H1270 V1530 Q1270,1524 1276,1524 Z" fill="#dae8fc"/>
+<rect x="1270" y="1524" width="190" height="228" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1365.0" y="1540" class="st" text-anchor="middle">«data class»</text>
+<text x="1365.0" y="1556" class="nm" text-anchor="middle">ProgressState</text>
+<line x1="1270" y1="1564" x2="1460" y2="1564" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1282" y="1582" class="mb">+ totalXp : Int</text>
+<text x="1282" y="1600" class="mb">+ today : DayActivity</text>
+<text x="1282" y="1618" class="mb">+ quests : List&lt;Quest&gt;</text>
+<text x="1282" y="1636" class="mb">+ questDaysThisWeek : Int</text>
+<text x="1282" y="1654" class="mb">+ chestReady : Boolean</text>
+<text x="1282" y="1672" class="mb">+ chestOpened : Boolean</text>
+<text x="1282" y="1690" class="mb">+ freezesHeld : Int</text>
+<text x="1282" y="1708" class="mb">+ badges : Set&lt;Badge&gt;</text>
+<text x="1282" y="1726" class="mb">+ level : Int</text>
+<text x="1282" y="1744" class="mb">+ levelProgress : Float</text>
+<g filter="url(#shadow)"><rect x="980" y="1822" width="190" height="120" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M986,1822 H1164 Q1170,1822 1170,1828 V1862 H980 V1828 Q980,1822 986,1822 Z" fill="#dae8fc"/>
+<rect x="980" y="1822" width="190" height="120" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1075.0" y="1838" class="st" text-anchor="middle">«data class» private</text>
+<text x="1075.0" y="1854" class="nm" text-anchor="middle">ProgressInputs</text>
+<line x1="980" y1="1862" x2="1170" y2="1862" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="992" y="1880" class="mb">+ settings : AppSettings</text>
+<text x="992" y="1898" class="mb">+ studyDays : Set&lt;Long&gt;</text>
+<text x="992" y="1916" class="mb">+ frozenDays : Set&lt;Long&gt;</text>
+<text x="992" y="1934" class="mb">+ badges : Set&lt;Badge&gt;</text>
+<g filter="url(#shadow)"><rect x="1570" y="792" width="460" height="420" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M1576,792 H2024 Q2030,792 2030,798 V818 H1570 V798 Q1570,792 1576,792 Z" fill="#dae8fc"/>
+<rect x="1570" y="792" width="460" height="420" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1800.0" y="810" class="nm" text-anchor="middle">ProgressRepository</text>
+<line x1="1570" y1="818" x2="2030" y2="818" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1582" y="836" class="mb">- dao : VocabloDao</text>
+<text x="1582" y="854" class="mb">- clock : () -&gt; Long</text>
+<text x="1582" y="872" class="mb">- zone : () -&gt; ZoneId</text>
+<text x="1582" y="890" class="mb">- days : Flow&lt;Long&gt;</text>
+<text x="1582" y="908" class="mb" text-decoration="underline">- BADGE_DAY : Long = 0</text>
+<line x1="1570" y1="916" x2="2030" y2="916" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1582" y="934" class="mb">+ today() : Long</text>
+<text x="1582" y="952" class="mb">+ totalXp() : Flow&lt;Int&gt;</text>
+<text x="1582" y="970" class="mb">+ todayActivity() : Flow&lt;DayActivity&gt;</text>
+<text x="1582" y="988" class="mb">- activityOn(day : Long) : Flow&lt;DayActivity&gt;</text>
+<text x="1582" y="1006" class="mb">+ frozenDays() / questDays() : Flow&lt;Set&lt;Long&gt;&gt;</text>
+<text x="1582" y="1024" class="mb">+ chestOpenedThisWeek() : Flow&lt;Boolean&gt;</text>
+<text x="1582" y="1042" class="mb">+ recordGame(game : Game, score : Int) : Int</text>
+<text x="1582" y="1060" class="mb">+ recordSentence(correct : Boolean) : Int</text>
+<text x="1582" y="1078" class="mb">+ settleQuests(newPerDay : Int) : Int</text>
+<text x="1582" y="1096" class="mb">+ openChest() : Int</text>
+<text x="1582" y="1114" class="mb">+ applyFreezes() : Int</text>
+<text x="1582" y="1132" class="mb">+ badges() : Flow&lt;Set&lt;Badge&gt;&gt;</text>
+<text x="1582" y="1150" class="mb">+ settleBadges() : List&lt;Badge&gt;</text>
+<text x="1582" y="1168" class="mb">+ medals() : Map&lt;String, Medal&gt;</text>
+<text x="1582" y="1186" class="mb">- List&lt;Long&gt;.toBadges() : Set&lt;Badge&gt;</text>
+<text x="1582" y="1204" class="mb">- insert(kind : String, xp : Int, ref : Long, day : Long) : Boolean</text>
+<g filter="url(#shadow)"><rect x="1570" y="1282" width="220" height="318" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M1576,1282 H1784 Q1790,1282 1790,1288 V1322 H1570 V1288 Q1570,1282 1576,1282 Z" fill="#dae8fc"/>
+<rect x="1570" y="1282" width="220" height="318" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1680.0" y="1298" class="st" text-anchor="middle">«data class»</text>
+<text x="1680.0" y="1314" class="nm" text-anchor="middle">AppSettings</text>
+<line x1="1570" y1="1322" x2="1790" y2="1322" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1582" y="1340" class="mb">+ themeId : ThemeId</text>
+<text x="1582" y="1358" class="mb">+ mode : ThemeMode</text>
+<text x="1582" y="1376" class="mb">+ region : Region</text>
+<text x="1582" y="1394" class="mb">+ newPerDay : Int</text>
+<text x="1582" y="1412" class="mb">+ onlineLookup : Boolean</text>
+<text x="1582" y="1430" class="mb">+ practice : PracticeSettings</text>
+<text x="1582" y="1448" class="mb">+ onboarded : Boolean</text>
+<text x="1582" y="1466" class="mb">+ remindersOn : Boolean</text>
+<text x="1582" y="1484" class="mb">+ reminderHour : Int</text>
+<text x="1582" y="1502" class="mb">+ tutorProvider : Provider</text>
+<text x="1582" y="1520" class="mb">+ tutorModel : String</text>
+<text x="1582" y="1538" class="mb">+ tutorBaseUrl : String</text>
+<text x="1582" y="1556" class="mb">+ lastOpenedDay : Long</text>
+<text x="1582" y="1574" class="mb">+ comebackSent : Boolean</text>
+<text x="1582" y="1592" class="mb">+ remindersOffered : Boolean</text>
+<g filter="url(#shadow)"><rect x="2140" y="1126" width="160" height="66" rx="6" fill="#ffffff" stroke="#d6b656" stroke-width="1.5"/></g>
+<path d="M2146,1126 H2294 Q2300,1126 2300,1132 V1166 H2140 V1132 Q2140,1126 2146,1126 Z" fill="#fff2cc"/>
+<rect x="2140" y="1126" width="160" height="66" rx="6" fill="none" stroke="#d6b656" stroke-width="1.5"/>
+<text x="2220.0" y="1142" class="st" text-anchor="middle">«abstract» (Android)</text>
+<text x="2220.0" y="1158" class="nm" text-anchor="middle" font-style="italic">BroadcastReceiver</text>
+<line x1="2140" y1="1166" x2="2300" y2="1166" stroke="#d6b656" stroke-width="1.5"/>
+<text x="2152" y="1184" class="mb">…</text>
+<g filter="url(#shadow)"><rect x="2140" y="1322" width="400" height="96" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M2146,1322 H2534 Q2540,1322 2540,1328 V1348 H2140 V1328 Q2140,1322 2146,1322 Z" fill="#dae8fc"/>
+<rect x="2140" y="1322" width="400" height="96" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2340.0" y="1340" class="nm" text-anchor="middle">ReminderReceiver</text>
+<line x1="2140" y1="1348" x2="2540" y2="1348" stroke="#6c8ebf" stroke-width="1.5"/>
+<line x1="2140" y1="1374" x2="2540" y2="1374" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2152" y="1392" class="mb">+ onReceive(context : Context, intent : Intent) : Unit</text>
+<text x="2152" y="1410" class="mb">- remind(context : Context, kind : Reminders.Kind) : Unit</text>
+<g filter="url(#shadow)"><rect x="2140" y="1488" width="330" height="200" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M2146,1488 H2464 Q2470,1488 2470,1494 V1528 H2140 V1494 Q2140,1488 2146,1488 Z" fill="#dae8fc"/>
+<rect x="2140" y="1488" width="330" height="200" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2305.0" y="1504" class="st" text-anchor="middle">«object»</text>
+<text x="2305.0" y="1520" class="nm" text-anchor="middle">Notifications</text>
+<line x1="2140" y1="1528" x2="2470" y2="1528" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2152" y="1546" class="mb">+ CHANNEL_REMINDERS : String</text>
+<text x="2152" y="1564" class="mb">- ID_REMINDER : Int</text>
+<text x="2152" y="1582" class="mb">- BRAND_COLOR : Int</text>
+<text x="2152" y="1600" class="mb">- LARGE_ICON_PX : Int = 256</text>
+<line x1="2140" y1="1608" x2="2470" y2="1608" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2152" y="1626" class="mb">+ createChannels(context : Context) : Unit</text>
+<text x="2152" y="1644" class="mb">+ needsPermission(context : Context) : Boolean</text>
+<text x="2152" y="1662" class="mb">+ showStudyReminder(context : Context,</text>
+<text x="2152" y="1680" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;message : Message) : Boolean</text>
+<g filter="url(#shadow)"><rect x="1270" y="1822" width="180" height="66" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M1276,1822 H1444 Q1450,1822 1450,1828 V1862 H1270 V1828 Q1270,1822 1276,1822 Z" fill="#e1d5e7"/>
+<rect x="1270" y="1822" width="180" height="66" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="1360.0" y="1838" class="st" text-anchor="middle">«enumeration» core:play</text>
+<text x="1360.0" y="1854" class="nm" text-anchor="middle">Badge</text>
+<line x1="1270" y1="1862" x2="1450" y2="1862" stroke="#9673a6" stroke-width="1.5"/>
+<text x="1282" y="1880" class="mb">(see uml-v1.2-play.svg)</text>
+<g filter="url(#shadow)"><rect x="80" y="1698" width="180" height="66" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M86,1698 H254 Q260,1698 260,1704 V1738 H80 V1704 Q80,1698 86,1698 Z" fill="#e1d5e7"/>
+<rect x="80" y="1698" width="180" height="66" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="170.0" y="1714" class="st" text-anchor="middle">«enumeration» core:play</text>
+<text x="170.0" y="1730" class="nm" text-anchor="middle">NextStep</text>
+<line x1="80" y1="1738" x2="260" y2="1738" stroke="#9673a6" stroke-width="1.5"/>
+<text x="92" y="1756" class="mb">(see uml-v1.2-play.svg)</text>
+<g filter="url(#shadow)"><rect x="2140" y="1758" width="180" height="66" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M2146,1758 H2314 Q2320,1758 2320,1764 V1798 H2140 V1764 Q2140,1758 2146,1758 Z" fill="#dae8fc"/>
+<rect x="2140" y="1758" width="180" height="66" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2230.0" y="1774" class="st" text-anchor="middle">«data class» core:play</text>
+<text x="2230.0" y="1790" class="nm" text-anchor="middle">Message</text>
+<line x1="2140" y1="1798" x2="2320" y2="1798" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2152" y="1816" class="mb">(see uml-v1.2-play.svg)</text>
+<g filter="url(#shadow)"><rect x="2390" y="1758" width="170" height="66" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M2396,1758 H2554 Q2560,1758 2560,1764 V1798 H2390 V1764 Q2390,1758 2396,1758 Z" fill="#dae8fc"/>
+<rect x="2390" y="1758" width="170" height="66" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2475.0" y="1774" class="st" text-anchor="middle">«object» core:play</text>
+<text x="2475.0" y="1790" class="nm" text-anchor="middle">Reminders</text>
+<line x1="2390" y1="1798" x2="2560" y2="1798" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2402" y="1816" class="mb">+ decide(…) : Decision</text>
+<path d="M320,270 L250,270" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="256" y="264" class="lb">uses</text>
+<path d="M1050,270 L980,270" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="986" y="264" class="lb">draws</text>
+<path d="M188,722 L188,792" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<path d="M158,1050 L158,1120" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="164.0" y="1110" class="lb">ui</text>
+<path d="M131,1402 L131,1472" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="137.0" y="1462" class="lb">summary 0..1</text>
+<path d="M146,1628 L146,1698" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="152.0" y="1688" class="lb">next</text>
+<path d="M370,1552 L300,1552" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="306" y="1546" class="lb">shows</text>
+<path d="M440,618 L720,618 L720,1472" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<path d="M340,895 L980,895" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#tri)"/>
+<path d="M1097,998 L1097,928" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#tri)"/>
+<path d="M340,812 L1570,812" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="346" y="806" class="lb">uses</text>
+<path d="M1370,1038 L1570,1038" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="1376" y="1032" class="lb">uses</text>
+<path d="M1097,1454 L1097,1524" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="1103.0" y="1514" class="lb">state</text>
+<path d="M1327,1454 L1327,1524" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="1333.0" y="1514" class="lb">progress</text>
+<path d="M1327,1752 L1327,1822" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="1333.0" y="1812" class="lb">badges *</text>
+<path d="M1570,1192 L1535,1192 L1535,1855 L1450,1855" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<path d="M2340,1322 L2340,1192" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#tri)"/>
+<path d="M2140,1368 L1790,1368" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="1796" y="1362" class="lb">reads</text>
+<path d="M2260,1418 L2260,1488" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="2266.0" y="1478" class="lb">posts</text>
+<path d="M2239,1688 L2239,1758" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<path d="M2540,1378 L2475,1378 L2475,1758" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="2546" y="1372" class="lb">asks</text>
+<rect x="40" y="2022" width="560" height="244" rx="6" fill="#ffffff" stroke="#555555" stroke-width="1"/>
+<text x="52" y="2042" class="nm">Legend</text>
+<path d="M54,2062 L124,2062" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#tri)"/>
+<text x="136" y="2066" class="mb">Generalization (extends)</text>
+<path d="M54,2082 L124,2082" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="136" y="2086" class="mb">Association (holds a reference)</text>
+<path d="M54,2102 L124,2102" stroke="#555555" fill="none" stroke-width="1.2" marker-start="url(#diamondF)" marker-end="url(#open)"/>
+<text x="136" y="2106" class="mb">Composition (owns, nested type)</text>
+<path d="M54,2122 L124,2122" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="136" y="2126" class="mb">Dependency (uses / calls)</text>
+<rect x="54" y="2136" width="28" height="13" rx="3" fill="#dae8fc" stroke="#6c8ebf"/><text x="92" y="2146" class="mb">Class, object or Kotlin file of functions («file»)</text>
+<rect x="54" y="2154" width="28" height="13" rx="3" fill="#d5e8d4" stroke="#82b366"/><text x="92" y="2164" class="mb">Interface</text>
+<rect x="54" y="2172" width="28" height="13" rx="3" fill="#fff2cc" stroke="#d6b656"/><text x="92" y="2182" class="mb">Abstract class (name in italics)</text>
+<rect x="54" y="2190" width="28" height="13" rx="3" fill="#e1d5e7" stroke="#9673a6"/><text x="92" y="2200" class="mb">Enumeration</text>
+<text x="54" y="2226" class="lb">Kotlin files of top-level composables and functions are shown as «file» boxes.</text>
+<text x="54" y="2242" class="lb">Boxes marked core:play, AndroidX or Android belong to another module or library and are shown for context.</text>
+<text x="54" y="2258" class="lb">Properties are listed as fields; Compose parameters with default values are listed without their defaults.</text>
+</svg>

@@ -58,17 +58,17 @@ Requirements FR-1 to FR-10 summarise version 1.0, which was built before this do
 | FR-14 | The app shall display its text in a bundled typeface that is the same on every phone and needs no download. | should | implemented in v1.1 |
 | FR-15 | ~~The app shall show custom illustrations, in the current theme's colours, for an empty deck and for the end of a study session.~~ | could | removed in v1.2, replaced by FR-20 |
 | FR-16 | Every screen shall take its corner radii and spacing from one shared set of design values. | could | implemented in v1.1 (applied to the study screens; other screens adopt it as they change) |
-| FR-17 | Tuzo shall be drawn in one consistent character design with a separate pose for each mood: waving hello, ready, cheering, thinking, oops, sleeping and proud. | should | proposed |
-| FR-18 | The launcher icon shall show the redesigned Tuzo, and the home-screen widget and notifications shall use the same Tuzo art. | should | proposed |
-| FR-19 | Each game and the sentence builder shall show its own illustrated tile on the Play screen, and the tutor's set-up screen shall show the tutor tile. | could | proposed |
-| FR-20 | The app shall show an illustrated Tuzo scene for an empty deck, nothing left to study, a finished session, an update ready, welcome back, the reminder offer and first-launch onboarding. | could | proposed |
-| FR-21 | In swipe study, Tuzo shall cheer after a Good or Easy answer and give a kind "oops" after Again, then return to the ready pose. | should | proposed |
-| FR-22 | The system shall award six badges (First steps, 7-day streak, 30-day streak, 100 words, Gold verb, Treasure), each once, when its milestone is first reached; shall celebrate newly earned badges on Home; and shall show every badge, earned or locked, on the Me screen. | should | proposed |
-| FR-23 | The end-of-session screen shall show the XP earned in that session, how many of today's three quests are done, the streak, and one suggested next step. | must | proposed |
-| FR-24 | When the app is opened after 3 or more days without study, Home shall show a welcome-back card, worded without blame, with a button to start studying. | should | proposed |
-| FR-25 | Reminder notifications shall be written in Tuzo's voice, picked from at least 10 messages per kind, with no message repeated within 7 days. | should | proposed |
-| FR-26 | After 7 days without the app being opened, the system shall send one "Tuzo misses you" reminder and then no reminders until the app is opened again. | must | proposed |
-| FR-27 | On Android 13 and newer, after the learner's first finished study session, the system shall offer reminders on a Tuzo screen that explains them, shall keep working normally if declined, and shall not offer again on its own. | must | proposed |
+| FR-17 | Tuzo shall be drawn in one consistent character design with a separate pose for each mood: waving hello, ready, cheering, thinking, oops, sleeping and proud. | should | implemented in v1.2 |
+| FR-18 | The launcher icon shall show the redesigned Tuzo, and the home-screen widget and notifications shall use the same Tuzo art. | should | implemented in v1.2 |
+| FR-19 | Each game and the sentence builder shall show its own illustrated tile on the Play screen, and the tutor's set-up screen shall show the tutor tile. | could | implemented in v1.2 |
+| FR-20 | The app shall show an illustrated Tuzo scene for an empty deck, nothing left to study, a finished session, an update ready, welcome back, the reminder offer and first-launch onboarding. | could | implemented in v1.2 |
+| FR-21 | In swipe study, Tuzo shall cheer after a Good or Easy answer and give a kind "oops" after Again, then return to the ready pose. | should | implemented in v1.2 |
+| FR-22 | The system shall award six badges (First steps, 7-day streak, 30-day streak, 100 words, Gold verb, Treasure), each once, when its milestone is first reached; shall celebrate newly earned badges on Home; and shall show every badge, earned or locked, on the Me screen. | should | implemented in v1.2 |
+| FR-23 | The end-of-session screen shall show the XP earned in that session, how many of today's three quests are done, the streak, and one suggested next step. | must | implemented in v1.2 |
+| FR-24 | When the app is opened after 3 or more days without study, Home shall show a welcome-back card, worded without blame, with a button to start studying. | should | implemented in v1.2 |
+| FR-25 | Reminder notifications shall be written in Tuzo's voice, picked from at least 10 messages per kind, with no message repeated within 7 days. | should | implemented in v1.2 |
+| FR-26 | After 7 days without the app being opened, the system shall send one "Tuzo misses you" reminder and then no reminders until the app is opened again. | must | implemented in v1.2 |
+| FR-27 | On Android 13 and newer, after the learner's first finished study session, the system shall offer reminders on a Tuzo screen that explains them, shall keep working normally if declined, and shall not offer again on its own. | must | implemented in v1.2 |
 
 ## 4. Non-functional requirements
 
@@ -80,8 +80,8 @@ Requirements FR-1 to FR-10 summarise version 1.0, which was built before this do
 | NFR-4 | Animations shall be replaced by still images when the phone's animations are turned off. | should | implemented in v1.0 |
 | NFR-5 | Third-party assets shipped in the app shall have licences that allow redistribution, kept in `docs/licenses/`. | must | implemented in v1.1 |
 | NFR-6 | Every behaviour change shall start with a failing test. | must | implemented in v1.0 |
-| NFR-7 | Engagement features shall motivate without manipulating: no guilt or shame wording, no fake urgency, no loss of earned XP, badges or streak freezes, and no more than two notifications a day. | must | proposed |
-| NFR-8 | Raster art shall be original to this app, with its generation prompts kept in `docs/ART_PROMPTS.md` and full-size sources in the project's shared art folder, and shall add no more than 2 MB to the APK. | should | proposed |
+| NFR-7 | Engagement features shall motivate without manipulating: no guilt or shame wording, no fake urgency, no loss of earned XP, badges or streak freezes, and no more than two notifications a day. | must | implemented in v1.2 |
+| NFR-8 | Raster art shall be original to this app, with its generation prompts kept in `docs/ART_PROMPTS.md` and full-size sources in the project's shared art folder, and shall add no more than 2 MB to the APK. | should | implemented in v1.2 |
 
 ## 5. External interfaces
 
