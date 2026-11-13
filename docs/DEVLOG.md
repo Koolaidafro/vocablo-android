@@ -28,7 +28,8 @@ Only assets added or changed since this log began are listed one by one. Everyth
 | `docs/SRS.md` | Document | Requirements | 1.1 | 1.1 |
 | `docs/DEVLOG.md` | Document | This log | 1.1 | 1.1 |
 | `docs/NEXT_UPDATE.md` | Document | Testing feedback waiting for the next update | 1.1 | 1.1 |
-| `docs/uml-v1.1.svg` | Diagram | Class diagram of the app's UI layer and design system | 1.1 | 1.1 |
+| `docs/uml-v1.1.svg` | Diagram | Class diagram with members: study screen and design system | 1.1 | 1.1 |
+| `docs/uml-v1.1-overview.svg` | Diagram | Class diagram overview: every module and package, types by name | 1.1 | 1.1 |
 | `docs/licenses/OFL-Nunito.txt`, `docs/licenses/ISC-Lucide.txt` | Licence texts | Redistribution terms for the font and icons (NFR-5) | 1.1 | 1.1 |
 | `.github/workflows/publish.yml` | CI config | Publishes a signed APK on every merge to `main` | 1.0 | 1.1 |
 | `app/build.gradle.kts`, `gradle/libs.versions.toml` | Build config | Dependencies and version | 1.0 | 1.1 |
@@ -58,7 +59,7 @@ Only assets added or changed since this log began are listed one by one. Everyth
 - Five Nunito font files; `docs/licenses/` with the font and icon licences.
 - `SwipeCardTest`, `RatingBarTest`, `DesignSystemTest`; one new case in `ReleaseParserTest`.
 - Test dependencies `ui-test-junit4` and `ui-test-manifest` for Compose tests on Robolectric.
-- `docs/SRS.md`, `docs/DEVLOG.md`, `docs/uml-v1.1.svg`.
+- `docs/SRS.md`, `docs/DEVLOG.md`, `docs/uml-v1.1.svg` and `docs/uml-v1.1-overview.svg`. The system has over 20 classes, so the UML is an overview of every package plus a detailed diagram of the packages this update changed.
 
 **Changed**
 - `StudyScreen.kt`: now only the screen and ViewModel; it was 327 lines including the card and rating bar. The finish screen shows Tuzo inside `CelebrationArt`, and the streak line uses an icon instead of "🔥".
