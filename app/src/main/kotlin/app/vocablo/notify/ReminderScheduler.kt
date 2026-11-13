@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import app.vocablo.container
+import app.vocablo.play.ReminderMessages
 import app.vocablo.play.Reminders
 import app.vocablo.play.StreakFreezes
 import app.vocablo.widget.TodayWidget
@@ -47,7 +48,10 @@ object ReminderScheduler {
         Reminders.Kind.entries.firstOrNull { it.name == intent.getStringExtra(EXTRA_KIND) } ?: Reminders.Kind.DAILY
 }
 
-/** Fires at a reminder slot: posts the nudge only when the learner hasn't studied yet today. */
+/**
+ * Fires at a reminder slot. Asks Reminders.decide what to do, so the receiver holds no rules
+ * of its own: it shows a reminder, the one comeback message, or nothing (FR-25, FR-26).
+ */
 class ReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val result = goAsync()
@@ -60,11 +64,22 @@ class ReminderReceiver : BroadcastReceiver() {
                     val study = c.repository.studyDays().first()
                     val frozen = c.progress.frozenDays().first()
                     val streak = StreakFreezes.streak(study, frozen, today)
-                    val decks = c.repository.deckSummaries().first()
-                    val due = decks.sumOf { it.dueCount } + c.verbs.dueCount().first()
+                    val due = c.repository.deckSummaries().first().sumOf { it.dueCount } + c.verbs.dueCount().first()
                     val kind = ReminderScheduler.kindOf(intent)
-                    if (Reminders.shouldShow(kind, today in study, streak, due)) {
-                        Notifications.showStudyReminder(context, due, streak)
+                    // A phone that never recorded an open (first run of v1.2) counts as opened today.
+                    val sinceOpened = if (settings.lastOpenedDay < 0) 0 else today - settings.lastOpenedDay
+                    when (Reminders.decide(kind, today in study, streak, due, sinceOpened, settings.comebackSent)) {
+                        Reminders.Decision.SHOW -> {
+                            val pool = ReminderMessages.kindFor(kind == Reminders.Kind.STREAK_SAVER, due, streak)
+                            Notifications.showStudyReminder(context, ReminderMessages.pick(pool, today, due, streak))
+                        }
+                        Reminders.Decision.COMEBACK -> {
+                            val message = ReminderMessages.pick(ReminderMessages.Kind.COMEBACK, today, due, streak)
+                            if (Notifications.showStudyReminder(context, message)) {
+                                c.settings.update { it.copy(comebackSent = true) }
+                            }
+                        }
+                        Reminders.Decision.QUIET -> Unit
                     }
                 }
                 ReminderScheduler.reschedule(context)

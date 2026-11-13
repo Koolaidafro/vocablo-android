@@ -2,41 +2,34 @@
 package app.vocablo.ui.theme
 
 import android.app.Application
-import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.assertCountEquals
-import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
-import app.vocablo.design.ThemeId
-import app.vocablo.design.ThemeMode
-import app.vocablo.ui.components.CelebrationArt
-import app.vocablo.ui.components.EmptyDeckArt
+import app.vocablo.play.Badge
+import app.vocablo.play.Game
+import app.vocablo.ui.components.Scene
+import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.components.badgeArt
+import app.vocablo.ui.components.gameArt
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 /**
- * Checks the app-wide design system: type, shapes, icons and illustrations (FR-13 to FR-16).
+ * Checks the app-wide design system: type, shapes, icons and the generated art (FR-13, FR-14,
+ * FR-16, FR-17, FR-19, FR-20, FR-22).
  *
  * Design: tests the shared pieces once, so screens that use them don't each need a visual test.
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [35], application = Application::class)
 class DesignSystemTest {
-
-    /** Hosts composables for the illustration checks. */
-    @get:Rule
-    val compose = createComposeRule()
 
     @Test
     fun everyTextStyleIsSetInNunito() {
@@ -72,21 +65,22 @@ class DesignSystemTest {
     }
 
     @Test
-    fun illustrationsDrawInEveryThemeLightAndDark() {
-        val combinations = ThemeId.entries.flatMap { theme -> listOf(ThemeMode.LIGHT, ThemeMode.DARK).map { theme to it } }
-        // One setContent per test is allowed, so every theme and mode is drawn side by side.
-        compose.setContent {
-            Column {
-                combinations.forEach { (theme, mode) ->
-                    VocabloTheme(theme, mode) {
-                        EmptyDeckArt(size = ART_SIZE)
-                        CelebrationArt(size = ART_SIZE) { }
-                    }
-                }
-            }
-        }
-        compose.onAllNodesWithContentDescription("An empty deck").assertCountEquals(combinations.size)
+    fun everyTuzoMoodHasItsOwnPose() {
+        val poses = TuzoMood.entries.map { it.drawable }
+        assertEquals("each mood should show a different drawing", poses.size, poses.toSet().size)
+        poses.forEach { assertNotNull(ContextCompat.getDrawable(context(), it)) }
+        TuzoMood.entries.forEach { assertTrue(it.description.startsWith("Tuzo")) }
     }
+
+    @Test
+    fun everySceneBadgeAndGameTileLoads() {
+        val art = Scene.entries.map { it.drawable } + Badge.entries.map(::badgeArt) + Game.entries.map(::gameArt)
+        assertEquals("no two pieces of art should share a drawing", art.size, art.toSet().size)
+        art.forEach { assertNotNull(ContextCompat.getDrawable(context(), it)) }
+        Scene.entries.forEach { assertTrue("${it.name} needs words for screen readers", it.description.isNotBlank()) }
+    }
+
+    private fun context() = ApplicationProvider.getApplicationContext<Application>()
 
     /** Every style in the type scale, by name. */
     private fun styles() = with(VocabloTypography) {
@@ -105,8 +99,5 @@ class DesignSystemTest {
 
         /** A shape size large enough that no corner is clamped. */
         const val SHAPE_SIDE = 1000f
-
-        /** Small, so all twenty drawings fit on the test screen. */
-        val ART_SIZE = 24.dp
     }
 }

@@ -1,10 +1,13 @@
 package app.vocablo.data
 
+import app.vocablo.play.Badge
+import app.vocablo.play.Badges
 import app.vocablo.play.DailyQuests
 import app.vocablo.play.DayActivity
 import app.vocablo.play.Game
 import app.vocablo.play.Medal
 import app.vocablo.play.Medals
+import app.vocablo.play.Milestones
 import app.vocablo.play.StreakFreezes
 import app.vocablo.play.WeeklyChest
 import app.vocablo.play.Xp
@@ -21,7 +24,7 @@ import kotlinx.coroutines.flow.map
 import java.time.Instant
 import java.time.ZoneId
 
-/** XP, quests, the weekly chest, streak freezes and medals. */
+/** XP, quests, the weekly chest, streak freezes, medals and badges. */
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProgressRepository(
     private val dao: VocabloDao,
@@ -112,6 +115,29 @@ class ProgressRepository(
         return toFreeze.size
     }
 
+    /** Badges earned so far (FR-22). They are never taken away (NFR-7). */
+    fun badges(): Flow<Set<Badge>> = dao.observeActivityRefs(ActivityKind.BADGE).map { refs -> refs.toBadges() }
+
+    /**
+     * Awards every badge whose milestone is now reached and returns the ones that are new.
+     * Safe to call as often as you like: the unique index on activity rows pays each badge once.
+     */
+    suspend fun settleBadges(): List<Badge> {
+        val awarded = dao.activityRefs(ActivityKind.BADGE).toBadges()
+        val study = (dao.cardStudyDays() + dao.verbStudyDays()).toSet()
+        val frozen = dao.activityDays(ActivityKind.FREEZE).toSet()
+        val milestones = Milestones(
+            studyDays = study.size,
+            longestStreak = StreakFreezes.longest(study, frozen),
+            cardsLearned = dao.cardsLearned(),
+            goldVerbs = medals().values.count { it == Medal.GOLD },
+            chestsOpened = dao.activityDays(ActivityKind.CHEST).size,
+        )
+        return Badges.newlyReached(milestones, awarded).filter { insert(ActivityKind.BADGE, 0, ref = it.ordinal.toLong(), day = BADGE_DAY) }
+    }
+
+    private fun List<Long>.toBadges(): Set<Badge> = mapNotNull { Badge.entries.getOrNull(it.toInt()) }.toSet()
+
     /** Medal per verb infinitive, from the weakest practiced tense's memory stability. */
     suspend fun medals(): Map<String, Medal> {
         val byRank = VerbList.all.associateBy { it.rank }
@@ -123,6 +149,11 @@ class ProgressRepository(
             }
             .filter { it.second != Medal.NONE }
             .toMap()
+    }
+
+    private companion object {
+        /** Badges are stored on one fixed day, so the unique (kind, day, ref) index allows each only once ever. */
+        const val BADGE_DAY = 0L
     }
 
     private suspend fun insert(kind: String, xp: Int, ref: Long = 0, day: Long = today()): Boolean =

@@ -15,7 +15,7 @@ android {
         targetSdk = 36
         // CI sets the version code for each published build; local builds are version 1.
         versionCode = System.getenv("VOCABLO_VERSION_CODE")?.toIntOrNull() ?: 1
-        versionName = "1.1.$versionCode"
+        versionName = "1.2.$versionCode"
     }
 
     // github: installed from GitHub releases and updates itself. play: for the Play Store,

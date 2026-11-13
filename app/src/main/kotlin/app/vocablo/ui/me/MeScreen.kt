@@ -40,6 +40,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.vocablo.BuildConfig
@@ -48,6 +49,9 @@ import app.vocablo.data.Region
 import app.vocablo.design.ThemeMode
 import app.vocablo.design.Themes
 import app.vocablo.notify.Notifications
+import app.vocablo.play.Badge
+import app.vocablo.play.ReminderMessages
+import app.vocablo.ui.components.BadgeArt
 import app.vocablo.ui.LibraryViewModel
 import app.vocablo.update.UpdateState
 import java.time.LocalDate
@@ -58,6 +62,7 @@ fun MeScreen(library: LibraryViewModel) {
     val context = LocalContext.current
     val settings by library.settings.collectAsStateWithLifecycle()
     val state by library.state.collectAsStateWithLifecycle()
+    val progress by library.progress.collectAsStateWithLifecycle()
     val message by library.message.collectAsStateWithLifecycle()
     var confirmRestore by rememberSaveable { mutableStateOf(false) }
 
@@ -69,7 +74,9 @@ fun MeScreen(library: LibraryViewModel) {
     }
 
     val sendReminder = {
-        val sent = Notifications.showStudyReminder(context, state.due + state.new.coerceAtMost(settings.newPerDay), state.streak)
+        val due = state.due + state.new.coerceAtMost(settings.newPerDay)
+        val kind = ReminderMessages.kindFor(saver = false, dueCount = due, streak = state.streak)
+        val sent = Notifications.showStudyReminder(context, ReminderMessages.pick(kind, LocalDate.now().toEpochDay(), due, state.streak))
         if (!sent) Toast.makeText(context, "Notifications are turned off for Vocablo in system settings.", Toast.LENGTH_LONG).show()
     }
     val askPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -92,6 +99,7 @@ fun MeScreen(library: LibraryViewModel) {
                 Fact("${state.totalCards}", "cards")
             }
         }
+        BadgesCard(progress.badges)
 
         Section("Appearance")
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -272,3 +280,42 @@ private fun AppVersion() {
         if (updates.enabled) TextButton(onClick = { scope.launch { updates.check() } }) { Text("Check now") }
     }
 }
+
+/**
+ * Every badge, earned ones in colour and locked ones faded with how to earn them (FR-22).
+ *
+ * Design: showing locked badges gives a clear next goal; their faded look keeps them from
+ * reading as a loss or a debt (NFR-7).
+ */
+@Composable
+private fun BadgesCard(earned: Set<Badge>) {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text("Badges · ${earned.size} of ${Badge.entries.size}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                maxItemsInEachRow = BADGES_PER_ROW,
+            ) {
+                Badge.entries.forEach { badge ->
+                    val has = badge in earned
+                    Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                        BadgeArt(badge, earned = has, size = 64.dp)
+                        Text(badge.title, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
+                        if (!has) {
+                            Text(
+                                badge.howToEarn,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/** Three badges a row fits a 320 dp phone with readable titles. */
+private const val BADGES_PER_ROW = 3

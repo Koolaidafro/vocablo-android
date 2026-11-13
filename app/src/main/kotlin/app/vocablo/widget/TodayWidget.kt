@@ -74,7 +74,7 @@ class TodayWidget : AppWidgetProvider() {
                 Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
             )
-            val tuzo = ContextCompat.getDrawable(context, R.drawable.tuzo)?.toBitmap(144, 144)
+            val tuzo = ContextCompat.getDrawable(context, R.drawable.tuzo_idle)?.toBitmap(144, 144)
             val views = RemoteViews(context.packageName, R.layout.widget_today).apply {
                 setTextViewText(R.id.widget_title, WidgetText.title(streak))
                 setTextViewText(R.id.widget_detail, WidgetText.detail(due, quests.count { it.done(activity) }, quests.size, today in study))

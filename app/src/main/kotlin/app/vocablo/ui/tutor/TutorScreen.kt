@@ -77,6 +77,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import app.vocablo.R
+import app.vocablo.ui.components.ArtTile
 
 data class TutorUi(
     val loading: Boolean = true,
@@ -193,7 +195,7 @@ private fun Setup(ui: TutorUi, vm: TutorViewModel) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Tuzo(size = 72.dp)
+            ArtTile(R.drawable.game_tutor, size = 72.dp)
             Column {
                 Text("Your AI tutor", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
                 Text("Practice real conversations with Tuzo, using your own AI key.", color = MaterialTheme.colorScheme.onSurfaceVariant)

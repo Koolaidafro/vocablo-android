@@ -9,11 +9,13 @@ import app.vocablo.data.AppSettings
 import app.vocablo.data.DeckSummary
 import app.vocablo.data.ProgressRepository
 import app.vocablo.data.SettingsStore
+import app.vocablo.play.Badge
 import app.vocablo.play.DailyQuests
 import app.vocablo.play.DayActivity
 import app.vocablo.play.Quest
 import app.vocablo.play.StreakFreezes
 import app.vocablo.play.WeeklyChest
+import app.vocablo.play.WelcomeBack
 import app.vocablo.play.Xp
 import app.vocablo.data.VerbRepository
 import app.vocablo.data.VocabloRepository
@@ -38,6 +40,8 @@ data class LibraryState(
     val loaded: Boolean = false,
     /** Days a streak freeze covered; they keep the chain without adding to it. */
     val frozenDays: Set<Long> = emptySet(),
+    /** True after 3 or more days without study, so Home greets the learner (FR-24). */
+    val welcomeBack: Boolean = false,
 ) {
     val due: Int get() = decks.sumOf { it.dueCount }
     val new: Int get() = decks.sumOf { it.newCount }
@@ -52,10 +56,20 @@ data class ProgressState(
     val chestReady: Boolean = false,
     val chestOpened: Boolean = false,
     val freezesHeld: Int = 0,
+    /** Badges earned so far (FR-22). */
+    val badges: Set<Badge> = emptySet(),
 ) {
     val level: Int get() = Xp.level(totalXp)
     val levelProgress: Float get() = Xp.levelProgress(totalXp)
 }
+
+/** The inputs [LibraryViewModel.progress] combines beyond the first four flows. */
+private data class ProgressInputs(
+    val settings: AppSettings,
+    val studyDays: Set<Long>,
+    val frozenDays: Set<Long>,
+    val badges: Set<Badge>,
+)
 
 /** Shared by Home, Decks and Me: deck counts, streaks, settings and file import/export. */
 class LibraryViewModel(
@@ -83,6 +97,7 @@ class LibraryViewModel(
             dueVerbItems = dueVerbs,
             loaded = true,
             frozenDays = frozen,
+            welcomeBack = WelcomeBack.show(days, today),
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), LibraryState())
 
@@ -98,8 +113,8 @@ class LibraryViewModel(
         progressRepo.todayActivity(),
         progressRepo.questDays(),
         progressRepo.chestOpenedThisWeek(),
-        combine(settingsStore.settings, repo.studyDays(), progressRepo.frozenDays(), ::Triple),
-    ) { xp, day, questDays, opened, (settings, study, frozen) ->
+        combine(settingsStore.settings, repo.studyDays(), progressRepo.frozenDays(), progressRepo.badges(), ::ProgressInputs),
+    ) { xp, day, questDays, opened, (settings, study, frozen, badges) ->
         val today = progressRepo.today()
         ProgressState(
             totalXp = xp,
@@ -109,20 +124,39 @@ class LibraryViewModel(
             chestReady = WeeklyChest.ready(questDays, today, opened),
             chestOpened = opened,
             freezesHeld = StreakFreezes.held(StreakFreezes.longest(study, frozen), frozen.size),
+            badges = badges,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ProgressState())
+
+    /** Badges earned since Home last celebrated, oldest first (FR-22). Kept in memory only: the badge itself is saved. */
+    private val _newBadges = MutableStateFlow<List<Badge>>(emptyList())
+    val newBadges: StateFlow<List<Badge>> = _newBadges.asStateFlow()
+
+    /** Called once Home has celebrated the new badges. */
+    fun badgesCelebrated() = _newBadges.update { emptyList() }
+
+    private suspend fun settleBadges() {
+        val fresh = progressRepo.settleBadges()
+        if (fresh.isNotEmpty()) _newBadges.update { it + fresh }
+    }
 
     init {
         // Pay out quests whenever today's activity changes, wherever it happened.
         viewModelScope.launch {
             combine(progressRepo.todayActivity(), settingsStore.settings) { _, s -> s.newPerDay }
-                .collect { progressRepo.settleQuests(it) }
+                .collect {
+                    progressRepo.settleQuests(it)
+                    settleBadges()
+                }
         }
     }
 
     /** Opens the weekly chest; the XP shows up through [progress]. */
     fun openChest(onOpened: (Int) -> Unit) {
-        viewModelScope.launch { onOpened(progressRepo.openChest()) }
+        viewModelScope.launch {
+            onOpened(progressRepo.openChest())
+            settleBadges()
+        }
     }
 
     /** One-off messages for the UI to show, e.g. "Imported 40 cards". */

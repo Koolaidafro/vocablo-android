@@ -18,6 +18,13 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         container.scope.launch { container.updates.checkIfStale() }
+        container.scope.launch { recordOpened() }
+    }
+
+    /** Remembers today as the last day the app was opened, which restarts reminders after a comeback (FR-26). */
+    private suspend fun recordOpened() {
+        val today = container.repository.today()
+        container.settings.update { if (it.lastOpenedDay == today && !it.comebackSent) it else it.copy(lastOpenedDay = today, comebackSent = false) }
     }
 
     override fun onStop() {

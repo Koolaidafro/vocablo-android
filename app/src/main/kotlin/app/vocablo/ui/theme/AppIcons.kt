@@ -62,14 +62,6 @@ object AppIcons {
     @DrawableRes val ChestOpened = Lucide.drawable.lucide_ic_package_open
     @DrawableRes val Life = Lucide.drawable.lucide_ic_heart
     @DrawableRes val Medal = Lucide.drawable.lucide_ic_medal
-    @DrawableRes val Sentences = Lucide.drawable.lucide_ic_sparkles
-
-    // Games.
-    @DrawableRes val VerbRain = Lucide.drawable.lucide_ic_cloud_rain
-    @DrawableRes val TugOfWar = Lucide.drawable.lucide_ic_arrow_left_right
-    @DrawableRes val SiONo = Lucide.drawable.lucide_ic_thumbs_up
-    @DrawableRes val Parejas = Lucide.drawable.lucide_ic_copy
-    @DrawableRes val Cuatro = Lucide.drawable.lucide_ic_grid_2x2
 }
 
 /**
