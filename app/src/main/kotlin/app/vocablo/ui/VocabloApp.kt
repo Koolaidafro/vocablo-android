@@ -60,7 +60,7 @@ import app.vocablo.ui.verbs.PracticeSettingsScreen
 import app.vocablo.ui.verbs.VerbDetailScreen
 import app.vocablo.ui.verbs.VerbListScreen
 
-enum class Tab(val label: String, @DrawableRes val icon: Int) {
+enum class Tab(val label: String, @param:DrawableRes val icon: Int) {
     HOME("Home", AppIcons.Home),
     DECKS("Decks", AppIcons.Decks),
     PLAY("Play", AppIcons.Play),

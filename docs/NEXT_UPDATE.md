@@ -1,9 +1,11 @@
 # Next update: feedback backlog
 
-Feedback collected while testing the current release. Nothing here is
-implemented yet. When Sir says "execute", every open item is implemented
-test-first, the SRS and DEVLOG are updated, and the update ships through a PR
-to `main` (which publishes the release).
+Feedback collected while testing. When Sir says "execute", every open item is
+implemented test-first, `SRS.md` and `DEVLOG.md` are updated, and the update
+ships through a PR to `main`, which publishes the release.
+
+Items 1 to 3 shipped in v1.1 (see `DEVLOG.md`, 2026-11-13). New feedback goes
+below as item 4 onwards.
 
 Status values: **open** (logged, not started), **done in vX.Y**.
 
@@ -11,7 +13,7 @@ Status values: **open** (logged, not started), **done in vX.Y**.
 
 ### 1. Swipe direction flips after the card is flipped
 - **Reported:** 2026-11-12
-- **Status:** open
+- **Status:** done in v1.1 (2026-11-13)
 - **What happens:** In Study, swiping right means "Got it" and left means
   "Again" on the front of the card. After tapping to flip the card, the
   directions are reversed.
@@ -28,7 +30,7 @@ Status values: **open** (logged, not started), **done in vX.Y**.
 
 ### 2. Rating button labels break mid-word
 - **Reported:** 2026-11-12 (with a screenshot from a phone)
-- **Status:** open
+- **Status:** done in v1.1 (2026-11-13)
 - **What happens:** On the Study screen, after the card is flipped, the four
   rating buttons at the bottom are too narrow for their labels. The text wraps
   in the middle of the word: "Aga / in", "Har / d", "Goo / d", "Eas / y".
@@ -46,7 +48,7 @@ Status values: **open** (logged, not started), **done in vX.Y**.
 
 ### 3. Make the app look like a modern app
 - **Reported:** 2026-11-12
-- **Status:** open (direction chosen 2026-11-12: option A)
+- **Status:** done in v1.1 (2026-11-13)
 - **What Sir asked:** Restyle the app so it looks like a current, polished app,
   either with custom assets and icons or with a better icon library.
 - **Where it stands today:** The app uses only the basic Material icon set

@@ -5,10 +5,11 @@ import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import app.vocablo.design.ThemeId
@@ -63,7 +64,8 @@ class DesignSystemTest {
     fun everyAppIconLoads() {
         val context = ApplicationProvider.getApplicationContext<Application>()
         val ids = AppIcons::class.java.declaredFields
-            .filter { it.type == Int::class.javaPrimitiveType }
+            // Skip compiler-made fields such as Compose's "$stable".
+            .filter { it.type == Int::class.javaPrimitiveType && !it.name.startsWith("$") }
             .map { it.isAccessible = true; it.getInt(AppIcons) }
         assertTrue("AppIcons should list the app's icons", ids.size >= MIN_ICONS)
         ids.forEach { assertNotNull(ContextCompat.getDrawable(context, it)) }
@@ -71,19 +73,19 @@ class DesignSystemTest {
 
     @Test
     fun illustrationsDrawInEveryThemeLightAndDark() {
-        ThemeId.entries.forEach { theme ->
-            listOf(ThemeMode.LIGHT, ThemeMode.DARK).forEach { mode ->
-                compose.setContent {
+        val combinations = ThemeId.entries.flatMap { theme -> listOf(ThemeMode.LIGHT, ThemeMode.DARK).map { theme to it } }
+        // One setContent per test is allowed, so every theme and mode is drawn side by side.
+        compose.setContent {
+            Column {
+                combinations.forEach { (theme, mode) ->
                     VocabloTheme(theme, mode) {
-                        Column {
-                            EmptyDeckArt()
-                            CelebrationArt { }
-                        }
+                        EmptyDeckArt(size = ART_SIZE)
+                        CelebrationArt(size = ART_SIZE) { }
                     }
                 }
-                compose.onNodeWithContentDescription("An empty deck").assertIsDisplayed()
             }
         }
+        compose.onAllNodesWithContentDescription("An empty deck").assertCountEquals(combinations.size)
     }
 
     /** Every style in the type scale, by name. */
@@ -103,5 +105,8 @@ class DesignSystemTest {
 
         /** A shape size large enough that no corner is clamped. */
         const val SHAPE_SIDE = 1000f
+
+        /** Small, so all twenty drawings fit on the test screen. */
+        val ART_SIZE = 24.dp
     }
 }
