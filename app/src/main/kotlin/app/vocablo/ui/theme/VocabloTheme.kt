@@ -13,6 +13,12 @@ import app.vocablo.design.ThemeMode
 import app.vocablo.design.Themes
 import app.vocablo.design.paletteFor
 
+/**
+ * Wraps the app in its colours, type and shapes.
+ *
+ * Design: the single entry point for the visual design. Colours come from the chosen theme
+ * in core/design; type and shapes are the same in every theme (FR-14, FR-16).
+ */
 @Composable
 fun VocabloTheme(
     themeId: ThemeId = Themes.default,
@@ -27,7 +33,12 @@ fun VocabloTheme(
         ThemeMode.DARK -> true
     }
     val palette = theme.paletteFor(mode, systemDark)
-    MaterialTheme(colorScheme = palette.toColorScheme(isDark), content = content)
+    MaterialTheme(
+        colorScheme = palette.toColorScheme(isDark),
+        typography = VocabloTypography,
+        shapes = VocabloShapes,
+        content = content,
+    )
 }
 
 private fun Palette.toColorScheme(dark: Boolean): ColorScheme {

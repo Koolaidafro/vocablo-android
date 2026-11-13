@@ -44,7 +44,7 @@ import kotlinx.coroutines.launch
 /**
  * The study card: tap to flip, swipe right for "Got it", swipe left for "Again".
  *
- * Design: kept apart from [StudyScreen] so the gesture can be tested on its own (FR-1).
+ * Design: kept apart from [StudyScreen] so the gesture can be tested on its own (FR-11).
  * The screen only passes in state and callbacks; this composable owns the drag and flip
  * animations, which are pure presentation. The drag is detected on a plain box around the
  * card, not on the card itself, so the flip's mirror rotation never changes its direction.
@@ -77,7 +77,7 @@ internal fun SwipeCard(
                 .padding(Spacing.xl)
                 .alpha((abs(drag) / HINT_FULL_AT).coerceIn(0f, 1f)),
         )
-        // The drag is read here, outside the card's rotation (FR-1). Inside the rotated layer,
+        // The drag is read here, outside the card's rotation (FR-11). Inside the rotated layer,
         // a flipped card is mirrored, so a right swipe would arrive as a left one.
         Box(Modifier.fillMaxSize().pointerInput(turn) { detectSwipe(offsetX, scope, onSwiped) }) {
             Card(

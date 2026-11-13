@@ -14,6 +14,7 @@ serializationJson = "1.9.0"
 robolectric = "4.16"
 junit4 = "4.13.2"
 androidxTestCore = "1.6.1"
+lucide = "2.2.1"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -23,7 +24,7 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
-androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
+lucide-icons = { module = "com.composables:icons-lucide-android", version.ref = "lucide" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit5" }

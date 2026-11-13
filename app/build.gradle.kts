@@ -15,7 +15,7 @@ android {
         targetSdk = 36
         // CI sets the version code for each published build; local builds are version 1.
         versionCode = System.getenv("VOCABLO_VERSION_CODE")?.toIntOrNull() ?: 1
-        versionName = "1.0.$versionCode"
+        versionName = "1.1.$versionCode"
     }
 
     // github: installed from GitHub releases and updates itself. play: for the Play Store,
@@ -89,7 +89,7 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material.icons.core)
+    implementation(libs.lucide.icons)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.room.runtime)

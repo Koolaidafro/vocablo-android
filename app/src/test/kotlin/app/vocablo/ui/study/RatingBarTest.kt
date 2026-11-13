@@ -23,7 +23,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 /**
- * Checks that the four rating labels each fit on one line (FR-2).
+ * Checks that the four rating labels each fit on one line (FR-12).
  *
  * Design: measures the real text layout through the semantics tree, so the test fails on
  * the actual symptom (a word broken over two lines or cut off) rather than on padding values.

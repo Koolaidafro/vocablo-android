@@ -28,7 +28,7 @@ import app.vocablo.ui.theme.Spacing
  * The controls under the study card: "Show answer" on the front, four ratings on the back.
  *
  * Design: kept apart from [StudyScreen] so its layout can be tested at narrow widths and
- * large font sizes (FR-2). The four ratings share the row equally, so each button uses
+ * large font sizes (FR-12). The four ratings share the row equally, so each button uses
  * slim side padding and a label that never wraps: it shrinks a step at a time instead,
  * which only happens on the narrowest phones with the largest font settings.
  */
@@ -60,7 +60,7 @@ internal fun RatingBar(flipped: Boolean, onFlip: () -> Unit, onRate: (Rating) ->
  * One of the four rating buttons, sharing the row's width equally with the others.
  *
  * Design: one function for all four replaces four near-identical button calls, so the
- * no-wrap rule (FR-2) is written once.
+ * no-wrap rule (FR-12) is written once.
  */
 @Composable
 private fun RowScope.RatingButton(

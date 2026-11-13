@@ -1,6 +1,7 @@
 package app.vocablo.ui
 
 import androidx.activity.compose.BackHandler
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -8,13 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -35,7 +29,6 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -57,6 +50,8 @@ import app.vocablo.ui.onboarding.OnboardingScreen
 import app.vocablo.ui.play.GameScreen
 import app.vocablo.ui.play.SentenceScreen
 import app.vocablo.ui.study.StudyScreen
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
 import app.vocablo.ui.theme.VocabloTheme
 import app.vocablo.ui.tutor.TutorScreen
 import app.vocablo.ui.verbs.DrillScreen
@@ -65,12 +60,12 @@ import app.vocablo.ui.verbs.PracticeSettingsScreen
 import app.vocablo.ui.verbs.VerbDetailScreen
 import app.vocablo.ui.verbs.VerbListScreen
 
-enum class Tab(val label: String, val icon: ImageVector) {
-    HOME("Home", Icons.Filled.Home),
-    DECKS("Decks", Icons.AutoMirrored.Filled.List),
-    PLAY("Play", Icons.Filled.PlayArrow),
-    TUTOR("Tutor", Icons.Filled.Face),
-    ME("Me", Icons.Filled.Person),
+enum class Tab(val label: String, @DrawableRes val icon: Int) {
+    HOME("Home", AppIcons.Home),
+    DECKS("Decks", AppIcons.Decks),
+    PLAY("Play", AppIcons.Play),
+    TUTOR("Tutor", AppIcons.Tutor),
+    ME("Me", AppIcons.Me),
 }
 
 /** Screens above the tabs. Kept as a simple back stack that survives rotation. */
@@ -244,7 +239,7 @@ private fun Tabs(tab: Tab, onTab: (Tab) -> Unit, library: LibraryViewModel, nav:
                     NavigationRailItem(
                         selected = tab == t,
                         onClick = { onTab(t) },
-                        icon = { Icon(t.icon, contentDescription = null) },
+                        icon = { AppIcon(t.icon, contentDescription = null) },
                         label = { Text(t.label) },
                     )
                 }
@@ -259,7 +254,7 @@ private fun Tabs(tab: Tab, onTab: (Tab) -> Unit, library: LibraryViewModel, nav:
                         NavigationBarItem(
                             selected = tab == t,
                             onClick = { onTab(t) },
-                            icon = { Icon(t.icon, contentDescription = null) },
+                            icon = { AppIcon(t.icon, contentDescription = null) },
                             label = { Text(t.label) },
                         )
                     }

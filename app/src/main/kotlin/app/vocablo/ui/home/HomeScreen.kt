@@ -38,6 +38,10 @@ import app.vocablo.ui.Screen
 import app.vocablo.ui.components.Confetti
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
+import app.vocablo.ui.theme.IconLabel
+import app.vocablo.ui.theme.IconTile
 import app.vocablo.update.UpdateCard
 import app.vocablo.verbs.Conjugator
 import app.vocablo.verbs.Person
@@ -129,10 +133,11 @@ private fun LevelCard(progress: ProgressState) {
                 modifier = Modifier.fillMaxWidth().semantics { contentDescription = "Level ${progress.level}, ${(progress.levelProgress * 100).toInt()} percent to the next" },
             )
             if (progress.freezesHeld > 0) {
-                Text(
-                    "🧊 ${progress.freezesHeld} streak ${if (progress.freezesHeld == 1) "freeze" else "freezes"} ready. A missed day is covered automatically.",
+                IconLabel(
+                    AppIcons.Freeze,
+                    "${progress.freezesHeld} streak ${if (progress.freezesHeld == 1) "freeze" else "freezes"} ready. A missed day is covered automatically.",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
@@ -148,7 +153,11 @@ private fun QuestsCard(progress: ProgressState) {
             progress.quests.forEach { q ->
                 val done = q.done(progress.today)
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text(if (done) "✅" else "⬜")
+                    AppIcon(
+                        if (done) AppIcons.QuestDone else AppIcons.QuestOpen,
+                        contentDescription = if (done) "Done" else "Not done yet",
+                        tint = if (done) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                     Column(Modifier.weight(1f)) {
                         Text(q.title, fontWeight = if (done) FontWeight.Normal else FontWeight.Medium)
                         LinearProgressIndicator(progress = { q.progress(progress.today).toFloat() / q.target }, modifier = Modifier.fillMaxWidth())
@@ -164,7 +173,11 @@ private fun QuestsCard(progress: ProgressState) {
 private fun ChestCard(progress: ProgressState, onOpen: () -> Unit) {
     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
         Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(if (progress.chestOpened) "📭" else "🎁", style = MaterialTheme.typography.headlineMedium)
+            IconTile(
+                if (progress.chestOpened) AppIcons.ChestOpened else AppIcons.Chest,
+                container = MaterialTheme.colorScheme.tertiary,
+                content = MaterialTheme.colorScheme.onTertiary,
+            )
             Column(Modifier.weight(1f)) {
                 Text("Weekly chest", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(
@@ -189,7 +202,7 @@ private fun StreakBadge(streak: Int, atRisk: Boolean) {
         ),
     ) {
         Column(Modifier.padding(horizontal = 14.dp, vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("🔥 $streak", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            IconLabel(AppIcons.Streak, "$streak", style = MaterialTheme.typography.titleMedium)
             Text(if (streak == 1) "day" else "days", style = MaterialTheme.typography.labelSmall)
         }
     }

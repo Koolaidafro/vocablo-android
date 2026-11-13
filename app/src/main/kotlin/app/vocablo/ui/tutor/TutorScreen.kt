@@ -18,15 +18,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -70,6 +65,8 @@ import app.vocablo.tutor.TutorPrompt
 import app.vocablo.tutor.Variety
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
 import app.vocablo.verbs.Stage
 import app.vocablo.verbs.label
 import kotlinx.coroutines.Dispatchers
@@ -266,7 +263,7 @@ private fun ScenarioPicker(ui: TutorUi, vm: TutorViewModel) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text("Tutor", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-            IconButton(onClick = { vm.editSetup(true) }) { Icon(Icons.Filled.Settings, contentDescription = "Tutor settings") }
+            IconButton(onClick = { vm.editSetup(true) }) { AppIcon(AppIcons.Settings, contentDescription = "Tutor settings") }
         }
         Text("Pick a situation. Tuzo plays the other person and fixes mistakes as you go.", color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text("Using ${ui.provider.label}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -293,7 +290,7 @@ private fun Chat(ui: TutorUi, scenario: Scenario, vm: TutorViewModel) {
     }
     Column(Modifier.fillMaxSize().imePadding()) {
         Row(Modifier.padding(horizontal = 4.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = vm::leave) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Leave conversation") }
+            IconButton(onClick = vm::leave) { AppIcon(AppIcons.Back, contentDescription = "Leave conversation") }
             Text("${scenario.emoji} ${scenario.title}", style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
             Tuzo(size = 40.dp, mood = if (ui.sending) TuzoMood.CHEER else TuzoMood.IDLE, modifier = Modifier.padding(end = 12.dp))
         }
@@ -324,7 +321,7 @@ private fun Chat(ui: TutorUi, scenario: Scenario, vm: TutorViewModel) {
                 modifier = Modifier.weight(1f),
             )
             IconButton(onClick = { vm.send(draft); draft = "" }, enabled = draft.isNotBlank() && !ui.sending) {
-                Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Send")
+                AppIcon(AppIcons.Send, contentDescription = "Send")
             }
         }
     }

@@ -9,11 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -38,8 +35,12 @@ import app.vocablo.data.StudySession
 import app.vocablo.data.VocabloRepository
 import app.vocablo.srs.Rating
 import app.vocablo.ui.Navigator
+import app.vocablo.ui.components.CelebrationArt
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
+import app.vocablo.ui.theme.IconLabel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -120,7 +121,7 @@ fun StudyScreen(deckId: Long?, nav: Navigator) {
 
     Column(Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            IconButton(onClick = nav::back) { Icon(Icons.Filled.Close, contentDescription = "End session") }
+            IconButton(onClick = nav::back) { AppIcon(AppIcons.Close, contentDescription = "End session") }
             LinearProgressIndicator(progress = { ui.progress }, modifier = Modifier.weight(1f).height(8.dp))
             Text("${ui.learned}/${ui.total}", style = MaterialTheme.typography.labelLarge)
         }
@@ -151,7 +152,7 @@ private fun Finished(ui: StudyUi, onDone: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
     ) {
-        Tuzo(size = 160.dp, mood = TuzoMood.CHEER)
+        CelebrationArt { Tuzo(size = 140.dp, mood = TuzoMood.CHEER) }
         Text("¡Bien hecho!", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
         Text(
             "You went through ${ui.learned} ${if (ui.learned == 1) "card" else "cards"}" +
@@ -159,7 +160,7 @@ private fun Finished(ui: StudyUi, onDone: () -> Unit) {
             textAlign = TextAlign.Center,
         )
         if (ui.streak > 0) {
-            Text("🔥 ${ui.streak}-day streak", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.tertiary)
+            IconLabel(AppIcons.Streak, "${ui.streak}-day streak", style = MaterialTheme.typography.titleLarge, tint = MaterialTheme.colorScheme.tertiary)
         }
         Button(onClick = onDone, modifier = Modifier.fillMaxWidth()) { Text("Done") }
     }

@@ -16,15 +16,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -54,6 +51,9 @@ import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
+import app.vocablo.ui.theme.IconLabel
 import app.vocablo.verbs.AnswerMode
 import app.vocablo.verbs.Check
 import app.vocablo.verbs.Conjugator
@@ -197,12 +197,14 @@ fun DrillScreen(nav: Navigator) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            IconButton(onClick = nav::back) { Icon(Icons.Filled.Close, contentDescription = "End drill") }
+            IconButton(onClick = nav::back) { AppIcon(AppIcons.Close, contentDescription = "End drill") }
             LinearProgressIndicator(
                 progress = { if (ui.finished) 1f else ui.done.toFloat() / (ui.done + ui.remaining).coerceAtLeast(1) },
                 modifier = Modifier.weight(1f).height(8.dp),
             )
-            if (ui.streakInSession >= 3) Text("🔥 ${ui.streakInSession}", style = MaterialTheme.typography.labelLarge)
+            if (ui.streakInSession >= 3) {
+                IconLabel(AppIcons.Streak, "${ui.streakInSession}", style = MaterialTheme.typography.labelLarge, tint = MaterialTheme.colorScheme.tertiary)
+            }
         }
         val q = ui.question
         when {

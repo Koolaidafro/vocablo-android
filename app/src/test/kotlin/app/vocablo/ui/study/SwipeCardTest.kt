@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 /**
- * Checks that a swipe means the same thing on both sides of the card (FR-1).
+ * Checks that a swipe means the same thing on both sides of the card (FR-11).
  *
  * Design: drives the real [SwipeCard] with Compose's touch injection, because the bug this
  * guards against lived in how the gesture reads coordinates through the flip rotation, which
