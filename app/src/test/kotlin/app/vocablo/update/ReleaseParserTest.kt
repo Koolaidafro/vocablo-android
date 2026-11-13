@@ -34,4 +34,13 @@ class ReleaseParserTest {
         assertNull(ReleaseParser.parse("""{"tag_name":"v1.0.5","assets":[]}"""))
         assertNull(ReleaseParser.parse("not json"))
     }
+
+    /** Version 1.1 tags must still be compared by their build number, so 1.0 phones see the update. */
+    @Test
+    fun aVersionOnePointOneReleaseIsNewerThanAnyEarlierBuild() {
+        val r = ReleaseParser.parse(body.replace("v1.0.123", "v1.1.130"))!!
+        assertEquals(130, r.versionCode)
+        assertEquals("1.1.130", r.versionName)
+        assertTrue(ReleaseParser.isNewer(r, 123))
+    }
 }

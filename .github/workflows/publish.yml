@@ -55,4 +55,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           git log -1 --format=%s > notes.txt
-          gh release create "v1.0.$CODE" vocablo.apk --title "Vocablo 1.0.$CODE" --notes-file notes.txt --latest
+          gh release create "v1.1.$CODE" vocablo.apk --title "Vocablo 1.1.$CODE" --notes-file notes.txt --latest

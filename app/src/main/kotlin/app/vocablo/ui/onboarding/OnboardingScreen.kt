@@ -38,6 +38,8 @@ import app.vocablo.data.AppSettings
 import app.vocablo.data.Region
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
 import app.vocablo.verbs.Conjugator
 import app.vocablo.verbs.Drill
 import app.vocablo.verbs.Placement
@@ -197,7 +199,7 @@ private fun Choice(title: String, body: String, selected: Boolean, onClick: () -
                 Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                 Text(body, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Start)
             }
-            if (selected) Text("✓", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary)
+            if (selected) AppIcon(AppIcons.Selected, contentDescription = "Selected", tint = MaterialTheme.colorScheme.primary)
         }
     }
 }

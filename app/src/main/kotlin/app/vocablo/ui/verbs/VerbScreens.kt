@@ -1,5 +1,6 @@
 package app.vocablo.ui.verbs
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,9 +14,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -23,7 +21,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -43,6 +40,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -61,6 +59,9 @@ import app.vocablo.play.Medal
 import app.vocablo.speech.SpeakButton
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
+import app.vocablo.ui.theme.IconTile
 import app.vocablo.verbs.AnswerMode
 import app.vocablo.verbs.Conjugator
 import app.vocablo.verbs.Person
@@ -104,7 +105,7 @@ fun PracticeSettingsScreen(nav: Navigator) {
         topBar = {
             TopAppBar(
                 title = { Text("What to practice") },
-                navigationIcon = { IconButton(onClick = nav::back) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") } },
+                navigationIcon = { IconButton(onClick = nav::back) { AppIcon(AppIcons.Back, contentDescription = "Back") } },
             )
         },
     ) { padding ->
@@ -128,7 +129,7 @@ fun PracticeSettingsScreen(nav: Navigator) {
                     Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text("Stage ${stage.number}: ${stage.title}", Modifier.weight(1f), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                            if (!open) Icon(Icons.Filled.Lock, contentDescription = "Locked")
+                            if (!open) AppIcon(AppIcons.Locked, contentDescription = "Locked")
                         }
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             stage.tenses.forEach { t ->
@@ -213,7 +214,7 @@ fun VerbListScreen(nav: Navigator) {
         topBar = {
             TopAppBar(
                 title = { Text("Verbs") },
-                navigationIcon = { IconButton(onClick = nav::back) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") } },
+                navigationIcon = { IconButton(onClick = nav::back) { AppIcon(AppIcons.Back, contentDescription = "Back") } },
             )
         },
     ) { padding ->
@@ -279,7 +280,7 @@ fun VerbDetailScreen(infinitive: String, nav: Navigator) {
         topBar = {
             TopAppBar(
                 title = { Text(infinitive) },
-                navigationIcon = { IconButton(onClick = nav::back) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") } },
+                navigationIcon = { IconButton(onClick = nav::back) { AppIcon(AppIcons.Back, contentDescription = "Back") } },
             )
         },
     ) { padding ->
@@ -352,7 +353,7 @@ fun PlayHub(nav: Navigator, dueVerbItems: Int, practice: PracticeSettings) {
         Game.entries.forEach { game ->
             Card(onClick = { nav.open(Screen.Game(game)) }, modifier = Modifier.fillMaxWidth()) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    Text(gameEmoji(game), style = MaterialTheme.typography.headlineMedium)
+                    IconTile(gameIcon(game))
                     Column(Modifier.weight(1f)) {
                         Text(game.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                         Text(game.blurb, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -363,22 +364,33 @@ fun PlayHub(nav: Navigator, dueVerbItems: Int, practice: PracticeSettings) {
     }
 }
 
-fun gameEmoji(game: Game): String = when (game) {
-    Game.VERB_RAIN -> "🌧️"
-    Game.TUG_OF_WAR -> "🪢"
-    Game.SI_O_NO -> "👍"
-    Game.PAREJAS -> "🃏"
-    Game.CUATRO -> "4️⃣"
+/** The icon that leads each game's row (FR-13). */
+@DrawableRes
+fun gameIcon(game: Game): Int = when (game) {
+    Game.VERB_RAIN -> AppIcons.VerbRain
+    Game.TUG_OF_WAR -> AppIcons.TugOfWar
+    Game.SI_O_NO -> AppIcons.SiONo
+    Game.PAREJAS -> AppIcons.Parejas
+    Game.CUATRO -> AppIcons.Cuatro
 }
 
 /** Gold: remembered for a month or more in every practiced tense. Silver: a week. Bronze: started. */
 @Composable
 fun MedalBadge(medal: Medal) {
-    val (emoji, name) = when (medal) {
-        Medal.GOLD -> "🥇" to "Gold"
-        Medal.SILVER -> "🥈" to "Silver"
-        Medal.BRONZE -> "🥉" to "Bronze"
+    val (color, name) = when (medal) {
+        Medal.GOLD -> GOLD to "Gold"
+        Medal.SILVER -> SILVER to "Silver"
+        Medal.BRONZE -> BRONZE to "Bronze"
         Medal.NONE -> return
     }
-    Text(emoji, modifier = Modifier.semantics { contentDescription = "$name medal" })
+    AppIcon(AppIcons.Medal, contentDescription = "$name medal", tint = color)
 }
+
+/** Medal colours. Fixed rather than themed, because gold, silver and bronze mean the same in every theme. */
+private val GOLD = Color(0xFFD4A017)
+
+/** See [GOLD]. */
+private val SILVER = Color(0xFF9AA4AE)
+
+/** See [GOLD]. */
+private val BRONZE = Color(0xFFB0703C)

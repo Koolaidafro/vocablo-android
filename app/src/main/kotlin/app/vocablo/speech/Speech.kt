@@ -13,6 +13,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import app.vocablo.container
 import app.vocablo.data.Region
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
 import java.util.Locale
 
 /** The phone's Spanish voice to use for each region, best match first. */
@@ -77,5 +79,5 @@ fun SpeakButton(text: String, modifier: Modifier = Modifier) {
     IconButton(
         onClick = { context.container.speech.speak(text) },
         modifier = modifier.size(48.dp).semantics { contentDescription = "Listen to $text" },
-    ) { Text("🔊") }
+    ) { AppIcon(AppIcons.Listen, contentDescription = null) }
 }

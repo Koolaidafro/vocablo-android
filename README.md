@@ -42,13 +42,14 @@ Requires JDK 17 or newer and the Android SDK (API 36).
 
 ## How we work
 
-Every feature starts with a failing test. See [CONTRIBUTING.md](CONTRIBUTING.md). Settled product decisions are in [docs/PLAN.md](docs/PLAN.md); release steps in [docs/RELEASE.md](docs/RELEASE.md); the privacy policy in [docs/PRIVACY.md](docs/PRIVACY.md).
+Every feature starts with a failing test. See [CONTRIBUTING.md](CONTRIBUTING.md). Requirements are in [docs/SRS.md](docs/SRS.md) and the change history in [docs/DEVLOG.md](docs/DEVLOG.md). Settled product decisions are in [docs/PLAN.md](docs/PLAN.md); release steps in [docs/RELEASE.md](docs/RELEASE.md); the privacy policy in [docs/PRIVACY.md](docs/PRIVACY.md).
 
 ## Data and credits
 
 - Dictionary text from [Wiktionary](https://en.wiktionary.org) (CC BY-SA 4.0), looked up online when a word isn't in the starter dictionary.
 - Verb frequency ranking from [FrequencyWords](https://github.com/hermitdave/FrequencyWords) by Hermit Dave (CC BY-SA 4.0).
-- Starter dictionary examples and Tuzo were made for Vocablo.
+- Starter dictionary examples, Tuzo and the illustrations were made for Vocablo.
+- Icons from [Lucide](https://lucide.dev) (ISC), via the Compose Icons package (MIT). Typeface [Nunito](https://github.com/googlefonts/nunito) (SIL OFL 1.1). Licence texts are in `docs/licenses/`.
 
 ## License
 

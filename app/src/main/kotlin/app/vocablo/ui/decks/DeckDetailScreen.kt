@@ -9,17 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -47,6 +42,9 @@ import app.vocablo.container
 import app.vocablo.data.VocabloRepository
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
+import app.vocablo.ui.components.EmptyDeckArt
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -83,18 +81,18 @@ fun DeckDetailScreen(deckId: Long, nav: Navigator) {
             TopAppBar(
                 title = { Text(deck?.name.orEmpty()) },
                 navigationIcon = {
-                    IconButton(onClick = nav::back) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") }
+                    IconButton(onClick = nav::back) { AppIcon(AppIcons.Back, contentDescription = "Back") }
                 },
                 actions = {
-                    IconButton(onClick = { renaming = true }) { Icon(Icons.Filled.Edit, contentDescription = "Rename deck") }
-                    IconButton(onClick = { confirmDelete = true }) { Icon(Icons.Filled.Delete, contentDescription = "Delete deck") }
+                    IconButton(onClick = { renaming = true }) { AppIcon(AppIcons.Edit, contentDescription = "Rename deck") }
+                    IconButton(onClick = { confirmDelete = true }) { AppIcon(AppIcons.Delete, contentDescription = "Delete deck") }
                 },
             )
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = { nav.open(Screen.EditCard(deckId, null)) },
-                icon = { Icon(Icons.Filled.Add, contentDescription = null) },
+                icon = { AppIcon(AppIcons.Add, contentDescription = null) },
                 text = { Text("Add card") },
             )
         },
@@ -107,6 +105,7 @@ fun DeckDetailScreen(deckId: Long, nav: Navigator) {
                         Text("Study this deck")
                     }
                     if (cards != null && list.isEmpty()) {
+                        EmptyDeckArt(Modifier.align(Alignment.CenterHorizontally).padding(top = 24.dp))
                         Text(
                             "No cards yet. Tap Add card and start typing a Spanish word.",
                             Modifier.fillMaxWidth().padding(top = 24.dp),

@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -20,7 +18,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
@@ -52,6 +49,8 @@ import app.vocablo.play.SentenceExercise
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -134,7 +133,7 @@ fun SentenceScreen(nav: Navigator) {
         topBar = {
             TopAppBar(
                 title = { Text("Sentence builder") },
-                navigationIcon = { IconButton(onClick = nav::back) { Icon(Icons.Filled.Close, contentDescription = "Close") } },
+                navigationIcon = { IconButton(onClick = nav::back) { AppIcon(AppIcons.Close, contentDescription = "Close") } },
                 actions = { if (ui.built > 0) Text("${ui.right}/${ui.built} · +${ui.xp} XP", modifier = Modifier.padding(end = 16.dp)) },
             )
         },

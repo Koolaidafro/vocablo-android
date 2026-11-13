@@ -21,15 +21,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -52,9 +49,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -78,6 +75,8 @@ import app.vocablo.ui.Navigator
 import app.vocablo.ui.components.Confetti
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
+import app.vocablo.ui.theme.AppIcon
+import app.vocablo.ui.theme.AppIcons
 import app.vocablo.verbs.Conjugator
 import app.vocablo.verbs.Drill
 import app.vocablo.verbs.label
@@ -133,7 +132,7 @@ fun GameScreen(game: Game, nav: Navigator) {
         topBar = {
             TopAppBar(
                 title = { Text(game.title) },
-                navigationIcon = { IconButton(onClick = nav::back) { Icon(Icons.Filled.Close, contentDescription = "Quit game") } },
+                navigationIcon = { IconButton(onClick = nav::back) { AppIcon(AppIcons.Close, contentDescription = "Quit game") } },
             )
         },
     ) { padding ->
@@ -177,9 +176,19 @@ private fun Results(result: GameResult, session: Int, onAgain: () -> Unit, onDon
 }
 
 @Composable
-private fun Hud(left: String, score: Int, mood: TuzoMood) {
+private fun Hud(left: String, score: Int, mood: TuzoMood) = Hud(score, mood) {
+    Text(left, style = MaterialTheme.typography.titleMedium)
+}
+
+/**
+ * The game's top bar: a status on the left, then the score and Tuzo.
+ *
+ * Design: the status is a slot so a game can show icons (Verb Rain's lives) as well as text.
+ */
+@Composable
+private fun Hud(score: Int, mood: TuzoMood, left: @Composable () -> Unit) {
     Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
-        Text(left, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+        Box(Modifier.weight(1f)) { left() }
         Text("$score", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, modifier = Modifier.semantics { contentDescription = "Score $score" })
         Tuzo(size = 48.dp, mood = mood, modifier = Modifier.padding(start = 12.dp))
     }
@@ -224,7 +233,11 @@ private fun VerbRainGame(m: PlayMaterial, onFinish: (Int) -> Unit) {
     }
 
     Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Hud("❤️".repeat(lives.coerceAtLeast(0)), score, mood)
+        Hud(score, mood) {
+            Row(Modifier.semantics(mergeDescendants = true) { contentDescription = "$lives lives left" }) {
+                repeat(lives.coerceAtLeast(0)) { AppIcon(AppIcons.Life, contentDescription = null, tint = MaterialTheme.colorScheme.error) }
+            }
+        }
         val q = round.question
         Card(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Column(Modifier.padding(16.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
