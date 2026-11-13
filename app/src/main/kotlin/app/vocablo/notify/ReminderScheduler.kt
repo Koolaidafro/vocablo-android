@@ -55,38 +55,37 @@ object ReminderScheduler {
 class ReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val result = goAsync()
-        val c = context.container
-        c.scope.launch {
+        context.container.scope.launch {
             try {
-                val settings = c.settings.settings.first()
-                if (settings.remindersOn) {
-                    val today = c.repository.today()
-                    val study = c.repository.studyDays().first()
-                    val frozen = c.progress.frozenDays().first()
-                    val streak = StreakFreezes.streak(study, frozen, today)
-                    val due = c.repository.deckSummaries().first().sumOf { it.dueCount } + c.verbs.dueCount().first()
-                    val kind = ReminderScheduler.kindOf(intent)
-                    // A phone that never recorded an open (first run of v1.2) counts as opened today.
-                    val sinceOpened = if (settings.lastOpenedDay < 0) 0 else today - settings.lastOpenedDay
-                    when (Reminders.decide(kind, today in study, streak, due, sinceOpened, settings.comebackSent)) {
-                        Reminders.Decision.SHOW -> {
-                            val pool = ReminderMessages.kindFor(kind == Reminders.Kind.STREAK_SAVER, due, streak)
-                            Notifications.showStudyReminder(context, ReminderMessages.pick(pool, today, due, streak))
-                        }
-                        Reminders.Decision.COMEBACK -> {
-                            val message = ReminderMessages.pick(ReminderMessages.Kind.COMEBACK, today, due, streak)
-                            if (Notifications.showStudyReminder(context, message)) {
-                                c.settings.update { it.copy(comebackSent = true) }
-                            }
-                        }
-                        Reminders.Decision.QUIET -> Unit
-                    }
-                }
+                if (context.container.settings.settings.first().remindersOn) remind(context, ReminderScheduler.kindOf(intent))
                 ReminderScheduler.reschedule(context)
                 TodayWidget.refresh(context) // a new day may have started
             } finally {
                 result.finish()
             }
+        }
+    }
+
+    /** Gathers today's numbers, asks the policy, and posts what it says. */
+    private suspend fun remind(context: Context, kind: Reminders.Kind) {
+        val c = context.container
+        val settings = c.settings.settings.first()
+        val today = c.repository.today()
+        val study = c.repository.studyDays().first()
+        val streak = StreakFreezes.streak(study, c.progress.frozenDays().first(), today)
+        val due = c.repository.deckSummaries().first().sumOf { it.dueCount } + c.verbs.dueCount().first()
+        // A phone that never recorded an open (first run of v1.2) counts as opened today.
+        val sinceOpened = if (settings.lastOpenedDay < 0) 0 else today - settings.lastOpenedDay
+        when (Reminders.decide(kind, today in study, streak, due, sinceOpened, settings.comebackSent)) {
+            Reminders.Decision.SHOW -> {
+                val pool = ReminderMessages.kindFor(kind == Reminders.Kind.STREAK_SAVER, due, streak)
+                Notifications.showStudyReminder(context, ReminderMessages.pick(pool, today, due, streak))
+            }
+            Reminders.Decision.COMEBACK -> {
+                val message = ReminderMessages.pick(ReminderMessages.Kind.COMEBACK, today, due, streak)
+                if (Notifications.showStudyReminder(context, message)) c.settings.update { it.copy(comebackSent = true) }
+            }
+            Reminders.Decision.QUIET -> Unit
         }
     }
 }
