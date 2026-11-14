@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -48,6 +49,12 @@ data class AppSettings(
     val tutorProvider: Provider = Provider.CLAUDE,
     val tutorModel: String = "",
     val tutorBaseUrl: String = "",
+    /** Day number the app was last opened, for the comeback rule (FR-26). -1 until first recorded. */
+    val lastOpenedDay: Long = -1,
+    /** True once the one comeback reminder has gone out; cleared when the app is opened (FR-26). */
+    val comebackSent: Boolean = false,
+    /** True once the reminder offer after the first session has been shown, so it is never repeated (FR-27). */
+    val remindersOffered: Boolean = false,
 )
 
 private val Context.settingsStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -79,6 +86,9 @@ class SettingsStore(context: Context) {
             p[TUTOR_PROVIDER] = new.tutorProvider.name
             p[TUTOR_MODEL] = new.tutorModel
             p[TUTOR_BASE_URL] = new.tutorBaseUrl
+            p[LAST_OPENED_DAY] = new.lastOpenedDay
+            p[COMEBACK_SENT] = new.comebackSent
+            p[REMINDERS_OFFERED] = new.remindersOffered
         }
     }
 
@@ -102,6 +112,9 @@ class SettingsStore(context: Context) {
         tutorProvider = p[TUTOR_PROVIDER].toEnum(Provider.CLAUDE),
         tutorModel = p[TUTOR_MODEL] ?: "",
         tutorBaseUrl = p[TUTOR_BASE_URL] ?: "",
+        lastOpenedDay = p[LAST_OPENED_DAY] ?: -1,
+        comebackSent = p[COMEBACK_SENT] ?: false,
+        remindersOffered = p[REMINDERS_OFFERED] ?: false,
     )
 
     private companion object {
@@ -122,6 +135,9 @@ class SettingsStore(context: Context) {
         val TUTOR_PROVIDER = stringPreferencesKey("tutor_provider")
         val TUTOR_MODEL = stringPreferencesKey("tutor_model")
         val TUTOR_BASE_URL = stringPreferencesKey("tutor_base_url")
+        val LAST_OPENED_DAY = longPreferencesKey("last_opened_day")
+        val COMEBACK_SENT = booleanPreferencesKey("comeback_sent")
+        val REMINDERS_OFFERED = booleanPreferencesKey("reminders_offered")
     }
 }
 

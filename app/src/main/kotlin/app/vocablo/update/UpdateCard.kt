@@ -20,6 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.vocablo.container
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.Alignment
+import app.vocablo.ui.components.Scene
+import app.vocablo.ui.components.SceneArt
 
 /** Shown on Home when a newer version is on GitHub. Shows nothing otherwise. */
 @Composable
@@ -36,7 +40,10 @@ fun UpdateCard() {
     } ?: return
     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("New version ${release.versionName}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                SceneArt(Scene.UPDATE_READY, size = 72.dp)
+                Text("New version ${release.versionName}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            }
             if (release.notes.isNotEmpty()) Text(release.notes.lines().take(4).joinToString("\n"), style = MaterialTheme.typography.bodySmall)
             when (val s = state) {
                 is UpdateState.Downloading -> LinearProgressIndicator(progress = { s.progress }, modifier = Modifier.fillMaxWidth())

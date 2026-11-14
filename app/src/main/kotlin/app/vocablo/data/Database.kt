@@ -128,6 +128,9 @@ object ActivityKind {
     const val QUEST_DAY = "QUEST_DAY"
     const val CHEST = "CHEST"
     const val FREEZE = "FREEZE"
+
+    /** A badge earned (FR-22): stored on day 0 with the badge as [ActivityEntity.ref], so each is paid once ever. */
+    const val BADGE = "BADGE"
 }
 
 /** One day's counters, matching DayActivity in core:play. */
@@ -321,6 +324,16 @@ abstract class VocabloDao {
 
     @Query("SELECT DISTINCT day FROM review_log")
     abstract suspend fun cardStudyDays(): List<Long>
+
+    /** Cards answered at least once, for the 100-words badge. */
+    @Query("SELECT COUNT(DISTINCT cardId) FROM review_log")
+    abstract suspend fun cardsLearned(): Int
+
+    @Query("SELECT ref FROM activity WHERE kind = :kind")
+    abstract fun observeActivityRefs(kind: String): Flow<List<Long>>
+
+    @Query("SELECT ref FROM activity WHERE kind = :kind")
+    abstract suspend fun activityRefs(kind: String): List<Long>
 
     @Query("SELECT DISTINCT day FROM verb_answers")
     abstract suspend fun verbStudyDays(): List<Long>

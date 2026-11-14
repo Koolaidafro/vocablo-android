@@ -30,12 +30,16 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.vocablo.play.Badge
 import app.vocablo.play.WeeklyChest
 import app.vocablo.ui.LibraryViewModel
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.ProgressState
 import app.vocablo.ui.Screen
+import app.vocablo.ui.components.BadgeArt
 import app.vocablo.ui.components.Confetti
+import app.vocablo.ui.components.Scene
+import app.vocablo.ui.components.SceneArt
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
 import app.vocablo.ui.theme.AppIcon
@@ -54,6 +58,7 @@ fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit
     val state by library.state.collectAsStateWithLifecycle()
     val settings by library.settings.collectAsStateWithLifecycle()
     val progress by library.progress.collectAsStateWithLifecycle()
+    val newBadges by library.newBadges.collectAsStateWithLifecycle()
     var chestXp by remember { mutableStateOf<Int?>(null) }
     val newToday = minOf(state.new, settings.newPerDay)
     val toStudy = state.due + newToday
@@ -78,6 +83,8 @@ fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit
             StreakBadge(state.streak, state.streakAtRisk)
         }
 
+        if (state.welcomeBack) WelcomeBackCard(canStudy = toStudy > 0, onStudy = { nav.open(Screen.Study(null)) })
+
         Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
             Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text("Today", style = MaterialTheme.typography.labelLarge)
@@ -89,7 +96,10 @@ fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit
                 when {
                     state.totalCards == 0 && state.loaded -> Button(onClick = onAddCards, Modifier.fillMaxWidth()) { Text("Add your first cards") }
                     toStudy > 0 -> Button(onClick = { nav.open(Screen.Study(null)) }, Modifier.fillMaxWidth()) { Text("Study now") }
-                    else -> Text("All caught up. Tuzo is taking a nap.", color = MaterialTheme.colorScheme.onPrimaryContainer)
+                    else -> Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        SceneArt(Scene.ALL_DONE, size = 96.dp)
+                        Text("All caught up. Tuzo is resting in the hammock.", color = MaterialTheme.colorScheme.onPrimaryContainer)
+                    }
                 }
             }
         }
@@ -106,6 +116,10 @@ fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit
         }
     }
 
+    if (newBadges.isNotEmpty() && chestXp == null) {
+        BadgeCelebration(newBadges, onDone = library::badgesCelebrated)
+    }
+
     chestXp?.let { xp ->
         Box(Modifier.fillMaxSize()) {
             Confetti(seed = xp)
@@ -117,6 +131,47 @@ fun HomeScreen(library: LibraryViewModel, nav: Navigator, onAddCards: () -> Unit
                 confirmButton = { TextButton(onClick = { chestXp = null }) { Text("¡Vamos!") } },
             )
         }
+    }
+}
+
+/**
+ * Greets a learner who has been away for a few days (FR-24).
+ *
+ * Design: the words welcome, never count the missed days or mention what was lost (NFR-7).
+ */
+@Composable
+private fun WelcomeBackCard(canStudy: Boolean, onStudy: () -> Unit) {
+    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+        Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            SceneArt(Scene.WELCOME_BACK, size = 96.dp)
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("¡Qué gusto verte!", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text("Tuzo kept everything safe. A two-minute session is a great restart.", style = MaterialTheme.typography.bodyMedium)
+                if (canStudy) Button(onClick = onStudy) { Text("Start again") }
+            }
+        }
+    }
+}
+
+/**
+ * Celebrates badges earned since Home last showed (FR-22): the first badge large, with a note
+ * when there are more, so one session never stacks up several dialogs.
+ */
+@Composable
+private fun BadgeCelebration(badges: List<Badge>, onDone: () -> Unit) {
+    val first = badges.first()
+    Box(Modifier.fillMaxSize()) {
+        Confetti(seed = first.ordinal)
+        AlertDialog(
+            onDismissRequest = onDone,
+            icon = { BadgeArt(first, earned = true, size = 112.dp) },
+            title = { Text("New badge: ${first.title}") },
+            text = {
+                val more = badges.size - 1
+                Text(first.howToEarn.removeSuffix(".") + ": done!" + if (more > 0) "\nAnd $more more on your Me page." else "")
+            },
+            confirmButton = { TextButton(onClick = onDone) { Text("¡Genial!") } },
+        )
     }
 }
 

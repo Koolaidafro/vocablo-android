@@ -50,6 +50,8 @@ import app.vocablo.verbs.VerbList
 import app.vocablo.verbs.label
 import app.vocablo.verbs.pronoun
 import kotlin.random.Random
+import app.vocablo.ui.components.Scene
+import app.vocablo.ui.components.SceneArt
 
 private enum class Level(val title: String, val body: String) {
     NEW("I'm brand new", "Start with the present tense and the 100 most common verbs."),
@@ -95,7 +97,7 @@ fun OnboardingScreen(onFinish: ((AppSettings) -> AppSettings) -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 when (current) {
                     Step.WELCOME -> {
-                        Tuzo(Modifier.align(Alignment.CenterHorizontally), size = 140.dp)
+                        SceneArt(Scene.ONBOARDING, Modifier.align(Alignment.CenterHorizontally), size = 260.dp)
                         Title("¡Hola! I'm Tuzo.")
                         Body("Four quick questions and Vocablo is set up for you. You can change everything later in Me.")
                         Button(onClick = { step = Step.REGION }, Modifier.fillMaxWidth()) { Text("Let's go") }

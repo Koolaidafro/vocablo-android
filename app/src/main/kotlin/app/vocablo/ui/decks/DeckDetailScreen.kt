@@ -42,13 +42,14 @@ import app.vocablo.container
 import app.vocablo.data.VocabloRepository
 import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
-import app.vocablo.ui.components.EmptyDeckArt
 import app.vocablo.ui.theme.AppIcon
 import app.vocablo.ui.theme.AppIcons
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import app.vocablo.ui.components.Scene
+import app.vocablo.ui.components.SceneArt
 
 class DeckViewModel(private val repo: VocabloRepository, val deckId: Long) : ViewModel() {
     val deck: StateFlow<Deck?> = repo.deck(deckId).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
@@ -105,7 +106,7 @@ fun DeckDetailScreen(deckId: Long, nav: Navigator) {
                         Text("Study this deck")
                     }
                     if (cards != null && list.isEmpty()) {
-                        EmptyDeckArt(Modifier.align(Alignment.CenterHorizontally).padding(top = 24.dp))
+                        SceneArt(Scene.EMPTY_DECK, Modifier.align(Alignment.CenterHorizontally).padding(top = 24.dp))
                         Text(
                             "No cards yet. Tap Add card and start typing a Spanish word.",
                             Modifier.fillMaxWidth().padding(top = 24.dp),

@@ -1,6 +1,5 @@
 package app.vocablo.ui.verbs
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -61,7 +60,6 @@ import app.vocablo.ui.Navigator
 import app.vocablo.ui.Screen
 import app.vocablo.ui.theme.AppIcon
 import app.vocablo.ui.theme.AppIcons
-import app.vocablo.ui.theme.IconTile
 import app.vocablo.verbs.AnswerMode
 import app.vocablo.verbs.Conjugator
 import app.vocablo.verbs.Person
@@ -82,6 +80,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import app.vocablo.R
+import app.vocablo.ui.components.ArtTile
+import app.vocablo.ui.components.gameArt
 
 class PracticeViewModel(private val store: SettingsStore) : ViewModel() {
     val settings: StateFlow<AppSettings> = store.settings.stateIn(viewModelScope, SharingStarted.Eagerly, AppSettings())
@@ -344,16 +345,19 @@ fun PlayHub(nav: Navigator, dueVerbItems: Int, practice: PracticeSettings) {
             onClick = { nav.open(Screen.Sentences) },
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
         ) {
-            Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("Sentence builder", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                Text("Put tiles in order to make sentences from your own words and verbs.")
+            Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                ArtTile(R.drawable.game_sentences, size = 64.dp)
+                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("Sentence builder", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text("Put tiles in order to make sentences from your own words and verbs.")
+                }
             }
         }
         Text("Games", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
         Game.entries.forEach { game ->
             Card(onClick = { nav.open(Screen.Game(game)) }, modifier = Modifier.fillMaxWidth()) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    IconTile(gameIcon(game))
+                    ArtTile(gameArt(game))
                     Column(Modifier.weight(1f)) {
                         Text(game.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                         Text(game.blurb, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -362,16 +366,6 @@ fun PlayHub(nav: Navigator, dueVerbItems: Int, practice: PracticeSettings) {
             }
         }
     }
-}
-
-/** The icon that leads each game's row (FR-13). */
-@DrawableRes
-fun gameIcon(game: Game): Int = when (game) {
-    Game.VERB_RAIN -> AppIcons.VerbRain
-    Game.TUG_OF_WAR -> AppIcons.TugOfWar
-    Game.SI_O_NO -> AppIcons.SiONo
-    Game.PAREJAS -> AppIcons.Parejas
-    Game.CUATRO -> AppIcons.Cuatro
 }
 
 /** Gold: remembered for a month or more in every practiced tense. Silver: a week. Bronze: started. */

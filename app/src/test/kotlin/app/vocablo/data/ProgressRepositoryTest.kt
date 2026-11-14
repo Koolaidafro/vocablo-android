@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import app.vocablo.cards.Card
+import app.vocablo.play.Badge
 import app.vocablo.play.DailyQuests
 import app.vocablo.play.Game
 import app.vocablo.play.Medal
@@ -125,5 +126,24 @@ class ProgressRepositoryTest {
         val medals = progress.medals()
         assertEquals(Medal.BRONZE, medals[plan[0].verb.verb.infinitive])
         assertEquals(1, medals.size)
+    }
+
+    @Test
+    fun badgesAreAwardedOnceWhenReachedAndNeverTakenAway() = runBlocking<Unit> {
+        assertEquals(emptyList<Badge>(), progress.settleBadges())
+        val deck = cards.createDeck("Casa")
+        val cardId = cards.addCard(Card(deckId = deck, spanish = "la mesa", english = "table"))
+        val study = cards.startStudy(deck, newPerDay = 20)
+        cards.saveAnswer(study.queue.answer(Rating.GOOD, now), Rating.GOOD, wasNew = true)
+
+        assertEquals(listOf(Badge.FIRST_STEPS), progress.settleBadges())
+        assertEquals(emptyList<Badge>(), progress.settleBadges())
+        assertEquals(setOf(Badge.FIRST_STEPS), progress.badges().first())
+        // Badges give no XP, so XP keeps tracking practice only (NFR-7).
+        assertEquals(Xp.CARD_REVIEW_NEW, progress.totalXp().first())
+
+        cards.deleteCard(cardId)
+        progress.settleBadges()
+        assertTrue(Badge.FIRST_STEPS in progress.badges().first())
     }
 }

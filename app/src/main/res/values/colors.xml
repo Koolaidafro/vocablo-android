@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Matches the jade behind Tuzo in the launcher art (FR-18). -->
+    <color name="ic_launcher_background">#FF2A7362</color>
     <color name="widget_background">#FFE8F3EF</color>
     <color name="widget_text">#FF12352C</color>
     <color name="widget_text_secondary">#FF3D5C53</color>

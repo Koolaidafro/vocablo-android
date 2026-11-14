@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1270 1708" width="1270" height="1708">
+<defs>
+<filter id="shadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.18"/></filter>
+<marker id="tri" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,1 L11,6 L1,11 Z" fill="#ffffff" stroke="#555555" stroke-width="1.2"/></marker>
+<marker id="open" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,1 L11,6 L1,11" fill="none" stroke="#555555" stroke-width="1.2"/></marker>
+<marker id="diamondF" viewBox="0 0 16 10" refX="1" refY="5" markerWidth="16" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="#555555" stroke="#555555"/></marker>
+<marker id="diamondH" viewBox="0 0 16 10" refX="1" refY="5" markerWidth="16" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="#ffffff" stroke="#555555"/></marker>
+</defs>
+<style>
+text { font-family: Helvetica, Arial, sans-serif; fill: #333333; }
+.nm { font-size: 13px; font-weight: bold; }
+.mb { font-size: 11px; }
+.st { font-size: 10px; }
+.lb { font-size: 10px; }
+.ct { font-size: 12px; font-weight: bold; fill: #555555; }
+.tt { font-size: 16px; font-weight: bold; }
+</style>
+<rect width="1270" height="1708" fill="#ffffff"/>
+<rect x="40" y="20" width="520" height="62" rx="6" fill="#ffffff" stroke="#555555" stroke-width="1"/><text x="52" y="42" class="tt">Vocablo</text><text x="52" y="60" class="mb">Class diagram: core:play engagement rules · version 1.2 · 2026-11-13</text><text x="52" y="75" class="lb">Built from the code on the v1.2 branch (PR #9). Types marked (v1.0) are shown for context.</text>
+<rect x="40" y="140" width="1190" height="1254" rx="8" fill="#fafafa" stroke="#999999" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="52" y="158" class="ct">module core:play · package app.vocablo.play (FR-22 to FR-26)</text>
+<g filter="url(#shadow)"><rect x="80" y="180" width="170" height="138" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,180 H244 Q250,180 250,186 V220 H80 V186 Q80,180 86,180 Z" fill="#dae8fc"/>
+<rect x="80" y="180" width="170" height="138" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="165.0" y="196" class="st" text-anchor="middle">«data class»</text>
+<text x="165.0" y="212" class="nm" text-anchor="middle">Milestones</text>
+<line x1="80" y1="220" x2="250" y2="220" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="238" class="mb">+ studyDays : Int</text>
+<text x="92" y="256" class="mb">+ longestStreak : Int</text>
+<text x="92" y="274" class="mb">+ cardsLearned : Int</text>
+<text x="92" y="292" class="mb">+ goldVerbs : Int</text>
+<text x="92" y="310" class="mb">+ chestsOpened : Int</text>
+<g filter="url(#shadow)"><rect x="350" y="180" width="250" height="210" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M356,180 H594 Q600,180 600,186 V220 H350 V186 Q350,180 356,180 Z" fill="#e1d5e7"/>
+<rect x="350" y="180" width="250" height="210" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="475.0" y="196" class="st" text-anchor="middle">«enumeration»</text>
+<text x="475.0" y="212" class="nm" text-anchor="middle">Badge</text>
+<line x1="350" y1="220" x2="600" y2="220" stroke="#9673a6" stroke-width="1.5"/>
+<text x="362" y="238" class="mb">FIRST_STEPS</text>
+<text x="362" y="256" class="mb">STREAK_7</text>
+<text x="362" y="274" class="mb">STREAK_30</text>
+<text x="362" y="292" class="mb">WORDS_100</text>
+<text x="362" y="310" class="mb">GOLD_VERB</text>
+<text x="362" y="328" class="mb">TREASURE</text>
+<text x="362" y="346" class="mb">+ title : String</text>
+<text x="362" y="364" class="mb">+ howToEarn : String</text>
+<text x="362" y="382" class="mb">+ earned : (Milestones) -&gt; Boolean</text>
+<g filter="url(#shadow)"><rect x="700" y="180" width="340" height="128" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M706,180 H1034 Q1040,180 1040,186 V220 H700 V186 Q700,180 706,180 Z" fill="#dae8fc"/>
+<rect x="700" y="180" width="340" height="128" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="870.0" y="196" class="st" text-anchor="middle">«object»</text>
+<text x="870.0" y="212" class="nm" text-anchor="middle">Badges</text>
+<line x1="700" y1="220" x2="1040" y2="220" stroke="#6c8ebf" stroke-width="1.5"/>
+<line x1="700" y1="246" x2="1040" y2="246" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="712" y="264" class="mb">+ reached(milestones : Milestones) : List&lt;Badge&gt;</text>
+<text x="712" y="282" class="mb">+ newlyReached(milestones : Milestones,</text>
+<text x="712" y="300" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;alreadyAwarded : Set&lt;Badge&gt;) : List&lt;Badge&gt;</text>
+<g filter="url(#shadow)"><rect x="80" y="460" width="130" height="84" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,460 H204 Q210,460 210,466 V500 H80 V466 Q80,460 86,460 Z" fill="#dae8fc"/>
+<rect x="80" y="460" width="130" height="84" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="145.0" y="476" class="st" text-anchor="middle">«data class»</text>
+<text x="145.0" y="492" class="nm" text-anchor="middle">Message</text>
+<line x1="80" y1="500" x2="210" y2="500" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="518" class="mb">+ title : String</text>
+<text x="92" y="536" class="mb">+ text : String</text>
+<g filter="url(#shadow)"><rect x="310" y="460" width="490" height="218" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M316,460 H794 Q800,460 800,466 V500 H310 V466 Q310,460 316,460 Z" fill="#dae8fc"/>
+<rect x="310" y="460" width="490" height="218" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="555.0" y="476" class="st" text-anchor="middle">«object»</text>
+<text x="555.0" y="492" class="nm" text-anchor="middle">ReminderMessages</text>
+<line x1="310" y1="500" x2="800" y2="500" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="322" y="518" class="mb">- cardsDue : List&lt;(Int, Int) -&gt; Message&gt;</text>
+<text x="322" y="536" class="mb">- streak : List&lt;(Int, Int) -&gt; Message&gt;</text>
+<text x="322" y="554" class="mb">- freshStart : List&lt;(Int, Int) -&gt; Message&gt;</text>
+<text x="322" y="572" class="mb">- comeback : List&lt;(Int, Int) -&gt; Message&gt;</text>
+<line x1="310" y1="580" x2="800" y2="580" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="322" y="598" class="mb">+ pool(kind : Kind) : List&lt;(Int, Int) -&gt; Message&gt;</text>
+<text x="322" y="616" class="mb">+ kindFor(saver : Boolean, dueCount : Int, streak : Int) : Kind</text>
+<text x="322" y="634" class="mb">+ pick(kind : Kind, day : Long, dueCount : Int, streak : Int) : Message</text>
+<text x="322" y="652" class="mb">- cards(n : Int) : String</text>
+<text x="322" y="670" class="mb">- String.cap() : String</text>
+<g filter="url(#shadow)"><rect x="900" y="460" width="190" height="120" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M906,460 H1084 Q1090,460 1090,466 V500 H900 V466 Q900,460 906,460 Z" fill="#e1d5e7"/>
+<rect x="900" y="460" width="190" height="120" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="995.0" y="476" class="st" text-anchor="middle">«enumeration»</text>
+<text x="995.0" y="492" class="nm" text-anchor="middle">ReminderMessages.Kind</text>
+<line x1="900" y1="500" x2="1090" y2="500" stroke="#9673a6" stroke-width="1.5"/>
+<text x="912" y="518" class="mb">CARDS_DUE</text>
+<text x="912" y="536" class="mb">STREAK</text>
+<text x="912" y="554" class="mb">FRESH_START</text>
+<text x="912" y="572" class="mb">COMEBACK</text>
+<g filter="url(#shadow)"><rect x="80" y="748" width="410" height="200" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,748 H484 Q490,748 490,754 V788 H80 V754 Q80,748 86,748 Z" fill="#dae8fc"/>
+<rect x="80" y="748" width="410" height="200" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="285.0" y="764" class="st" text-anchor="middle">«object»</text>
+<text x="285.0" y="780" class="nm" text-anchor="middle">Reminders</text>
+<line x1="80" y1="788" x2="490" y2="788" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="806" class="mb">+ STREAK_SAVER_HOUR : Int = 20</text>
+<text x="92" y="824" class="mb">+ QUIET_AFTER_DAYS : Int = 7</text>
+<line x1="80" y1="832" x2="490" y2="832" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="850" class="mb">+ next(now : LocalDateTime, dailyHour : Int) : Slot</text>
+<text x="92" y="868" class="mb">+ shouldShow(kind : Kind, studiedToday : Boolean,</text>
+<text x="92" y="886" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;streak : Int, dueCount : Int) : Boolean</text>
+<text x="92" y="904" class="mb">+ decide(kind : Kind, studiedToday : Boolean, streak : Int,</text>
+<text x="92" y="922" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;dueCount : Int, daysSinceOpened : Long,</text>
+<text x="92" y="940" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;comebackSent : Boolean) : Decision</text>
+<g filter="url(#shadow)"><rect x="590" y="748" width="140" height="84" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M596,748 H724 Q730,748 730,754 V788 H590 V754 Q590,748 596,748 Z" fill="#e1d5e7"/>
+<rect x="590" y="748" width="140" height="84" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="660.0" y="764" class="st" text-anchor="middle">«enumeration»</text>
+<text x="660.0" y="780" class="nm" text-anchor="middle">Reminders.Kind</text>
+<line x1="590" y1="788" x2="730" y2="788" stroke="#9673a6" stroke-width="1.5"/>
+<text x="602" y="806" class="mb">DAILY</text>
+<text x="602" y="824" class="mb">STREAK_SAVER</text>
+<g filter="url(#shadow)"><rect x="800" y="748" width="170" height="102" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M806,748 H964 Q970,748 970,754 V788 H800 V754 Q800,748 806,748 Z" fill="#e1d5e7"/>
+<rect x="800" y="748" width="170" height="102" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="885.0" y="764" class="st" text-anchor="middle">«enumeration»</text>
+<text x="885.0" y="780" class="nm" text-anchor="middle">Reminders.Decision</text>
+<line x1="800" y1="788" x2="970" y2="788" stroke="#9673a6" stroke-width="1.5"/>
+<text x="812" y="806" class="mb">SHOW</text>
+<text x="812" y="824" class="mb">COMEBACK</text>
+<text x="812" y="842" class="mb">QUIET</text>
+<g filter="url(#shadow)"><rect x="1040" y="748" width="160" height="84" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M1046,748 H1194 Q1200,748 1200,754 V788 H1040 V754 Q1040,748 1046,748 Z" fill="#dae8fc"/>
+<rect x="1040" y="748" width="160" height="84" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1120.0" y="764" class="st" text-anchor="middle">«data class»</text>
+<text x="1120.0" y="780" class="nm" text-anchor="middle">Reminders.Slot</text>
+<line x1="1040" y1="788" x2="1200" y2="788" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1052" y="806" class="mb">+ kind : Kind</text>
+<text x="1052" y="824" class="mb">+ at : LocalDateTime</text>
+<g filter="url(#shadow)"><rect x="80" y="1018" width="430" height="146" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,1018 H504 Q510,1018 510,1024 V1058 H80 V1024 Q80,1018 86,1018 Z" fill="#dae8fc"/>
+<rect x="80" y="1018" width="430" height="146" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="295.0" y="1034" class="st" text-anchor="middle">«object»</text>
+<text x="295.0" y="1050" class="nm" text-anchor="middle">SessionSummary</text>
+<line x1="80" y1="1058" x2="510" y2="1058" stroke="#6c8ebf" stroke-width="1.5"/>
+<line x1="80" y1="1084" x2="510" y2="1084" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="1102" class="mb">+ xp(newAnswers : Int, reviewAnswers : Int) : Int</text>
+<text x="92" y="1120" class="mb">+ questsDone(quests : List&lt;Quest&gt;, today : DayActivity) : Int</text>
+<text x="92" y="1138" class="mb">+ nextStep(dueVerbs : Int, quests : List&lt;Quest&gt;,</text>
+<text x="92" y="1156" class="mb">&#160;&#160;&#160;&#160;&#160;&#160;today : DayActivity) : NextStep</text>
+<g filter="url(#shadow)"><rect x="610" y="1018" width="130" height="138" rx="6" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/></g>
+<path d="M616,1018 H734 Q740,1018 740,1024 V1058 H610 V1024 Q610,1018 616,1018 Z" fill="#e1d5e7"/>
+<rect x="610" y="1018" width="130" height="138" rx="6" fill="none" stroke="#9673a6" stroke-width="1.5"/>
+<text x="675.0" y="1034" class="st" text-anchor="middle">«enumeration»</text>
+<text x="675.0" y="1050" class="nm" text-anchor="middle">NextStep</text>
+<line x1="610" y1="1058" x2="740" y2="1058" stroke="#9673a6" stroke-width="1.5"/>
+<text x="622" y="1076" class="mb">DRILL_VERBS</text>
+<text x="622" y="1094" class="mb">PLAY_GAME</text>
+<text x="622" y="1112" class="mb">BUILD_SENTENCES</text>
+<text x="622" y="1130" class="mb">DONE_FOR_TODAY</text>
+<text x="622" y="1148" class="mb">+ label : String</text>
+<g filter="url(#shadow)"><rect x="840" y="1018" width="370" height="92" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M846,1018 H1204 Q1210,1018 1210,1024 V1058 H840 V1024 Q840,1018 846,1018 Z" fill="#dae8fc"/>
+<rect x="840" y="1018" width="370" height="92" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1025.0" y="1034" class="st" text-anchor="middle">«object»</text>
+<text x="1025.0" y="1050" class="nm" text-anchor="middle">WelcomeBack</text>
+<line x1="840" y1="1058" x2="1210" y2="1058" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="852" y="1076" class="mb">+ AWAY_DAYS : Int = 3</text>
+<line x1="840" y1="1084" x2="1210" y2="1084" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="852" y="1102" class="mb">+ show(studyDays : Set&lt;Long&gt;, today : Long) : Boolean</text>
+<g filter="url(#shadow)"><rect x="80" y="1254" width="260" height="110" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M86,1254 H334 Q340,1254 340,1260 V1294 H80 V1260 Q80,1254 86,1254 Z" fill="#dae8fc"/>
+<rect x="80" y="1254" width="260" height="110" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="210.0" y="1270" class="st" text-anchor="middle">«data class» (v1.0)</text>
+<text x="210.0" y="1286" class="nm" text-anchor="middle">Quest</text>
+<line x1="80" y1="1294" x2="340" y2="1294" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="1312" class="mb">+ kind : QuestKind</text>
+<text x="92" y="1330" class="mb">+ target : Int</text>
+<line x1="80" y1="1338" x2="340" y2="1338" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="92" y="1356" class="mb">+ done(day : DayActivity) : Boolean</text>
+<g filter="url(#shadow)"><rect x="410" y="1254" width="270" height="84" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M416,1254 H674 Q680,1254 680,1260 V1294 H410 V1260 Q410,1254 416,1254 Z" fill="#dae8fc"/>
+<rect x="410" y="1254" width="270" height="84" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="545.0" y="1270" class="st" text-anchor="middle">«data class» (v1.0)</text>
+<text x="545.0" y="1286" class="nm" text-anchor="middle">DayActivity</text>
+<line x1="410" y1="1294" x2="680" y2="1294" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="422" y="1312" class="mb">cardsReviewed, newCards, verbsRight,</text>
+<text x="422" y="1330" class="mb">gamesPlayed, sentencesBuilt, xp : Int</text>
+<g filter="url(#shadow)"><rect x="750" y="1254" width="200" height="84" rx="6" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/></g>
+<path d="M756,1254 H944 Q950,1254 950,1260 V1294 H750 V1260 Q750,1254 756,1254 Z" fill="#dae8fc"/>
+<rect x="750" y="1254" width="200" height="84" rx="6" fill="none" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="850.0" y="1270" class="st" text-anchor="middle">«object» (v1.0)</text>
+<text x="850.0" y="1286" class="nm" text-anchor="middle">Xp</text>
+<line x1="750" y1="1294" x2="950" y2="1294" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="762" y="1312" class="mb">+ CARD_REVIEW : Int = 2</text>
+<text x="762" y="1330" class="mb">+ CARD_REVIEW_NEW : Int = 3</text>
+<path d="M350,220 L250,220" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="256" y="214" class="lb">condition over</text>
+<path d="M700,220 L600,220" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="606" y="214" class="lb">returns</text>
+<path d="M310,502 L210,502" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="216" y="496.0" class="lb">builds</text>
+<path d="M800,520 L900,520" stroke="#555555" fill="none" stroke-width="1.2" marker-start="url(#diamondF)" marker-end="url(#open)"/>
+<path d="M490,790 L590,790" stroke="#555555" fill="none" stroke-width="1.2" marker-start="url(#diamondF)" marker-end="url(#open)"/>
+<path d="M428,748 L428,723 L1120,723 L1120,748" stroke="#555555" fill="none" stroke-width="1.2" marker-start="url(#diamondF)" marker-end="url(#open)"/>
+<path d="M470,748 L470,735 L885,735 L885,748" stroke="#555555" fill="none" stroke-width="1.2" marker-start="url(#diamondF)" marker-end="url(#open)"/>
+<path d="M510,1048 L610,1048" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="516" y="1042" class="lb">returns</text>
+<path d="M295,1164 L295,1224 M210,1224 L850,1224" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4"/>
+<path d="M210,1224 L210,1254" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<path d="M545,1224 L545,1254" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<path d="M850,1224 L850,1254" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="301" y="1218" class="lb">uses</text>
+<rect x="40" y="1424" width="560" height="244" rx="6" fill="#ffffff" stroke="#555555" stroke-width="1"/>
+<text x="52" y="1444" class="nm">Legend</text>
+<path d="M54,1464 L124,1464" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#tri)"/>
+<text x="136" y="1468" class="mb">Generalization (extends)</text>
+<path d="M54,1484 L124,1484" stroke="#555555" fill="none" stroke-width="1.2" marker-end="url(#open)"/>
+<text x="136" y="1488" class="mb">Association (holds a reference)</text>
+<path d="M54,1504 L124,1504" stroke="#555555" fill="none" stroke-width="1.2" marker-start="url(#diamondF)" marker-end="url(#open)"/>
+<text x="136" y="1508" class="mb">Composition (owns, nested type)</text>
+<path d="M54,1524 L124,1524" stroke="#555555" fill="none" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#open)"/>
+<text x="136" y="1528" class="mb">Dependency (uses / calls)</text>
+<rect x="54" y="1538" width="28" height="13" rx="3" fill="#dae8fc" stroke="#6c8ebf"/><text x="92" y="1548" class="mb">Class, object or Kotlin file of functions («file»)</text>
+<rect x="54" y="1556" width="28" height="13" rx="3" fill="#d5e8d4" stroke="#82b366"/><text x="92" y="1566" class="mb">Interface</text>
+<rect x="54" y="1574" width="28" height="13" rx="3" fill="#fff2cc" stroke="#d6b656"/><text x="92" y="1584" class="mb">Abstract class (name in italics)</text>
+<rect x="54" y="1592" width="28" height="13" rx="3" fill="#e1d5e7" stroke="#9673a6"/><text x="92" y="1602" class="mb">Enumeration</text>
+<text x="54" y="1628" class="lb">Kotlin &quot;object&quot; singletons are shown with «object»; nested types are named Outer.Inner.</text>
+<text x="54" y="1644" class="lb">Pure Kotlin, no Android imports: every rule here is unit-tested in EngagementTest.</text>
+<text x="54" y="1660" class="lb">Overview of every module: uml-v1.2-overview.svg. App side: uml-v1.2-app.svg.</text>
+</svg>

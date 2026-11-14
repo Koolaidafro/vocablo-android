@@ -1,3 +1,4 @@
+// Vocablo: Spanish flashcards for Android.
 package app.vocablo.ui.study
 
 import androidx.compose.foundation.layout.Arrangement
@@ -5,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
@@ -16,11 +16,14 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -28,19 +31,25 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.vocablo.cards.Card as VocabCard
-import app.vocablo.cards.Streaks
 import app.vocablo.container
+import app.vocablo.data.ProgressRepository
 import app.vocablo.data.SettingsStore
 import app.vocablo.data.StudySession
+import app.vocablo.data.VerbRepository
 import app.vocablo.data.VocabloRepository
+import app.vocablo.play.DailyQuests
+import app.vocablo.play.NextStep
+import app.vocablo.play.SessionSummary
+import app.vocablo.play.StreakFreezes
 import app.vocablo.srs.Rating
 import app.vocablo.ui.Navigator
-import app.vocablo.ui.components.CelebrationArt
+import app.vocablo.ui.components.Scene
+import app.vocablo.ui.components.SceneArt
 import app.vocablo.ui.components.Tuzo
 import app.vocablo.ui.components.TuzoMood
 import app.vocablo.ui.theme.AppIcon
 import app.vocablo.ui.theme.AppIcons
-import app.vocablo.ui.theme.IconLabel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,23 +57,48 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/** What the finish screen shows once a session ends (FR-23). */
+data class Summary(
+    val xp: Int,
+    val questsDone: Int,
+    val questsTotal: Int,
+    val streak: Int,
+    val next: NextStep,
+    /** True when the reminder offer has not been shown yet and reminders are on (FR-27). */
+    val mayOfferReminders: Boolean,
+)
+
 data class StudyUi(
     val loading: Boolean = true,
     val card: VocabCard? = null,
     val flipped: Boolean = false,
-    /** Answers given so far, including repeats. Used to key the card's animations. */
+    /** Answers given so far, including repeats. Used to key the card's animations and Tuzo's reaction. */
     val answers: Int = 0,
     val learned: Int = 0,
     val total: Int = 0,
     val missed: Int = 0,
     val finished: Boolean = false,
-    val streak: Int = 0,
+    /** The most recent rating, so Tuzo can react to it (FR-21). Null before the first answer. */
+    val lastRating: Rating? = null,
+    /** Answers on new cards and on cards seen before, for the session's XP (FR-23). */
+    val newAnswers: Int = 0,
+    val reviewAnswers: Int = 0,
+    /** Filled in once the last answer is saved. */
+    val summary: Summary? = null,
 ) {
     val progress: Float get() = if (total == 0) 0f else learned.toFloat() / total
 }
 
+/**
+ * Runs one swipe-study session and builds its summary.
+ *
+ * Design: the summary's rules live in SessionSummary (core:play); this class only gathers the
+ * numbers once the last answer is saved, so the finish screen never shows a half-saved day.
+ */
 class StudyViewModel(
     private val repo: VocabloRepository,
+    private val progress: ProgressRepository,
+    private val verbs: VerbRepository,
     private val settings: SettingsStore,
     deckId: Long?,
 ) : ViewModel() {
@@ -88,15 +122,41 @@ class StudyViewModel(
         val item = s.queue.current ?: return
         val wasNew = item.state.isNew
         val updated = s.queue.answer(rating, System.currentTimeMillis())
-        _ui.update { it.copy(answers = it.answers + 1, missed = it.missed + if (rating == Rating.AGAIN) 1 else 0) }
+        _ui.update {
+            it.copy(
+                answers = it.answers + 1,
+                missed = it.missed + if (rating == Rating.AGAIN) 1 else 0,
+                lastRating = rating,
+                newAnswers = it.newAnswers + if (wasNew) 1 else 0,
+                reviewAnswers = it.reviewAnswers + if (wasNew) 0 else 1,
+            )
+        }
         publish(s)
         viewModelScope.launch {
             repo.saveAnswer(updated, rating, wasNew)
-            if (s.queue.isFinished) {
-                val streak = Streaks.current(repo.studyDays().first(), repo.today())
-                _ui.update { it.copy(streak = streak) }
-            }
+            if (s.queue.isFinished) _ui.update { it.copy(summary = summarize(it)) }
         }
+    }
+
+    /** Called when the learner answers the reminder offer, either way, so it is never shown again (FR-27). */
+    fun remindersOffered() {
+        viewModelScope.launch { settings.update { it.copy(remindersOffered = true) } }
+        _ui.update { it.copy(summary = it.summary?.copy(mayOfferReminders = false)) }
+    }
+
+    private suspend fun summarize(ui: StudyUi): Summary {
+        val today = repo.today()
+        val prefs = settings.settings.first()
+        val activity = progress.todayActivity().first()
+        val quests = DailyQuests.forDay(today, prefs.newPerDay)
+        return Summary(
+            xp = SessionSummary.xp(ui.newAnswers, ui.reviewAnswers),
+            questsDone = SessionSummary.questsDone(quests, activity),
+            questsTotal = quests.size,
+            streak = StreakFreezes.streak(repo.studyDays().first(), progress.frozenDays().first(), today),
+            next = SessionSummary.nextStep(verbs.dueCount().first(), quests, activity),
+            mayOfferReminders = prefs.remindersOn && !prefs.remindersOffered,
+        )
     }
 
     private fun publish(s: StudySession) {
@@ -116,7 +176,9 @@ class StudyViewModel(
 @Composable
 fun StudyScreen(deckId: Long?, nav: Navigator) {
     val app = LocalContext.current.applicationContext
-    val vm: StudyViewModel = viewModel { StudyViewModel(app.container.repository, app.container.settings, deckId) }
+    val vm: StudyViewModel = viewModel {
+        StudyViewModel(app.container.repository, app.container.progress, app.container.verbs, app.container.settings, deckId)
+    }
     val ui by vm.ui.collectAsStateWithLifecycle()
 
     Column(Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -124,11 +186,20 @@ fun StudyScreen(deckId: Long?, nav: Navigator) {
             IconButton(onClick = nav::back) { AppIcon(AppIcons.Close, contentDescription = "End session") }
             LinearProgressIndicator(progress = { ui.progress }, modifier = Modifier.weight(1f).height(8.dp))
             Text("${ui.learned}/${ui.total}", style = MaterialTheme.typography.labelLarge)
+            if (!ui.finished && ui.card != null) ReactingTuzo(ui.lastRating, ui.answers, ui.flipped)
         }
         val card = ui.card
+        val summary = ui.summary
         when {
             ui.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
-            ui.finished -> Finished(ui, onDone = nav::back)
+            ui.finished && summary != null -> FinishedScreen(
+                learned = ui.learned,
+                missed = ui.missed,
+                summary = summary,
+                onNext = { step -> openNextStep(step, nav) },
+                onReminderOfferAnswered = vm::remindersOffered,
+            )
+            ui.finished -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
             card == null -> Empty(onDone = nav::back)
             else -> {
                 SwipeCard(
@@ -145,25 +216,34 @@ fun StudyScreen(deckId: Long?, nav: Navigator) {
     }
 }
 
+/**
+ * A small Tuzo beside the progress bar that reacts to each answer (FR-21): a cheer after Good
+ * or Easy, a kind "oops" after Again, thinking while the answer shows, then back to ready.
+ *
+ * Design: keyed on the answer count, so two Good answers in a row still replay the cheer.
+ */
 @Composable
-private fun Finished(ui: StudyUi, onDone: () -> Unit) {
-    Column(
-        Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
-    ) {
-        CelebrationArt { Tuzo(size = 140.dp, mood = TuzoMood.CHEER) }
-        Text("¡Bien hecho!", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
-        Text(
-            "You went through ${ui.learned} ${if (ui.learned == 1) "card" else "cards"}" +
-                if (ui.missed > 0) " and retried ${ui.missed}." else " without a single miss.",
-            textAlign = TextAlign.Center,
-        )
-        if (ui.streak > 0) {
-            IconLabel(AppIcons.Streak, "${ui.streak}-day streak", style = MaterialTheme.typography.titleLarge, tint = MaterialTheme.colorScheme.tertiary)
-        }
-        Button(onClick = onDone, modifier = Modifier.fillMaxWidth()) { Text("Done") }
+private fun ReactingTuzo(lastRating: Rating?, answers: Int, flipped: Boolean) {
+    var reacting by remember { mutableStateOf(false) }
+    LaunchedEffect(answers) {
+        if (answers == 0) return@LaunchedEffect
+        reacting = true
+        delay(REACTION_MILLIS)
+        reacting = false
     }
+    val mood = when {
+        reacting && lastRating == Rating.AGAIN -> TuzoMood.OOPS
+        reacting && lastRating != null -> TuzoMood.CHEER
+        flipped -> TuzoMood.THINK
+        else -> TuzoMood.READY
+    }
+    Tuzo(size = 44.dp, mood = mood)
+}
+
+/** Leaves the session for the suggested next step. */
+private fun openNextStep(step: NextStep, nav: Navigator) {
+    nav.back()
+    nextStepScreen(step)?.let(nav::open)
 }
 
 @Composable
@@ -173,13 +253,16 @@ private fun Empty(onDone: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
     ) {
-        Tuzo(size = 140.dp, mood = TuzoMood.SLEEP)
+        SceneArt(Scene.ALL_DONE, size = 200.dp)
         Text("Nothing to study right now", style = MaterialTheme.typography.headlineSmall)
         Text(
-            "Every card is scheduled for later. Add new words, or come back when Tuzo wakes up.",
+            "Every card is scheduled for later. Add new words, or come back when Tuzo is out of the hammock.",
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Button(onClick = onDone) { Text("Back") }
     }
 }
+
+/** How long Tuzo's reaction to an answer lasts before returning to ready. */
+private const val REACTION_MILLIS = 900L
